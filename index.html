@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>شامل لإدارة مراكز التجميل والفروع | المنظومة  المتكاملة ERP</title>
+    <title>شامل لإدارة مراكز التجميل والفروع | المنظومة السحابية المتكاملة ERP</title>
     
     <!-- CSS frameworks & Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
@@ -153,19 +153,6 @@
     </style>
 </head>
 <body>
-
-    <!-- شاشة الحظر الحمراء عند انتهاء اشتراك المركز -->
-    <div id="expired-lock-screen" class="hidden" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#b02a37; z-index:99999; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; padding:20px;">
-        <div class="card p-5 bg-white text-dark shadow-lg rounded-4" style="max-width: 500px; width: 100%;">
-            <i class="fa-solid fa-triangle-exclamation text-danger fa-4x mb-3"></i>
-            <h2 class="fw-bold mb-2">عذراً، انتهت صلاحية الحساب!</h2>
-            <p class="text-muted mb-4">لقد انتهت مدة تفعيل هذا المركز الرئيسي. يرجى التواصل مع المطور لتجديد الاشتراك واستعادة صلاحية النظام.</p>
-            <div class="p-3 bg-light rounded-3 mb-3 text-secondary fw-bold">
-                تواصل مع المطور: صبري الديب[cite: 2] (01065826742)
-            </div>
-            <button onclick="logout()" class="btn btn-dark w-100 fw-bold">العودة لتسجيل الدخول</button>
-        </div>
-    </div>
 
     <!-- بوابة حجز المواعيد المباشرة للعملاء (تفتح عبر الرابط العام) -->
     <div id="public-booking-portal" class="hidden">
@@ -511,7 +498,7 @@
                 </div>
             </div>
 
-            <!-- TAB 5: الحسابات التفصيلية التفاعلية -->
+            <!-- TAB 5: الحسابات التفصيلية التفاعلية مع إعدادات ضريبة القيمة المضافة حسب العملة والبلد -->
             <div id="tab-finance" class="tab-content hidden">
                 <div class="row mb-3 g-2">
                     <div class="col-md-3 col-6">
@@ -536,6 +523,20 @@
                         <div class="card p-3 text-center bg-dark text-white rounded-4">
                             <small>صافي الأرباح (<span class="currency-lbl">EGP</span>)</small>
                             <h4 id="fin-net" class="fw-bold m-0">0</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- إعدادات القيمة المضافة للفرع الحالي -->
+                <div class="card p-4 mb-4 border border-secondary">
+                    <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-percent me-1"></i> إعدادات ضريبة القيمة المضافة (VAT) للفرع والعملة الحالية</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="small fw-bold text-secondary">نسبة الضريبة المضافة (%)</label>
+                            <input type="number" id="branch-vat-rate" class="form-control form-control-sm rounded-3" value="15" min="0" max="100" onchange="saveBranchVatSettings()">
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <small class="text-muted">يتم تطبيق هذه النسبة تلقائياً عند طباعة الفاتورة الضريبية وحساب قيمة الضريبة وعكسها لكل عملة.</small>
                         </div>
                     </div>
                 </div>
@@ -763,19 +764,19 @@
                 </div>
             </div>
 
-            <!-- TAB 9: إدارة الفروع واختيار العملات -->
+            <!-- TAB 9: إدارة الفروع واختيار العملات (متاحة للمطور والمركز الرئيسي ضمن الحصة) -->
             <div id="tab-clinics" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> إنشاء مركز أو فرع وتحديد العملة والصلاحية</h6>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المركز / الفرع الرئيسي</label><input type="text" id="clinic-name-in" class="form-control form-control-sm rounded-3"></div>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم مسؤول المركز</label><input type="text" id="doc-name-in" class="form-control form-control-sm rounded-3"></div>
+                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> إدارة وفروع المركز وتحديد العملة والصلاحية</h6>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم الفرع / المركز</label><input type="text" id="clinic-name-in" class="form-control form-control-sm rounded-3"></div>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المسؤول</label><input type="text" id="doc-name-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="row mb-2">
                                 <div class="col-6"><label class="small fw-bold text-secondary">الحد الأقصى للفروع</label><input type="number" id="clinic-max-branches-in" class="form-control form-control-sm rounded-3" value="3" min="1"></div>
                                 <div class="col-6"><label class="small fw-bold text-secondary">أيام الصلاحية</label><input type="number" id="clinic-days-in" class="form-control form-control-sm rounded-3" value="30" min="1"></div>
                             </div>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">عملة المركز / الفرع:</label>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">عملة الفرع / المركز:</label>
                                 <select id="clinic-currency-in" class="form-select form-select-sm rounded-3">
                                     <option value="EGP">جنيه مصري (EGP)</option>
                                     <option value="SAR">ريال سعودي (SAR)</option>
@@ -786,14 +787,14 @@
                                     <option value="USD">دولار أمريكي (USD)</option>
                                 </select>
                             </div>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم للدخول</label><input type="text" id="doc-user-in" class="form-control form-control-sm rounded-3"></div>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم</label><input type="text" id="doc-user-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-3"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="doc-pass-in" class="form-control form-control-sm rounded-3"></div>
                             <button onclick="addNewClinic()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إنشاء وتفعيل المركز</button>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> مراكز وفروع المنصة (اضغط لاستعراضها)</h6>
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> مراكز وفروع النظام (استعراض وتحكم)</h6>
                             <div class="table-responsive">
                                 <table class="table table-hover align-middle small">
                                     <thead class="table-light"><tr><th>المركز والمسؤول</th><th>العملة</th><th>الصلاحية والفروع</th><th>إدارة ودخول</th></tr></thead>
@@ -805,16 +806,16 @@
                 </div>
             </div>
 
-            <!-- TAB 10: موظفي الفرع وتوزيع الصلاحيات -->
+            <!-- TAB 10: موظفي الفرع المستقل وصلاحياتهم (مدير الفرع يتحكم بموظفيه فقط) -->
             <div id="tab-doc-staff" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-plus me-1"></i> إضافة موظف وتحديد دوره وصلاحياته</h6>
+                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-plus me-1"></i> إدارة موظفي فرعي وصلاحياتهم</h6>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم الموظف الثلاثي</label><input type="text" id="staff-name" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">الراتب الأساسي (<span class="currency-lbl">EGP</span>)</label><input type="number" id="staff-salary-in" class="form-control form-control-sm rounded-3" value="4000" min="0"></div>
                             <div class="mb-2">
-                                <label class="small fw-bold text-secondary">الدور الوظيفي والصلاحيات:</label>
+                                <label class="small fw-bold text-secondary">الدور الوظيفي وصلاحيات الأقسام:</label>
                                 <select id="staff-role-select" class="form-select form-select-sm rounded-3">
                                     <option value="reception">موظف استقبال (Reception - حجوزات وطابور)</option>
                                     <option value="secretary">سكرتارية (Secretary - ملفات ومواعيد)</option>
@@ -824,12 +825,12 @@
                             </div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم</label><input type="text" id="staff-user" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-3"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="staff-pass" class="form-control form-control-sm rounded-3"></div>
-                            <button onclick="addClinicStaff()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">حفظ الموظف والصلاحيات</button>
+                            <button onclick="addClinicStaff()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">حفظ الموظف وصلاحياته للفرع</button>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-users me-1"></i> طاقم العمل بـ <span id="my-clinic-title-label">--</span></h6>
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-users me-1"></i> طاقم العمل الخاص بفرعي الحالي</h6>
                             <div class="table-responsive">
                                 <table class="table table-hover align-middle small">
                                     <thead class="table-light"><tr><th>الاسم</th><th>الدور الوظيفي</th><th>الراتب الأساسي</th><th>المستخدم</th><th>حذف</th></tr></thead>
@@ -847,8 +848,7 @@
                     <div class="col-12 mb-3">
                         <div class="card p-4 border-warning">
                             <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)[cite: 2]</h4>
-                            <p class="text-muted small">من هنا يمكنك وحدك إدارة "أيام التفعيل" الخاصة باشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase)[cite: 2].</p>
-                            
+                            <p class="text-muted small">من هنا يمكنك وحدك إدارة اشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase)[cite: 2].</p>
                             <hr>
                             <div class="row g-3">
                                 <div class="col-md-4">
@@ -870,20 +870,13 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="mt-4">
-                                <h5 class="fw-bold text-dark mb-3">التحكم السريع في المنصة:</h5>
-                                <button onclick="forceSyncData()" class="btn btn-outline-primary btn-sm fw-bold me-2"><i class="fa-solid fa-rotate me-1"></i> فرض مزامنة سحابية فورية</button>
-                                <button onclick="exportSystemBackup()" class="btn btn-outline-success btn-sm fw-bold me-2"><i class="fa-solid fa-download me-1"></i> تحميل نسخة احتياطية (Backup)</button>
-                                <button onclick="clearSystemCache()" class="btn btn-outline-danger btn-sm fw-bold"><i class="fa-solid fa-trash-can me-1"></i> مسح الذاكرة المؤقتة</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="dev-footer no-print">
-                Developed by <strong>Sapry El-Deeb</strong>[cite: 2] | Tel: <a href="https://wa.me/201065826742">01065826742</a> | Email: sapry.eldeep@gmail.com[cite: 2]
+                Developed by <strong>Sapry El-Deeb</strong>[cite: 2] | Tel: <a href="https://wa.me/201065826742">01065826742</a>[cite: 2]
             </div>
 
         </div>
@@ -1024,6 +1017,24 @@
             document.querySelectorAll('.currency-lbl').forEach(el => el.innerText = cur);
             const selector = document.getElementById('active-currency-selector');
             if(selector) selector.value = cur;
+            
+            // تحديث نسبة ضريبة القيمة المضافة حسب العملة والفرع الحالي
+            const cl = window.platformData.clinics.find(x => x.id === getCurrentClinicId());
+            const vatInput = document.getElementById('branch-vat-rate');
+            if(vatInput) {
+                vatInput.value = cl && cl.vatRate !== undefined ? cl.vatRate : (cur === 'SAR' ? 15 : 14);
+            }
+        }
+
+        function saveBranchVatSettings() {
+            const cId = getCurrentClinicId();
+            const cl = window.platformData.clinics.find(x => x.id === cId);
+            const val = parseFloat(document.getElementById('branch-vat-rate')?.value) || 15;
+            if(cl) {
+                cl.vatRate = val;
+                window.saveToFirebase();
+                alert("تم حفظ نسبة ضريبة القيمة المضافة للفرع بنجاح!");
+            }
         }
 
         function changeActiveCenterCurrency(newCurrency) {
@@ -1033,7 +1044,7 @@
                 cl.currency = newCurrency;
             } else if (cId === 'main_branch' || cId === 'master') {
                 if(!window.platformData.clinics[0]) {
-                    window.platformData.clinics.push({ id: 'main_branch', name: 'المركز الرئيسي', currency: newCurrency, expiryDate: new Date(Date.now() + 365*86400000).toISOString(), maxBranches: 3 });
+                    window.platformData.clinics.push({ id: 'main_branch', name: 'المركز الرئيسي', currency: newCurrency, expiryDate: new Date(Date.now() + 365*86400000).toISOString() });
                 } else {
                     window.platformData.clinics[0].currency = newCurrency;
                 }
@@ -1115,11 +1126,13 @@
             document.querySelectorAll('.doctor-only').forEach(e => e.classList.add('hidden'));
             document.querySelectorAll('.developer-only').forEach(e => e.classList.add('hidden'));
 
-            if (window.currentUser.role === 'master_admin' || window.currentUser.role === 'doctor') {
+            if (window.currentUser.role === 'master_admin') {
                 document.querySelectorAll('.master-admin-only').forEach(e => e.classList.remove('hidden'));
-                if(window.currentUser.role === 'master_admin') {
-                    document.querySelectorAll('.developer-only').forEach(e => e.classList.remove('hidden'));
-                }
+                document.querySelectorAll('.doctor-only').forEach(e => e.classList.remove('hidden'));
+                document.querySelectorAll('.developer-only').forEach(e => e.classList.remove('hidden'));
+            } else if (window.currentUser.role === 'doctor') {
+                // مدير الفرع/المركز يظهر له إدارة موظفيه فقط ولا يظهر له إنشاء فروع عامة
+                document.querySelectorAll('.doctor-only').forEach(e => e.classList.remove('hidden'));
             } else if (window.currentUser.role === 'reception') {
                 document.querySelector('.nav-sec-finance').classList.add('hidden');
                 document.querySelector('.nav-sec-payroll').classList.add('hidden');
@@ -1144,7 +1157,6 @@
             if (window.innerWidth < 992) toggleTabletSidebar();
         }
 
-        // --- تعديل: إنشاء المركز مع سقف الفروع وصلاحية الاشتراك ---
         function addNewClinic() {
             const name = document.getElementById('clinic-name-in').value.trim();
             const docName = document.getElementById('doc-name-in').value.trim();
@@ -1154,7 +1166,7 @@
             const user = document.getElementById('doc-user-in').value.trim();
             const pass = document.getElementById('doc-pass-in').value.trim();
 
-            if(!name || !docName || !user || !pass) { alert("أدخل كافة بيانات المركز!"); return; }
+            if(!name || !docName || !user || !pass) { alert("أدخل كافة بيانات الفرع!"); return; }
 
             const exists = window.platformData.users.some(x => x.user === user);
             if(exists) { alert("اسم المستخدم مستخدم مسبقاً!"); return; }
@@ -1163,16 +1175,7 @@
             const expiryDate = new Date();
             expiryDate.setDate(expiryDate.getDate() + daysCount);
 
-            window.platformData.clinics.push({ 
-                id: clinicId, 
-                name, 
-                docName, 
-                currency, 
-                maxBranches, 
-                daysCount, 
-                expiryDate: expiryDate.toISOString(), 
-                subBranches: [] 
-            });
+            window.platformData.clinics.push({ id: clinicId, name, docName, currency, maxBranches, daysCount, expiryDate: expiryDate.toISOString() });
             window.platformData.users.push({ name: docName, user, pass, role: 'doctor', clinicId: clinicId });
 
             window.saveToFirebase();
@@ -1182,7 +1185,7 @@
             document.getElementById('doc-name-in').value = '';
             document.getElementById('doc-user-in').value = '';
             document.getElementById('doc-pass-in').value = '';
-            alert(`تم إنشاء المركز وتحديد سقف فروعه (${maxBranches}) وصلاحيته بنجاح!`);
+            alert(`تم إنشاء الفرع وتحديد عملته بنجاح!`);
         }
 
         function renderClinicsList() {
@@ -1191,15 +1194,15 @@
             tbody.innerHTML = '';
             
             window.platformData.clinics.forEach((cl) => {
+                const isActive = checkClinicSubscription(cl.id);
                 const expiryFormatted = new Date(cl.expiryDate).toLocaleDateString('ar-EG');
-                let currentSubCount = (cl.subBranches || []).length;
                 
                 tbody.innerHTML += `<tr>
                     <td><strong>${cl.name}</strong><br><small class="text-primary">المسؤول: ${cl.docName}</small></td>
                     <td><span class="badge bg-secondary">${cl.currency || 'EGP'}</span></td>
-                    <td>الصلاحية حتى: ${expiryFormatted}<br><small class="text-muted">الفروع: ${currentSubCount} / ${cl.maxBranches || 3}</small></td>
+                    <td>${expiryFormatted}</td>
                     <td>
-                        <button onclick="viewBranchData('${cl.id}', '${cl.name}')" class="btn btn-outline-success btn-sm py-0 mb-1"><i class="fa-solid fa-eye"></i> استعراض</button>
+                        <button onclick="viewBranchData('${cl.id}', '${cl.name}')" class="btn btn-outline-success btn-sm py-0 mb-1" title="استعراض تفاصيل الفرع"><i class="fa-solid fa-eye"></i> استعراض</button>
                         ${window.currentUser && window.currentUser.role === 'master_admin' ? `<button onclick="promptExtendDays('${cl.id}')" class="btn btn-outline-primary btn-sm py-0 mb-1">+تفعيل</button>` : ''}
                         <button onclick="deleteClinic('${cl.id}')" class="btn btn-danger btn-sm py-0 mb-1"><i class="fa-solid fa-trash"></i></button>
                     </td>
@@ -1217,10 +1220,11 @@
             document.getElementById('current-clinic-badge').innerText = `معاينة: ${branchName} (${getCurrentCurrency()})`;
             switchTab('dashboard', document.querySelector('.nav-sec-queue'));
             renderAllUI();
+            alert(`تم الانتقال لبيانات وفروع (${branchName}). يمكنك الآن الاطلاع على طابوره وحساباته بعملة (${getCurrentCurrency()}).`);
         }
 
         function promptExtendDays(cId) {
-            const daysStr = prompt("أدخل عدد أيام التفعيل الإضافية:", "30");
+            const daysStr = prompt("أدخل عدد أيام التفعيل المراد إضافتها للاشتراك:", "30");
             if(daysStr && !isNaN(daysStr)) {
                 const addDays = parseInt(daysStr);
                 const cl = window.platformData.clinics.find(x => x.id === cId);
@@ -1231,13 +1235,13 @@
                     cl.expiryDate = currentExpiry.toISOString();
                     window.saveToFirebase();
                     renderClinicsList();
-                    alert(`تم تمديد اشتراك المركز بنجاح!`);
+                    alert(`تم تحديث وتمديد أيام التفعيل بنجاح!`);
                 }
             }
         }
 
         function deleteClinic(cId) {
-            if(confirm("هل أنت متأكد من حذف المركز؟")) {
+            if(confirm("هل أنت متأكد من حذف الفرع؟")) {
                 window.platformData.clinics = window.platformData.clinics.filter(x => x.id !== cId);
                 window.platformData.users = window.platformData.users.filter(x => x.clinicId !== cId);
                 window.saveToFirebase();
@@ -1934,61 +1938,73 @@
             if(paidInput) paidInput.value = total;
         }
 
+        // --- طباعة الفاتورة الضريبية مع حساب القيمة المضافة ديناميكياً وتوليد QR Code الفعلي ---
         function printOfficialInvoice(name, service, total, paid, payMethod, handler, date) {
             const due = total - paid;
             let cur = getCurrentCurrency();
+            let cl = window.platformData.clinics.find(x => x.id === getCurrentClinicId());
+            let vatRate = cl && cl.vatRate !== undefined ? cl.vatRate : (cur === 'SAR' ? 15 : 14);
+            
+            // حساب الضريبة عكسياً بناءً على نسبة الفرع والعملة
+            let taxableAmount = (total / (1 + (vatRate / 100))).toFixed(2);
+            let vatAmount = (total - taxableAmount).toFixed(2);
+            let vatNum = cl?.vatNumber || "300000000000003";
+
             const invoiceWin = window.open('', '_blank');
             invoiceWin.document.write(`
                 <html dir="rtl">
                 <head>
-                    <title>فاتورة رسمية - ${name}</title>
+                    <title>فاتورة ضريبية رسمية - ${name}</title>
                     <style>
                         body { font-family: 'Cairo', sans-serif; padding: 30px; color: #333; background: #fff; }
                         .invoice-box { max-width: 600px; margin: auto; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0,0,0,0.15); border-radius: 12px; }
-                        h2 { color: #d63384; text-align: center; margin-bottom: 5px; }
-                        .sub-title { text-align: center; font-size: 13px; color: #666; margin-bottom: 20px; }
-                        .info-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
-                        table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 20px; }
+                        h2 { color: #d63384; text-align: center; margin-bottom: 2px; }
+                        .sub-title { text-align: center; font-size: 13px; color: #666; margin-bottom: 15px; }
+                        .info-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13.5px; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; }
                         th, td { border: 1px solid #ddd; padding: 10px; text-align: right; font-size: 13px; }
                         th { background: #fdf2f8; color: #d63384; }
-                        .totals { text-align: left; font-size: 14px; margin-top: 15px; }
-                        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #666; border-top: 1px dashed #999; padding-top: 10px; }
+                        .totals { text-align: left; font-size: 13.5px; margin-top: 10px; }
+                        .qr-section { text-align: center; margin-top: 20px; }
+                        .footer { text-align: center; margin-top: 25px; font-size: 11px; color: #666; border-top: 1px dashed #999; padding-top: 10px; }
                     </style>
                 </head>
                 <body>
                     <div class="invoice-box">
                         <h2>مركز التجميل والعناية المتكاملة</h2>
-                        <div class="sub-title">فاتورة رسمية معتمدة (Official Invoice)</div>
+                        <div class="sub-title">فاتورة ضريبية إلكترونية مبسطة (ZATCA & ETA Compliant)</div>
                         <hr>
                         <div class="info-row">
-                            <div><strong>اسم العميل:</strong> ${name}</div>
+                            <div><strong>الرقم الضريبي:</strong> ${vatNum}</div>
                             <div><strong>التاريخ:</strong> ${date}</div>
                         </div>
                         <div class="info-row">
-                            <div><strong>طريقة الدفع:</strong> ${payMethod || 'نقدي'}</div>
-                            <div><strong>الموظف المسؤول:</strong> ${handler || '--'}</div>
+                            <div><strong>اسم العميل:</strong> ${name}</div>
+                            <div><strong>المسؤول:</strong> ${handler || '--'}</div>
                         </div>
                         <table>
                             <thead>
-                                <tr><th>الخدمات المطلوبة</th><th>المطلوب</th><th>المدفوع</th><th>المتبقي</th></tr>
+                                <tr><th>الخدمة / الباقة</th><th>السعر الشامل</th><th>المبلغ الخاضع للضريبة</th><th>قيمة الضريبة (${vatRate}%)</th></tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>${service}</td>
                                     <td>${total} ${cur}</td>
-                                    <td style="color: #198754; font-weight: bold;">${paid} ${cur}</td>
-                                    <td style="color: #dc3545; font-weight: bold;">${due} ${cur}</td>
+                                    <td>${taxableAmount} ${cur}</td>
+                                    <td>${vatAmount} ${cur}</td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="totals">
-                            <p><strong>الإجمالي المطلوب:</strong> ${total} ${cur}</p>
+                            <p><strong>الإجمالي الشامل للضريبة:</strong> ${total} ${cur}</p>
                             <p><strong>المبلغ المدفوع:</strong> <span style="color:#198754;">${paid} ${cur}</span></p>
                             <p><strong>المبلغ المتبقي:</strong> <span style="color:#dc3545;">${due} ${cur}</span></p>
                         </div>
-                        <div class="footer">
-                            رسمي ومعتمد من الإدارة
+                        <div class="qr-section">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Name:${encodeURIComponent(name)};VAT:${vatNum};Total:${total};VATAmount:${vatAmount}" alt="ZATCA QR Code">
+                            <div style="font-size:10px; color:#666; margin-top:5px;">رمز الاستجابة السريع الفاتورة الإلكترونية</div>
                         </div>
+                        <div class="footer">متوافق مع متطلبات الفاتورة الإلكترونية للعملة (${cur})</div>
                     </div>
                     <script>window.print();<\/script>
                 </body>
