@@ -83,7 +83,7 @@
                 <div class="mb-4 text-start"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="password" required class="form-control form-control-lg fs-6 rounded-3" placeholder="••••••••"></div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold fs-6 rounded-3 shadow-sm" style="background: var(--primary-gradient); border: none;">تسجيل الدخول</button>
             </form>
-            <div class="dev-footer mt-4">نظام إدارة مراكز التجميل الاحترافي | V40 Ultimate Certified ERP</div>
+            <div class="dev-footer mt-4">نظام إدارة مراكز التجميل الاحترافي | V41 Ultimate Complete Build</div>
         </div>
     </div>
 
@@ -152,7 +152,7 @@
                                 <h6 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-file-invoice me-1"></i> تسجيل وحفظ الجلسة</h6>
                                 <div class="mb-2"><input type="text" id="p-name" required class="form-control form-control-sm rounded-3" placeholder="اسم العميل..."></div>
                                 <div class="row mb-2"><div class="col-6"><input type="number" id="p-age" class="form-control form-control-sm rounded-3" placeholder="العمر" min="0"></div><div class="col-6"><input type="text" id="p-phone" required class="form-control form-control-sm rounded-3" placeholder="الهاتف"></div></div>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">الخدمات أو الباقات:</label><div id="multi-services-checkboxes" class="border p-2 rounded-3 bg-light" style="max-height: 140px; overflow-y: auto;"></div></div>
+                                <div class="mb-2"><label class="small fw-bold text-secondary">الخدمات أو الباقات:</label><div id="multi-services-checkboxes" class="border p-2 rounded-3 bg-light" style="max-height: 120px; overflow-y: auto;"></div></div>
                                 <div class="mb-2"><select id="p-expert-select" class="form-select form-select-sm rounded-3"></select></div>
                                 <div class="row mb-2"><div class="col-6"><input type="number" id="p-total" required class="form-control form-control-sm rounded-3" placeholder="المطلوب (شامل الضريبة)" min="0"></div><div class="col-6"><input type="number" id="p-paid" required class="form-control form-control-sm rounded-3" placeholder="المدفوع" min="0"></div></div>
                                 <div class="mb-3"><select id="p-pay-method" class="form-select form-select-sm rounded-3"><option value="نقدي">نقدي (كاش)</option><option value="تحويل بنكي">تحويل بنكي</option><option value="فيزا POS">شبكة / فيزا (POS)</option><option value="محفظة العميل">محفظة العميل مسبقة الدفع</option></select></div>
@@ -508,7 +508,7 @@
     const analytics = getAnalytics(app);
     const db = getDatabase(app);
 
-    const DB_PATH = 'shamelBeautyCenterPlatformV40'; 
+    const DB_PATH = 'shamelBeautyCenterPlatformV41'; 
 
     window.safeArr = function(obj) {
         if (!obj) return [];
@@ -1089,6 +1089,131 @@
             invoiceWin.document.close();
         }
 
+        // ================= الدوال المساعدة المكتملة والمفقودة سابقاً =================
+        function calculateDoctorCommissions() {
+            const summaryDiv = document.getElementById('expert-commissions-summary');
+            if(!summaryDiv) return;
+            summaryDiv.innerHTML = '';
+            
+            let expertsMap = {};
+            getCombinedAllRecords().forEach(r => {
+                let expName = r.handler || 'غير محدد';
+                if(!expertsMap[expName]) expertsMap[expName] = { count: 0, totalSales: 0 };
+                expertsMap[expName].count += 1;
+                expertsMap[expName].totalSales += (r.paid || 0);
+            });
+
+            let html = '<ul class="list-unstyled m-0">';
+            Object.keys(expertsMap).forEach(exp => {
+                let data = expertsMap[exp];
+                let comm = data.totalSales * 0.10; // 10% عمولة افتراضية للخبراء
+                html += `<li class="mb-1"><strong>${exp}:</strong> ${data.count} جلسات | مبيعات: ${data.totalSales} | العمولة (10%): <span class="text-success fw-bold">${comm}</span></li>`;
+            });
+            html += '</ul>';
+            summaryDiv.innerHTML = html;
+        }
+
+        function populatePayrollStaffSelect() {
+            const sel = document.getElementById('payroll-staff-select');
+            if(!sel) return;
+            sel.innerHTML = '<option value="">اختر الموظف...</option>';
+            const cId = getCurrentClinicId();
+            const staffList = (window.platformData.staffDirectory && window.platformData.staffDirectory[cId]) ? window.platformData.staffDirectory[cId] : [];
+            staffList.forEach(st => {
+                sel.innerHTML += `<option value="${st.name}">${st.name} (${st.role})</option>`;
+            });
+        }
+
+        function addPayrollTransaction() {
+            const staffName = document.getElementById('payroll-staff-select').value;
+            const type = document.getElementById('payroll-trans-type').value;
+            const amount = parseFloat(document.getElementById('payroll-trans-amount').value) || 0;
+            const note = document.getElementById('payroll-trans-note').value.trim();
+
+            if(!staffName || amount <= 0) { alert("أدخل بيانات السلفة أو المكافأة بشكل صحيح!"); return; }
+            const cId = getCurrentClinicId();
+            if(!window.platformData.payrollStore) window.platformData.payrollStore = {};
+            if(!window.platformData.payrollStore[cId]) window.platformData.payrollStore[cId] = [];
+
+            window.platformData.payrollStore[cId].push({ id: Date.now(), staffName, transType: type, amount, note, date: getFormattedDateTime() });
+            window.saveToFirebase();
+            renderPayrollSummary();
+            document.getElementById('payroll-trans-amount').value = '';
+            document.getElementById('payroll-trans-note').value = '';
+            alert("تم حفظ المعاملة المالية للموظف بنجاح!");
+        }
+
+        function renderPayrollSummary() {
+            const tbody = document.getElementById('payroll-summary-tbody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            let cur = getCurrentCurrency();
+            const cId = getCurrentClinicId();
+            
+            const staffList = (window.platformData.staffDirectory && window.platformData.staffDirectory[cId]) ? window.platformData.staffDirectory[cId] : [];
+            const payrollRecords = (window.platformData.payrollStore && window.platformData.payrollStore[cId]) ? window.platformData.payrollStore[cId] : [];
+
+            if(staffList.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">لا توجد موظفين مسجلين لحساب الرواتب</td></tr>';
+                return;
+            }
+
+            staffList.forEach(st => {
+                let base = st.salary || 4000;
+                let bonuses = 0, deductions = 0;
+                payrollRecords.filter(r => r.staffName === st.name).forEach(r => {
+                    if(r.transType === 'bonus') bonuses += r.amount;
+                    else if(r.transType === 'advance' || r.transType === 'deduction') deductions += r.amount;
+                });
+
+                let net = base + bonuses - deductions;
+
+                tbody.innerHTML += `<tr>
+                    <td><strong>${st.name}</strong><br><small class="text-muted">${st.role}</small></td>
+                    <td>${base} ${cur}</td>
+                    <td class="text-danger">${deductions} ${cur}</td>
+                    <td class="text-success">${bonuses} ${cur}</td>
+                    <td class="fw-bold text-primary">${net} ${cur}</td>
+                    <td><button onclick="printSalaryReceipt('${st.name}', ${base}, ${bonuses}, ${deductions}, ${net}, '${cur}')" class="btn btn-sm btn-outline-dark py-0"><i class="fa-solid fa-receipt"></i> مسير</button></td>
+                </tr>`;
+            });
+        }
+
+        function printSalaryReceipt(name, base, bonus, deduct, net, cur) {
+            const receiptWin = window.open('', '_blank');
+            receiptWin.document.write(`
+                <html dir="rtl">
+                <head>
+                    <title>مسير راتب - ${name}</title>
+                    <style>
+                        body { font-family: 'Cairo', sans-serif; padding: 25px; color: #333; }
+                        .box { border: 1px solid #ddd; padding: 25px; max-width: 450px; margin: auto; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+                        h3 { text-align: center; color: #d63384; margin-bottom: 2px; }
+                        .sub { text-align: center; font-size: 11px; color: #666; margin-bottom: 20px; }
+                        .row-line { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
+                        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #666; border-top: 1px dashed #999; padding-top: 10px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="box">
+                        <h3>مركز التجميل والعناية المتكاملة</h3>
+                        <div class="sub">إيصال مسير راتب شهري</div>
+                        <hr>
+                        <div class="row-line"><div><strong>الموظف:</strong> ${name}</div><div><strong>التاريخ:</strong> ${getFormattedDateTime()}</div></div>
+                        <div class="row-line"><div>الراتب الأساسي:</div><div>${base} ${cur}</div></div>
+                        <div class="row-line"><div>المكافآت والإضافات:</div><div style="color:green;">+ ${bonus} ${cur}</div></div>
+                        <div class="row-line"><div>السلف والخصومات:</div><div style="color:red;">- ${deduct} ${cur}</div></div>
+                        <hr>
+                        <div class="row-line" style="font-size:16px; font-weight:bold;"><div>الصافي المستحق:</div><div style="color:#d63384;">${net} ${cur}</div></div>
+                        <div class="footer">توقيع المستلم: ........................ | اعتماد الإدارة</div>
+                    </div>
+                    <script>window.print();<\/script>
+                </body>
+                </html>
+            `);
+            receiptWin.document.close();
+        }
+
         // ================= أزرار طباعة وتصدير التقارير والإكسيل المباشرة لكل الأقسام =================
         function printSectionReport(sectionTitle) {
             const cur = getCurrentCurrency();
@@ -1328,69 +1453,39 @@
             window.saveToFirebase(); renderAppointments();
         }
 
-        function addClinicStaff() {
-            const name = document.getElementById('staff-name').value.trim();
-            const salary = parseFloat(document.getElementById('staff-salary-in').value) || 4000;
-            const role = document.getElementById('staff-role-select').value;
-            const user = document.getElementById('staff-user').value.trim();
-            const pass = document.getElementById('staff-pass').value.trim();
-
-            if(!name || !user || !pass) { alert("أدخل كافة بيانات الموظف!"); return; }
-            const exists = window.platformData.users.some(x => x && x.user === user);
-            if(exists) { alert("اسم المستخدم مستخدم مسبقاً!"); return; }
-
+        function savePatientToQueue() {
             const cId = getCurrentClinicId();
-            if(cId === 'master') { alert("يجب الدخول لفرع محدد لتعيين الموظفين!"); return; }
+            if(cId === 'master') { alert("يجب الدخول لفرع لتسجيل الجلسات!"); return; }
 
-            if(!window.platformData.staffDirectory) window.platformData.staffDirectory = {};
-            if(!window.platformData.staffDirectory[cId]) window.platformData.staffDirectory[cId] = [];
-            window.platformData.staffDirectory[cId].push({ id: Date.now(), name, salary, role, phone: '--' });
-
-            window.platformData.users.push({ name: name, user: user, pass: pass, role: role, clinicId: cId });
-            window.saveToFirebase();
-            renderDocStaff();
-            populatePayrollStaffSelect();
-            document.getElementById('staff-name').value = '';
-            document.getElementById('staff-salary-in').value = '4000';
-            document.getElementById('staff-user').value = '';
-            document.getElementById('staff-pass').value = '';
-            alert("تم إضافة الموظف بنجاح!");
-        }
-
-        function renderDocStaff() {
-            const tbody = document.getElementById('doc-staff-tbody');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            let cur = getCurrentCurrency();
-
-            const cId = getCurrentClinicId();
-            const staffList = (window.platformData.staffDirectory && window.platformData.staffDirectory[cId]) ? window.platformData.staffDirectory[cId] : [];
+            const name = document.getElementById('p-name').value.trim();
+            const phone = document.getElementById('p-phone').value.trim();
+            const total = Math.max(0, parseFloat(document.getElementById('p-total').value) || 0);
+            const paid = Math.max(0, parseFloat(document.getElementById('p-paid').value) || 0);
+            const payMethod = document.getElementById('p-pay-method').value;
+            const expert = document.getElementById('p-expert-select')?.value || 'غير محدد';
             
-            if(staffList.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">لا توجد موظفين مسجلين</td></tr>';
-                return;
+            let servs = []; document.querySelectorAll('.service-chk:checked').forEach(c => servs.push(c.value));
+            
+            if(!name || !phone) return;
+
+            if (payMethod === 'محفظة العميل') {
+                if(!window.platformData.walletStore) window.platformData.walletStore = {};
+                if(!window.platformData.walletStore[cId]) window.platformData.walletStore[cId] = {};
+                let currentWallet = window.platformData.walletStore[cId][name] || 0;
+                if (currentWallet < paid) {
+                    alert(`عذراً، رصيد محفظة العميل (${currentWallet}) لا يكفي لتغطية المدفوع (${paid})!`);
+                    return;
+                }
+                window.platformData.walletStore[cId][name] = currentWallet - paid;
             }
 
-            staffList.forEach((st, idx) => {
-                let roleLabel = 'خبير تجميل';
-                if(st.role === 'reception') roleLabel = 'استقبال';
-                else if(st.role === 'accountant') roleLabel = 'محاسب';
+            if(!window.platformData.queue[cId]) window.platformData.queue[cId] = [];
+            window.platformData.queue[cId].push({ id: Date.now(), name, phone, service: servs.join('+')||'جلسة تجميل', total, paid, payMethod, handler: expert, due: total - paid, status: 'waiting', isoDate: getTodayISO(), date: getFormattedDateTime() });
 
-                tbody.innerHTML += `<tr>
-                    <td><strong>${st.name}</strong></td>
-                    <td><span class="badge bg-info text-dark">${roleLabel}</span></td>
-                    <td class="text-success">${st.salary} ${cur}</td>
-                    <td>${st.name}</td>
-                    <td><button onclick="deleteStaffMember('${cId}', ${idx})" class="btn btn-danger btn-sm py-0"><i class="fa-solid fa-trash"></i></button></td>
-                </tr>`;
-            });
-        }
-
-        function deleteStaffMember(cId, idx) {
-            window.platformData.staffDirectory[cId].splice(idx, 1);
-            window.saveToFirebase();
-            renderDocStaff();
-            populatePayrollStaffSelect();
+            window.saveToFirebase(); renderAllUI();
+            document.getElementById('p-name').value=''; document.getElementById('p-phone').value=''; document.getElementById('p-total').value=''; document.getElementById('p-paid').value='';
+            document.querySelectorAll('.service-chk').forEach(c => c.checked=false);
+            alert("تم الحفظ بنجاح!");
         }
 
         function renderAllUI() {
@@ -1407,6 +1502,9 @@
                 renderStaffPermissionsUI();
                 renderPharmacyStore();
                 populateAttendanceSelect();
+                populatePayrollStaffSelect();
+                renderPayrollSummary();
+                calculateDoctorCommissions();
                 updateCurrencyLabels();
                 loadCenterSettings();
                 applyPermissions();
