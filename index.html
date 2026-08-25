@@ -154,7 +154,7 @@
 </head>
 <body>
 
-    <!-- شاشة الحظر الحمراء لانتهاء اشتراك المركز -->
+    <!-- شاشة الحظر الحمراء عند انتهاء اشتراك المركز -->
     <div id="expired-lock-screen" class="hidden" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#b02a37; z-index:99999; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; padding:20px;">
         <div class="card p-5 bg-white text-dark shadow-lg rounded-4" style="max-width: 500px; width: 100%;">
             <i class="fa-solid fa-triangle-exclamation text-danger fa-4x mb-3"></i>
@@ -259,9 +259,10 @@
                 <a class="nav-link nav-sec-inventory" href="#" onclick="switchTab('beauty-inventory', this)"><i class="fa-solid fa-boxes-stacked text-info me-1"></i> مخزون المستحضرات</a>
                 <a class="nav-link nav-sec-payroll" href="#" onclick="switchTab('payroll', this)"><i class="fa-solid fa-wallet text-success me-1"></i> رواتب وعمولات الخبراء والسلف</a>
 
-                <!-- شجرة الإدارة الهرمية: المطور ينشئ المراكز، والمركز ينشئ فروعه ضمن السقف، والفرع يدير موظفيه -->
+                <!-- ظهور تبويب إدارة الفروع للمطور فقط -->
                 <a class="nav-link master-admin-only hidden" href="#" onclick="switchTab('clinics', this)"><i class="fa-solid fa-network-wired text-warning me-1"></i> إدارة المراكز الرئيسية وفروعها</a>
                 <a class="nav-link center-owner-only hidden" href="#" onclick="switchTab('center-branches', this)"><i class="fa-solid fa-sitemap text-warning me-1"></i> إدارة فروع مركزي والحد الأقصى</a>
+                <!-- ظهور تبويب الموظفين لمدير المركز والفرع لإدارة موظفيهم باستقلالية -->
                 <a class="nav-link doctor-only hidden" href="#" onclick="switchTab('doc-staff', this)"><i class="fa-solid fa-users-gear me-1"></i> موظفي الفرع والصلاحيات</a>
                 
                 <a class="nav-link developer-only hidden" href="#" onclick="switchTab('dev-panel', this)"><i class="fa-solid fa-terminal text-warning me-1"></i> لوحة تحكم المطور</a>
@@ -283,6 +284,7 @@
                     </div>
                 </div>
                 
+                <!-- محدد العملة التفاعلي الخاص بالمركز النشط -->
                 <div class="d-flex align-items-center gap-2">
                     <div class="input-group input-group-sm" style="width: auto;">
                         <span class="input-group-text bg-light fw-bold text-secondary"><i class="fa-solid fa-coins text-warning me-1"></i> عملة المركز:</span>
@@ -750,14 +752,14 @@
                 </div>
             </div>
 
-            <!-- TAB 9: إدارة المركز الرئيسي وفروعه (للمطور والمركز الرئيسي فقط) -->
+            <!-- TAB 9: إدارة المراكز الرئيسية (للمطور فقط) -->
             <div id="tab-clinics" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> (المطور) إنشاء مركز رئيسي وسقف فروعه</h6>
+                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> إنشاء مركز رئيسي مع سقف الفروع وصلاحية الاشتراك</h6>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم المركز الرئيسي</label><input type="text" id="clinic-name-in" class="form-control form-control-sm rounded-3"></div>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المسؤول</label><input type="text" id="doc-name-in" class="form-control form-control-sm rounded-3"></div>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم مدير المركز</label><input type="text" id="doc-name-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="row mb-2">
                                 <div class="col-6"><label class="small fw-bold text-secondary">الحد الأقصى للفروع</label><input type="number" id="clinic-max-branches-in" class="form-control form-control-sm rounded-3" value="3" min="1"></div>
                                 <div class="col-6"><label class="small fw-bold text-secondary">أيام الصلاحية</label><input type="number" id="clinic-days-in" class="form-control form-control-sm rounded-3" value="30" min="1"></div>
@@ -773,17 +775,17 @@
                                     <option value="USD">دولار أمريكي (USD)</option>
                                 </select>
                             </div>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم</label><input type="text" id="doc-user-in" class="form-control form-control-sm rounded-3"></div>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم للدخول</label><input type="text" id="doc-user-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-3"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="doc-pass-in" class="form-control form-control-sm rounded-3"></div>
-                            <button onclick="addNewClinic()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إنشاء وتفعيل المركز</button>
+                            <button onclick="addNewClinic()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إنشاء وتفعيل المركز الرئيسي</button>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> المراكز الرئيسية المسجلة</h6>
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> المراكز الرئيسية المسجلة بالمنصة</h6>
                             <div class="table-responsive">
                                 <table class="table table-hover align-middle small">
-                                    <thead class="table-light"><tr><th>المركز والمسؤول</th><th>العملة</th><th>الصلاحية وفروعها</th><th>إدارة ودخول</th></tr></thead>
+                                    <thead class="table-light"><tr><th>المركز والمسؤول</th><th>العملة</th><th>الصلاحية والفروع</th><th>إدارة</th></tr></thead>
                                     <tbody id="clinics-list-tbody"></tbody>
                                 </table>
                             </div>
@@ -792,18 +794,18 @@
                 </div>
             </div>
 
-            <!-- TAB 9 مكرر: مدير المركز الرئيسي لإدارة فروعه ضمن العداد -->
+            <!-- TAB 9 مكرر: مدير المركز الرئيسي (إنشاء فروع لمركزه ضمن الحصة المسموحة) -->
             <div id="tab-center-branches" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-sitemap me-1"></i> إدارة فروع مركزي والحد الأقصى</h6>
+                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-sitemap me-1"></i> إضافة فرع جديد ضمن حصة مركزي</h6>
                             <div class="p-2 mb-3 bg-light border rounded small">استهلاك الفروع المسموحة: <strong id="center-branch-counter-label" class="text-primary">0 من 3</strong></div>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم الفرع التابع</label><input type="text" id="sub-branch-name-in" class="form-control form-control-sm rounded-3" placeholder="مثال: فرع المعادي..."></div>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم الفرع التابع</label><input type="text" id="sub-branch-name-in" class="form-control form-control-sm rounded-3" placeholder="مثال: فرع الرياض..."></div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم مدير الفرع</label><input type="text" id="sub-branch-mgr-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم</label><input type="text" id="sub-branch-user-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-3"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="sub-branch-pass-in" class="form-control form-control-sm rounded-3"></div>
-                            <button onclick="addSubBranchByCenterOwner()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إضافة الفرع ضمن العداد</button>
+                            <button onclick="addSubBranchByCenterOwner()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إضافة الفرع ضمن الحصة</button>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-12 mb-3">
@@ -864,6 +866,7 @@
                         <div class="card p-4 border-warning">
                             <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)[cite: 2]</h4>
                             <p class="text-muted small">من هنا يمكنك وحدك إدارة اشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase)[cite: 2].</p>
+                            
                             <hr>
                             <div class="row g-3">
                                 <div class="col-md-4">
@@ -897,7 +900,7 @@
         </div>
     </div>
 
-    <!-- Firebase SDK Imports مع ميزة الإصلاح الذاتي Self-Healing للبيانات -->
+    <!-- Firebase SDK Imports مع خاصية الإصلاح الذاتي Self-Healing -->
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -922,7 +925,6 @@
         users: [
             { name: "صبري الديب", user: "sapry eldeep", pass: "159632", role: "master_admin", clinicId: "master" }
         ],
-        clinics: [],
         centers: [],
         queue: {},
         archive: {},
@@ -953,7 +955,6 @@
         const data = snapshot.val();
         if (data && data.users && data.users.length > 0) {
             window.platformData.users = data.users;
-            window.platformData.clinics = data.clinics || [];
             window.platformData.centers = data.centers || [];
             window.platformData.services = data.services || window.platformData.services;
             window.platformData.queue = data.queue || {};
@@ -975,7 +976,6 @@
                 users: [
                     { name: "صبري الديب", user: "sapry eldeep", pass: "159632", role: "master_admin", clinicId: "master" }
                 ],
-                clinics: [],
                 centers: [
                     { id: 'center_main', name: 'المركز الرئيسي', currency: 'EGP', maxBranches: 3, expiryDate: new Date(Date.now() + 365*86400000).toISOString(), branches: [] }
                 ],
@@ -1036,22 +1036,24 @@
         function getCurrentClinicId() {
             if (window.viewingBranchId) return window.viewingBranchId;
             if (!window.currentUser) {
-                return (window.platformData.clinics && window.platformData.clinics.length > 0) ? window.platformData.clinics[0].id : 'main_branch';
+                return (window.platformData.centers && window.platformData.centers.length > 0 && window.platformData.centers[0].branches.length > 0) ? window.platformData.centers[0].branches[0].id : 'main_branch';
             }
             if (window.currentUser.role === 'master_admin') {
-                return (window.platformData.clinics && window.platformData.clinics.length > 0) ? window.platformData.clinics[0].id : 'main_branch';
+                return (window.platformData.centers && window.platformData.centers.length > 0 && window.platformData.centers[0].branches.length > 0) ? window.platformData.centers[0].branches[0].id : 'main_branch';
+            }
+            if (window.currentUser.role === 'center_owner') {
+                let center = window.platformData.centers.find(x => x.id === window.currentUser.centerId);
+                return (center && center.branches.length > 0) ? center.branches[0].id : 'main_branch';
             }
             return window.currentUser.clinicId || 'main_branch';
         }
 
         function getCurrentCurrency() {
             const cId = getCurrentClinicId();
-            const cl = window.platformData.clinics.find(x => x.id === cId);
-            if(cl) return cl.currency || 'EGP';
             for(let center of (window.platformData.centers || [])) {
-                if(center.id === cId) return center.currency || 'EGP';
-                let sub = (center.branches || []).find(b => b.id === cId);
-                if(sub) return center.currency || 'EGP';
+                if(center.id === cId || (center.branches || []).some(b => b.id === cId)) {
+                    return center.currency || 'EGP';
+                }
             }
             return 'EGP';
         }
@@ -1062,34 +1064,40 @@
             const selector = document.getElementById('active-currency-selector');
             if(selector) selector.value = cur;
             
-            const cl = window.platformData.clinics.find(x => x.id === getCurrentClinicId());
+            let targetCenter = null;
+            for(let center of (window.platformData.centers || [])) {
+                if(center.id === getCurrentClinicId() || (center.branches || []).some(b => b.id === getCurrentClinicId())) {
+                    targetCenter = center;
+                    break;
+                }
+            }
             const vatInput = document.getElementById('branch-vat-rate');
             if(vatInput) {
-                vatInput.value = cl && cl.vatRate !== undefined ? cl.vatRate : (cur === 'SAR' ? 15 : 14);
+                vatInput.value = targetCenter && targetCenter.vatRate !== undefined ? targetCenter.vatRate : (cur === 'SAR' ? 15 : 14);
             }
         }
 
         function saveBranchVatSettings() {
-            const cId = getCurrentClinicId();
-            const cl = window.platformData.clinics.find(x => x.id === cId);
+            let targetCenter = null;
+            for(let center of (window.platformData.centers || [])) {
+                if(center.id === getCurrentClinicId() || (center.branches || []).some(b => b.id === getCurrentClinicId())) {
+                    targetCenter = center;
+                    break;
+                }
+            }
             const val = parseFloat(document.getElementById('branch-vat-rate')?.value) || 15;
-            if(cl) {
-                cl.vatRate = val;
+            if(targetCenter) {
+                targetCenter.vatRate = val;
                 window.saveToFirebase();
-                alert("تم حفظ نسبة ضريبة القيمة المضافة للفرع بنجاح!");
+                alert("تم حفظ نسبة ضريبة القيمة المضافة بنجاح!");
             }
         }
 
         function changeActiveCenterCurrency(newCurrency) {
             const cId = getCurrentClinicId();
-            let cl = window.platformData.clinics.find(x => x.id === cId);
-            if(cl) {
-                cl.currency = newCurrency;
-            } else {
-                for(let center of (window.platformData.centers || [])) {
-                    if(center.id === cId || (center.branches || []).some(b => b.id === cId)) {
-                        center.currency = newCurrency;
-                    }
+            for(let center of (window.platformData.centers || [])) {
+                if(center.id === cId || (center.branches || []).some(b => b.id === cId)) {
+                    center.currency = newCurrency;
                 }
             }
             window.saveToFirebase();
