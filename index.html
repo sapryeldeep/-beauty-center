@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>شامل لإدارة مراكز التجميل والفروع | المنظومة السحابية المتكاملة ERP</title>
     
-    <!-- إعدادات تطبيق الهاتف PWA -->
     <meta name="theme-color" content="#d63384">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22%D8%B4%D8%A7%D9%85%D9%84%20ERP%22%2C%22short_name%22%3A%22%D8%B4%D8%A7%D9%85%D9%84%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23fdf2f8%22%2C%22theme_color%22%3A%22%23d63384%22%7D">
-
-    <!-- CSS frameworks & Fonts -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -24,217 +20,24 @@
             --bg-light: #fdf2f8; 
         }
 
-        body { 
-            background-color: var(--bg-light); 
-            font-family: 'Cairo', sans-serif; 
-            overflow-x: hidden;
-            color: #333;
-        }
-
-        .login-wrapper {
-            min-height: 100vh;
-            background: linear-gradient(rgba(214, 51, 132, 0.85), rgba(20, 23, 26, 0.92)), 
-                        url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1920&q=80') no-repeat center center;
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-card {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 22px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-        }
-
-        .sidebar { 
-            width: var(--sidebar-width); 
-            height: 100vh; 
-            position: fixed; 
-            top: 0; 
-            right: 0; 
-            background: linear-gradient(180deg, #161a1d 0%, #212529 100%);
-            color: #fff; 
-            padding-top: 20px; 
-            z-index: 1040; 
-            transition: all 0.3s ease-in-out;
-            overflow-y: auto;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-        }
-        .sidebar .nav-link { 
-            color: #adb5bd; 
-            padding: 10px 18px; 
-            font-weight: 600; 
-            border-radius: 10px; 
-            margin: 4px 12px; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            font-size: 13.5px; 
-            transition: all 0.2s;
-        }
-        .sidebar .nav-link:hover, .sidebar .nav-link.active { 
-            color: #fff; 
-            background: var(--primary-gradient);
-            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.4);
-            transform: translateX(-4px);
-        }
-
-        .main-content { 
-            margin-right: var(--sidebar-width); 
-            padding: 25px; 
-            transition: all 0.3s ease-in-out;
-        }
-
-        @media (max-width: 991.98px) {
-            .sidebar { transform: translateX(100%); }
-            .sidebar.show-sidebar { transform: translateX(0); }
-            .main-content { margin-right: 0 !important; padding: 15px; }
-            .tablet-toggle-btn { display: inline-block !important; }
-        }
-
+        body { background-color: var(--bg-light); font-family: 'Cairo', sans-serif; overflow-x: hidden; color: #333; }
+        .login-wrapper { min-height: 100vh; background: linear-gradient(rgba(214, 51, 132, 0.85), rgba(20, 23, 26, 0.92)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1920&q=80') no-repeat center center; background-size: cover; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .login-card { background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 22px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+        .sidebar { width: var(--sidebar-width); height: 100vh; position: fixed; top: 0; right: 0; background: linear-gradient(180deg, #161a1d 0%, #212529 100%); color: #fff; padding-top: 20px; z-index: 1040; transition: all 0.3s ease-in-out; overflow-y: auto; box-shadow: -5px 0 20px rgba(0,0,0,0.1); }
+        .sidebar .nav-link { color: #adb5bd; padding: 10px 18px; font-weight: 600; border-radius: 10px; margin: 4px 12px; display: flex; align-items: center; gap: 10px; font-size: 13.5px; transition: all 0.2s; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { color: #fff; background: var(--primary-gradient); box-shadow: 0 4px 15px rgba(214, 51, 132, 0.4); transform: translateX(-4px); }
+        .main-content { margin-right: var(--sidebar-width); padding: 25px; transition: all 0.3s ease-in-out; }
+        @media (max-width: 991.98px) { .sidebar { transform: translateX(100%); } .sidebar.show-sidebar { transform: translateX(0); } .main-content { margin-right: 0 !important; padding: 15px; } .tablet-toggle-btn { display: inline-block !important; } }
         .tablet-toggle-btn { display: none; }
-        
-        .card { 
-            border: none; 
-            border-radius: 18px; 
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05); 
-            transition: transform 0.2s, box-shadow 0.2s;
-            background: #ffffff;
-            cursor: pointer;
-        }
-        .card:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-        }
-
+        .card { border: none; border-radius: 18px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05); transition: transform 0.2s, box-shadow 0.2s; background: #ffffff; cursor: pointer; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); }
         .hidden { display: none !important; }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background-color: #25d366;
-            color: #fff;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 32px;
-            width: 60px;
-            height: 60px;
-            z-index: 1050;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 0.3s;
-        }
-        .whatsapp-float:hover { transform: scale(1.12); color: #fff; }
-
-        .dev-footer {
-            font-size: 11px;
-            color: #6c757d;
-            border-top: 1px dashed #dee2e6;
-            margin-top: 30px;
-            padding-top: 12px;
-            text-align: center;
-        }
-
-        .sidebar-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5); z-index: 1030; display: none;
-            backdrop-filter: blur(3px);
-        }
+        .sidebar-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1030; display: none; backdrop-filter: blur(3px); }
         .sidebar-overlay.active { display: block; }
-
-        #public-booking-portal {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
-            z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px;
-            overflow-y: auto;
-        }
+        .dev-footer { font-size: 11px; color: #6c757d; border-top: 1px dashed #dee2e6; margin-top: 30px; padding-top: 12px; text-align: center; }
     </style>
 </head>
 <body>
-
-    <!-- بوابة حجز المواعيد المباشرة للعملاء -->
-    <div id="public-booking-portal" class="hidden">
-        <form onsubmit="event.preventDefault(); submitPublicBookingRequest();">
-            <div id="portal-form-card" class="card p-4 p-md-5 shadow-lg" style="width: 100%; max-width: 550px; border-radius: 24px;">
-                <div class="text-center mb-4">
-                    <i class="fa-solid fa-spa fa-3x mb-2" style="color: var(--primary-color);"></i>
-                    <h3 class="fw-bold text-dark" id="portal-center-title">بوابة حجز موعد جلسة أونلاين</h3>
-                    <p class="text-muted small">اختر الموعد المناسب، وسيتم التحقق من توفر الوقت آلياً وتأكيد حجزك فوراً</p>
-                </div>
-                <div class="mb-3">
-                    <label class="small fw-bold text-secondary">اسم العميل(ة) الثلاثي</label>
-                    <input type="text" id="pub-name" required class="form-control form-control-lg fs-6 rounded-3" placeholder="أدخل اسمك الكريم...">
-                </div>
-                <div class="mb-3">
-                    <label class="small fw-bold text-secondary">رقم الهاتف (للتواصل وتأكيد الحجز)</label>
-                    <input type="text" id="pub-phone" required class="form-control form-control-lg fs-6 rounded-3" placeholder="01xxxxxxxxx">
-                </div>
-                <div class="mb-3">
-                    <label class="small fw-bold text-secondary">اختر الخدمات المطلوبة:</label>
-                    <div id="pub-services-container" class="border p-2 rounded-3 bg-white" style="max-height: 140px; overflow-y: auto;"></div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-6"><label class="small fw-bold text-secondary">تاريخ الجلسة</label><input type="date" required id="pub-date" class="form-control form-control-lg fs-6 rounded-3"></div>
-                    <div class="col-6"><label class="small fw-bold text-secondary">التوقيت المفضل</label><input type="time" required id="pub-time" class="form-control form-control-lg fs-6 rounded-3"></div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold fs-6 rounded-3 shadow-sm" style="background: var(--primary-gradient); border: none;"><i class="fa-solid fa-calendar-check me-1"></i> إرسال وتأكيد الحجز</button>
-                <div class="text-center mt-3">
-                    <small class="text-muted" style="cursor: pointer;" onclick="exitPublicPortal()"><i class="fa-solid fa-arrow-right me-1"></i> دخول الإدارة والموظفين</small>
-                </div>
-            </div>
-        </form>
-
-        <div id="portal-thankyou-card" class="card p-4 p-md-5 text-center shadow-lg border-0 rounded-4 hidden" style="width: 100%; max-width: 500px; background: #ffffff;">
-            <div class="mb-3">
-                <div class="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-circle" style="width: 75px; height: 75px; box-shadow: 0 10px 20px rgba(25, 135, 84, 0.25);">
-                    <i class="fa-solid fa-check fa-2x"></i>
-                </div>
-            </div>
-            <h4 class="fw-bold text-dark mb-1">أهلاً بكِ في مركز التجميل والعناية</h4>
-            <p class="text-success fw-bold mb-3 fs-6">تم تأكيد حجزك بنجاح ونزل في جدول المركز!</p>
-            
-            <div class="border rounded-3 p-3 text-start mb-3" style="background-color: #fdf2f8; font-size: 13.5px;">
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="text-muted">اسم العميل:</span>
-                    <strong class="text-dark" id="conf-name">--</strong>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="text-muted">الخدمات المختارة:</span>
-                    <strong class="text-dark" id="conf-services">--</strong>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="text-muted">تاريخ الموعد:</span>
-                    <strong class="text-primary" id="conf-date">--</strong>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span class="text-muted">توقيت الجلسة:</span>
-                    <strong class="text-primary" id="conf-time">--</strong>
-                </div>
-            </div>
-
-            <p class="text-muted small mb-4">
-                <i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> 
-                يسعدنا حضوركِ قبل الموعد بـ 10 دقائق لضمان تقديم أفضل تجربة عناية لكِ.
-            </p>
-
-            <button onclick="resetPublicPortal()" class="btn btn-primary btn-sm w-100 py-2 fw-bold rounded-3" style="background: var(--primary-gradient); border: none;">
-                حجز موعد آخر
-            </button>
-        </div>
-    </div>
-
-    <!-- زر واتساب تفاعلي -->
-    <a href="https://wa.me/201065826742?text=مرحباً، أود الاستفسار عن حجز المواعيد والخدمات" class="whatsapp-float no-print" target="_blank" title="تواصل معنا">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
 
     <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleTabletSidebar()"></div>
 
@@ -245,6 +48,8 @@
             <h3 class="fw-bold text-dark mb-1">إدارة مراكز التجميل والفروع</h3>
             <p class="text-muted small mb-4">المنصة السحابية المتقدمة (ERP)</p>
             <div id="login-error" class="alert alert-danger py-2 small hidden"></div>
+            
+            <!-- تم التغليف بـ Form لضمان عمل الـ Enter -->
             <form onsubmit="event.preventDefault(); handleLogin();">
                 <div class="mb-3 text-start">
                     <label class="small fw-bold text-secondary">اسم المستخدم</label>
@@ -256,9 +61,8 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold fs-6 rounded-3 shadow-sm" style="background: var(--primary-gradient); border: none;">تسجيل الدخول</button>
             </form>
-            <div class="dev-footer mt-4">
-                نظام إدارة مراكز التجميل الاحترافي
-            </div>
+            
+            <div class="dev-footer mt-4">نظام شامل لإدارة مراكز التجميل (V29 Solid SaaS)</div>
         </div>
     </div>
 
@@ -275,22 +79,16 @@
                 <a class="nav-link active nav-sec-queue" href="#" onclick="switchTab('dashboard', this)"><i class="fa-solid fa-chart-line"></i> طابور الانتظار وحفظ الجلسات</a>
                 <a class="nav-link nav-sec-archive" href="#" onclick="switchTab('archive', this)"><i class="fa-solid fa-box-archive"></i> أرشيف الجلسات والفواتير</a>
                 <a class="nav-link nav-sec-patients" href="#" onclick="switchTab('patients', this)"><i class="fa-solid fa-users"></i> ملفات العملاء ونقاط الولاء</a>
-                <a class="nav-link nav-sec-appointments" href="#" onclick="switchTab('appointments', this)"><i class="fa-solid fa-calendar-check"></i> الحجوزات ونظام الحجز الأونلاين</a>
                 <a class="nav-link nav-sec-finance" href="#" onclick="switchTab('finance', this)"><i class="fa-solid fa-file-invoice-dollar"></i> الحسابات التفصيلية والخزينة</a>
-                
                 <a class="nav-link nav-sec-services" href="#" onclick="switchTab('beauty-services', this)"><i class="fa-solid fa-scissors text-warning me-1"></i> باقات وعروض التجميل</a>
-                <a class="nav-link nav-sec-inventory" href="#" onclick="switchTab('beauty-inventory', this)"><i class="fa-solid fa-boxes-stacked text-info me-1"></i> مخزون المستحضرات</a>
                 <a class="nav-link nav-sec-payroll" href="#" onclick="switchTab('payroll', this)"><i class="fa-solid fa-wallet text-success me-1"></i> رواتب وعمولات الخبراء والسلف</a>
 
-                <!-- الإعدادات والضرائب -->
                 <a class="nav-link doctor-only master-admin-only hidden" href="#" onclick="switchTab('settings', this)"><i class="fa-solid fa-gear text-info me-1"></i> الإعدادات والضرائب</a>
-
                 <a class="nav-link master-admin-only hidden" href="#" onclick="switchTab('clinics', this)"><i class="fa-solid fa-network-wired text-warning me-1"></i> إدارة وفروع المركز والعملات</a>
                 <a class="nav-link doctor-only hidden" href="#" onclick="switchTab('doc-staff', this)"><i class="fa-solid fa-users-gear me-1"></i> موظفي الفرع والصلاحيات</a>
-                
                 <a class="nav-link developer-only hidden" href="#" onclick="switchTab('dev-panel', this)"><i class="fa-solid fa-terminal text-warning me-1"></i> لوحة تحكم المطور</a>
 
-                <a class="nav-link text-warning mt-2" href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> خروج</a>
+                <a class="nav-link text-warning mt-2" href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج</a>
             </nav>
         </div>
 
@@ -307,15 +105,14 @@
                 </div>
                 
                 <div class="d-flex align-items-center gap-2">
+                    <button id="btn-reset-view" class="btn btn-danger btn-sm rounded-3 px-3 hidden fw-bold shadow-sm" onclick="resetAdminView()"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i> إنهاء المعاينة والعودة</button>
                     <div class="input-group input-group-sm" style="width: auto;">
-                        <span class="input-group-text bg-light fw-bold text-secondary"><i class="fa-solid fa-coins text-warning me-1"></i> عملة المركز:</span>
+                        <span class="input-group-text bg-light fw-bold text-secondary"><i class="fa-solid fa-coins text-warning me-1"></i> العملة:</span>
                         <select id="active-currency-selector" class="form-select form-select-sm fw-bold border-primary" onchange="changeActiveCenterCurrency(this.value)">
                             <option value="EGP">جنيه مصري (EGP)</option>
                             <option value="SAR">ريال سعودي (SAR)</option>
                             <option value="AED">درهم إماراتي (AED)</option>
                             <option value="KWD">دينار كويتي (KWD)</option>
-                            <option value="QAR">ريال قطري (QAR)</option>
-                            <option value="BHD">دينار بحريني (BHD)</option>
                             <option value="USD">دولار أمريكي (USD)</option>
                         </select>
                     </div>
@@ -323,60 +120,27 @@
                 </div>
             </div>
 
-            <!-- TAB 1: الطابور وحفظ البيانات -->
+            <!-- TAB 1: الطابور -->
             <div id="tab-dashboard" class="tab-content">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
                             <form onsubmit="event.preventDefault(); savePatientToQueue();">
-                                <h6 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-file-invoice me-1"></i> تسجيل عميل وخدمات متعددة</h6>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">اسم العميل(ة)</label><input type="text" id="p-name" required class="form-control form-control-sm rounded-3" placeholder="اسم العميل..."></div>
-                                <div class="row mb-2">
-                                    <div class="col-6"><label class="small fw-bold text-secondary">العمر</label><input type="number" id="p-age" class="form-control form-control-sm rounded-3" min="0"></div>
-                                    <div class="col-6"><label class="small fw-bold text-secondary">الهاتف</label><input type="text" id="p-phone" required class="form-control form-control-sm rounded-3" placeholder="01xxxxxxxxx"></div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="small fw-bold text-secondary">اختر الخدمات (متعددة):</label>
-                                    <div id="multi-services-checkboxes" class="border p-2 rounded-3 bg-white" style="max-height: 140px; overflow-y: auto;"></div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="small fw-bold text-secondary">الخبير / الموظف المنفذ</label>
-                                    <select id="p-expert-select" class="form-select form-select-sm rounded-3"></select>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-6"><label class="small fw-bold text-secondary">المطلوب (شامل الضريبة)</label><input type="number" id="p-total" required class="form-control form-control-sm rounded-3" min="0"></div>
-                                    <div class="col-6"><label class="small fw-bold text-secondary">المدفوع (<span class="currency-lbl">EGP</span>)</label><input type="number" id="p-paid" required class="form-control form-control-sm rounded-3" min="0"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="small fw-bold text-secondary">طريقة الدفع (الخزينة المستلمة)</label>
-                                    <select id="p-pay-method" class="form-select form-select-sm rounded-3">
-                                        <option value="نقدي (خزينة الكاش)">نقدي (خزينة الكاش)</option>
-                                        <option value="تحويل بنكي / InstaPay">تحويل بنكي / InstaPay</option>
-                                        <option value="شبكة / فيزا POS">شبكة / فيزا (POS)</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;"><i class="fa-solid fa-floppy-disk me-1"></i> حفظ وتسكين في الطابور</button>
+                                <h6 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-file-invoice me-1"></i> تسجيل وحفظ الجلسة</h6>
+                                <div class="mb-2"><input type="text" id="p-name" required class="form-control form-control-sm rounded-3" placeholder="اسم العميل..."></div>
+                                <div class="row mb-2"><div class="col-6"><input type="number" id="p-age" class="form-control form-control-sm rounded-3" placeholder="العمر" min="0"></div><div class="col-6"><input type="text" id="p-phone" required class="form-control form-control-sm rounded-3" placeholder="الهاتف"></div></div>
+                                <div class="mb-2"><label class="small fw-bold text-secondary">الخدمات:</label><div id="multi-services-checkboxes" class="border p-2 rounded-3 bg-light" style="max-height: 120px; overflow-y: auto;"></div></div>
+                                <div class="mb-2"><select id="p-expert-select" class="form-select form-select-sm rounded-3"></select></div>
+                                <div class="row mb-2"><div class="col-6"><input type="number" id="p-total" required class="form-control form-control-sm rounded-3" placeholder="المطلوب (شامل الضريبة)" min="0"></div><div class="col-6"><input type="number" id="p-paid" required class="form-control form-control-sm rounded-3" placeholder="المدفوع" min="0"></div></div>
+                                <div class="mb-3"><select id="p-pay-method" class="form-select form-select-sm rounded-3"><option value="نقدي">نقدي (كاش)</option><option value="تحويل بنكي">تحويل بنكي</option><option value="فيزا POS">شبكة / فيزا (POS)</option></select></div>
+                                <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;"><i class="fa-solid fa-floppy-disk me-1"></i> حفظ وتسكين</button>
                             </form>
                         </div>
                     </div>
-
                     <div class="col-lg-7 col-md-12 mb-3">
                         <div class="card p-4 h-100">
-                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                                <h6 class="text-success fw-bold m-0"><i class="fa-solid fa-clock-rotate-left me-1"></i> طابور الانتظار والجلسات اليومية</h6>
-                                <div class="d-flex gap-2">
-                                    <button onclick="sendWhatsAppReminder()" class="btn btn-outline-success btn-sm fw-bold rounded-3"><i class="fa-brands fa-whatsapp me-1"></i> تذكير بالواتساب</button>
-                                    <button onclick="callNextPatient()" class="btn btn-success btn-sm fw-bold rounded-3 px-3"><i class="fa-solid fa-bullhorn me-1"></i> نداء صوتي</button>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle">
-                                    <thead class="table-light small">
-                                        <tr><th>#</th><th>الاسم</th><th>الخدمات</th><th>الخبير</th><th>الدفع</th><th>المطلوب</th><th>المدفوع</th><th>إجراءات</th></tr>
-                                    </thead>
-                                    <tbody id="queue-tbody" class="small"></tbody>
-                                </table>
-                            </div>
+                            <h6 class="text-success fw-bold mb-3"><i class="fa-solid fa-clock-rotate-left me-1"></i> طابور الانتظار اليومي</h6>
+                            <div class="table-responsive"><table class="table table-hover align-middle"><thead class="table-light small"><tr><th>الاسم</th><th>الخدمات</th><th>الخبير</th><th>المطلوب</th><th>المدفوع</th><th>إجراءات</th></tr></thead><tbody id="queue-tbody" class="small"></tbody></table></div>
                         </div>
                     </div>
                 </div>
@@ -385,546 +149,190 @@
             <!-- TAB 2: الأرشيف -->
             <div id="tab-archive" class="tab-content hidden">
                 <div class="card p-4 mb-3">
-                    <h6 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-magnifying-glass me-1"></i> البحث في أرشيف الجلسات والفواتير</h6>
+                    <h6 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-magnifying-glass me-1"></i> أرشيف الجلسات والفواتير</h6>
                     <div class="row g-2">
-                        <div class="col-md-5 col-sm-12"><label class="small fw-bold text-secondary">البحث بالاسم أو الهاتف:</label><input type="text" id="archive-search-name" class="form-control form-control-sm rounded-3" oninput="searchArchive()"></div>
-                        <div class="col-md-5 col-sm-12"><label class="small fw-bold text-secondary">البحث بالتاريخ:</label><input type="date" id="archive-search-date" class="form-control form-control-sm rounded-3" onchange="searchArchive()"></div>
-                        <div class="col-md-2 col-sm-12 d-flex align-items-end"><button onclick="clearArchiveSearch()" class="btn btn-secondary btn-sm w-100 fw-bold rounded-3">إعادة ضبط</button></div>
+                        <div class="col-md-5"><input type="text" id="archive-search-name" class="form-control form-control-sm rounded-3" placeholder="بحث بالاسم أو الهاتف..." oninput="searchArchive()"></div>
+                        <div class="col-md-5"><input type="date" id="archive-search-date" class="form-control form-control-sm rounded-3" onchange="searchArchive()"></div>
+                        <div class="col-md-2"><button onclick="clearArchiveSearch()" class="btn btn-secondary btn-sm w-100 fw-bold rounded-3">ضبط</button></div>
                     </div>
                 </div>
-                <div class="card p-4">
-                    <h6 class="fw-bold mb-3"><i class="fa-solid fa-list-check me-1"></i> نتائج الأرشيف</h6>
-                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
-                        <table class="table table-hover table-striped align-middle small">
-                            <thead class="table-dark"><tr><th>التاريخ</th><th>الاسم</th><th>الهاتف</th><th>الخدمات</th><th>الدفع</th><th>المسؤول</th><th>المطلوب</th><th>طباعة فاتورة</th></tr></thead>
-                            <tbody id="archive-tbody"></tbody>
-                        </table>
-                    </div>
-                </div>
+                <div class="card p-4"><div class="table-responsive" style="max-height: 500px; overflow-y: auto;"><table class="table table-hover table-striped align-middle small"><thead class="table-dark"><tr><th>التاريخ</th><th>الاسم</th><th>الهاتف</th><th>الخدمات</th><th>الدفع</th><th>المسؤول</th><th>المطلوب</th><th>فاتورة</th></tr></thead><tbody id="archive-tbody"></tbody></table></div></div>
             </div>
 
-            <!-- TAB 3: ملفات العملاء -->
+            <!-- TAB 3: العملاء -->
             <div id="tab-patients" class="tab-content hidden">
                 <div class="row">
-                    <div class="col-lg-4 col-md-12 mb-3">
-                        <div class="card p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h6 class="fw-bold m-0 text-primary">دليل العملاء ونقاط الولاء</h6>
-                                <input type="text" id="patient-search-in" oninput="filterPatientsList()" class="form-control form-control-sm w-50 rounded-3" placeholder="بحث...">
-                            </div>
-                            <div class="d-flex gap-2 mb-3">
-                                <button onclick="printSectionReport('المديونيات والآجل')" class="btn btn-outline-danger btn-sm w-50 fw-bold"><i class="fa-solid fa-print me-1"></i> طباعة الآجل</button>
-                                <button onclick="exportReceivablesExcel()" class="btn btn-outline-success btn-sm w-50 fw-bold"><i class="fa-solid fa-file-excel me-1"></i> تحميل إكسيل</button>
-                            </div>
-                            <div class="table-responsive" style="max-height: 480px; overflow-y: auto;">
-                                <table class="table table-hover align-middle small">
-                                    <thead class="table-light"><tr><th>الاسم</th><th>الهاتف</th><th>النقاط</th><th>المتبقي</th></tr></thead>
-                                    <tbody id="patients-dir-tbody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-md-12">
+                    <div class="col-lg-4 mb-3"><div class="card p-4"><input type="text" id="patient-search-in" oninput="filterPatientsList()" class="form-control form-control-sm mb-3 rounded-3" placeholder="بحث في العملاء..."><div class="table-responsive" style="max-height:480px;"><table class="table table-hover align-middle small"><thead class="table-light"><tr><th>الاسم</th><th>النقاط</th><th>المتبقي</th></tr></thead><tbody id="patients-dir-tbody"></tbody></table></div></div></div>
+                    <div class="col-lg-8">
                         <div id="patient-profile-card" class="card p-4 hidden">
-                            <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3 flex-wrap gap-2">
-                                <div>
-                                    <h4 class="fw-bold text-primary m-0" id="prof-p-name">--</h4>
-                                    <small class="text-muted"><i class="fa-solid fa-phone me-1"></i><span id="prof-p-phone">--</span> | العمر: <span id="prof-p-age">--</span> سنة | رصيد النقاط: <strong class="text-success" id="prof-p-points">0 نقطة</strong></small>
-                                </div>
-                                <div class="d-flex gap-1 flex-wrap">
-                                    <button onclick="printFullMedicalReport()" class="btn btn-outline-dark btn-sm fw-bold rounded-3"><i class="fa-solid fa-file-lines me-1"></i> كشف حساب</button>
-                                    <button onclick="deletePatientCompletely()" class="btn btn-danger btn-sm fw-bold rounded-3"><i class="fa-solid fa-trash me-1"></i> حذف</button>
-                                    <button onclick="payExtraFromProfile()" id="prof-pay-btn" class="btn btn-success btn-sm fw-bold rounded-3"><i class="fa-solid fa-hand-holding-dollar me-1"></i> تحصيل متبقي</button>
-                                </div>
+                            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                                <div><h4 class="fw-bold text-primary m-0" id="prof-p-name">--</h4><small class="text-muted"><span id="prof-p-phone">--</span> | نقاط: <strong class="text-success" id="prof-p-points">0</strong></small></div>
+                                <div><button onclick="payExtraFromProfile()" class="btn btn-success btn-sm fw-bold">تحصيل</button></div>
                             </div>
-
-                            <div class="border p-3 rounded-3 bg-white mb-3 shadow-sm">
-                                <h6 class="fw-bold text-dark mb-2"><i class="fa-solid fa-spa me-1 text-primary"></i> تفضيلات العميل / نوع بشرة / ملاحظات تجميلية</h6>
-                                <textarea id="beauty-notes-input" class="form-control form-control-sm rounded-3" rows="2" placeholder="ملاحظات حساسية، نوع البشرة، أو طلبات خاصة..." onchange="saveBeautyNotes()"></textarea>
-                            </div>
-
-                            <div class="row mb-3 text-center g-2">
-                                <div class="col-4"><div class="p-2 border rounded-3 bg-white shadow-sm"><small class="text-muted d-block">المطلوب</small><strong id="prof-p-total" class="fs-6 text-dark">0</strong></div></div>
-                                <div class="col-4"><div class="p-2 border rounded-3 bg-white shadow-sm"><small class="text-muted d-block">المدفوع</small><strong id="prof-p-paid" class="fs-6 text-success">0</strong></div></div>
-                                <div class="col-4"><div class="p-2 border rounded-3 bg-white shadow-sm"><small class="text-muted d-block">المتبقي (آجل)</small><strong id="prof-p-due" class="fs-6 text-danger">0</strong></div></div>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h6 class="fw-bold m-0 text-dark">سجل الجلسات والفواتير:</h6>
-                                <button onclick="addExtraServiceToPatient()" class="btn btn-sm btn-outline-success rounded-3"><i class="fa-solid fa-plus me-1"></i> إضافة جلسة</button>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-sm table-bordered align-middle small">
-                                    <thead class="table-light"><tr><th>التاريخ</th><th>الخدمات</th><th>الدفع</th><th>المسؤول</th><th>المطلوب</th><th>المدفوع</th><th>المتبقي</th></tr></thead>
-                                    <tbody id="prof-p-history"></tbody>
-                                </table>
-                            </div>
+                            <div class="row mb-3 text-center g-2"><div class="col-4"><div class="p-2 border rounded-3 bg-light"><small>المطلوب</small><strong id="prof-p-total" class="d-block fs-6">0</strong></div></div><div class="col-4"><div class="p-2 border rounded-3 bg-light"><small>المدفوع</small><strong id="prof-p-paid" class="d-block fs-6 text-success">0</strong></div></div><div class="col-4"><div class="p-2 border rounded-3 bg-light"><small>المتبقي (آجل)</small><strong id="prof-p-due" class="d-block fs-6 text-danger">0</strong></div></div></div>
+                            <div class="table-responsive"><table class="table table-sm table-bordered align-middle small"><thead class="table-light"><tr><th>التاريخ</th><th>الخدمة</th><th>المطلوب</th><th>المدفوع</th><th>المتبقي</th></tr></thead><tbody id="prof-p-history"></tbody></table></div>
                         </div>
-                        <div id="patient-profile-empty" class="card p-5 text-center text-muted">
-                            <i class="fa-solid fa-user-gear fa-3x mb-3 text-secondary"></i>
-                            <h6>اختر عميلاً من القائمة لعرض سجله ونقاط الولاء.</h6>
-                        </div>
+                        <div id="patient-profile-empty" class="card p-5 text-center text-muted"><i class="fa-solid fa-users fa-3x mb-3"></i><h6>اختر عميلاً لعرض السجل</h6></div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 4: الحجوزات ورابط الحجز الأونلاين -->
-            <div id="tab-appointments" class="tab-content hidden">
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <div class="card p-4 bg-white border">
-                            <h5 class="fw-bold text-primary mb-2"><i class="fa-solid fa-globe me-2"></i> رابط حجز العملاء أونلاين المباشر</h5>
-                            <p class="text-muted small">قم بنسخ هذا الرابط ومشاركته مع عملائك؛ يفتح الرابط نموذج الحجز مباشرة دون الحاجة لتسجيل دخول، وينزل في جدول المواعيد تلقائياً:</p>
-                            <div class="input-group input-group-sm mb-3" style="max-width: 550px;">
-                                <input type="text" id="online-booking-link" class="form-control" readonly value="">
-                                <button onclick="copyOnlineLink()" class="btn btn-success fw-bold"><i class="fa-solid fa-copy me-1"></i> نسخ الرابط للعملاء</button>
-                                <button onclick="openClientBookingPortalDirectly()" class="btn btn-primary fw-bold"><i class="fa-solid fa-eye me-1"></i> فتح بوابة الحجز</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 mb-3">
-                        <div class="card p-4">
-                            <form onsubmit="event.preventDefault(); addAppointment();">
-                                <h6 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-calendar-plus me-1"></i> حجز موعد جلسة قادمة (داخلي)</h6>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">اسم العميل(ة)</label><input type="text" required id="app-name" class="form-control form-control-sm rounded-3"></div>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">الهاتف</label><input type="text" required id="app-phone" class="form-control form-control-sm rounded-3"></div>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">التاريخ</label><input type="date" required id="app-date" class="form-control form-control-sm rounded-3"></div>
-                                <div class="mb-3"><label class="small fw-bold text-secondary">الوقت</label><input type="time" required id="app-time" class="form-control form-control-sm rounded-3"></div>
-                                <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">تأكيد الحجز</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-md-12">
-                        <div class="card p-4">
-                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-calendar-days me-1"></i> جدول المواعيد والحجوزات القادمة</h6>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle">
-                                    <thead class="table-light small"><tr><th>العميل</th><th>الهاتف</th><th>التاريخ</th><th>التوقيت</th><th>الإجراء</th></tr></thead>
-                                    <tbody id="app-tbody" class="small"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 5: الحسابات التفصيلية التفاعلية -->
+            <!-- TAB 5: الحسابات التفصيلية -->
             <div id="tab-finance" class="tab-content hidden">
                 <div class="row mb-3 g-2">
-                    <div class="col-md-3 col-6">
-                        <div class="card p-3 text-center text-white rounded-4" style="background: var(--primary-gradient);" onclick="openFinanceModal('إجمالي الإيرادات', getCombinedAllRecords())" title="اضغط لعرض تفاصيل الإيرادات">
-                            <small>إجمالي الإيرادات (<span class="currency-lbl">EGP</span>) <i class="fa-solid fa-arrow-pointer ms-1"></i></small>
-                            <h4 id="fin-total" class="fw-bold m-0">0</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="card p-3 text-center bg-success text-white rounded-4" onclick="openFinanceModal('المبالغ المحصلة', getCombinedAllRecords())" title="اضغط لعرض المحصل">
-                            <small>إجمالي المحصل (<span class="currency-lbl">EGP</span>) <i class="fa-solid fa-arrow-pointer ms-1"></i></small>
-                            <h4 id="fin-paid" class="fw-bold m-0">0</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="card p-3 text-center bg-danger text-white rounded-4" onclick="openFinanceModal('المصروفات التفصيلية', getExpensesRecordsForModal())" title="اضغط لعرض المصروفات">
-                            <small>المصروفات التفصيلية (<span class="currency-lbl">EGP</span>) <i class="fa-solid fa-arrow-pointer ms-1"></i></small>
-                            <h4 id="fin-expenses" class="fw-bold m-0">0</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="card p-3 text-center bg-dark text-white rounded-4">
-                            <small>صافي الأرباح (<span class="currency-lbl">EGP</span>)</small>
-                            <h4 id="fin-net" class="fw-bold m-0">0</h4>
-                        </div>
-                    </div>
+                    <div class="col-md-3 col-6"><div class="card p-3 text-center text-white rounded-4" style="background: var(--primary-gradient);"><small>إجمالي الإيرادات</small><h4 id="fin-total" class="fw-bold m-0">0</h4></div></div>
+                    <div class="col-md-3 col-6"><div class="card p-3 text-center bg-success text-white rounded-4"><small>إجمالي المحصل</small><h4 id="fin-paid" class="fw-bold m-0">0</h4></div></div>
+                    <div class="col-md-3 col-6"><div class="card p-3 text-center bg-danger text-white rounded-4"><small>المصروفات</small><h4 id="fin-expenses" class="fw-bold m-0">0</h4></div></div>
+                    <div class="col-md-3 col-6"><div class="card p-3 text-center bg-dark text-white rounded-4"><small>صافي الأرباح</small><h4 id="fin-net" class="fw-bold m-0">0</h4></div></div>
                 </div>
-
-                <div id="finance-detail-modal" class="card p-4 mb-4 border border-primary hidden">
-                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                        <h5 id="modal-title" class="fw-bold text-primary m-0">تفاصيل القسم</h5>
-                        <div class="d-flex gap-2">
-                            <button id="modal-print-btn" onclick="" class="btn btn-outline-primary btn-sm fw-bold"><i class="fa-solid fa-print me-1"></i> طباعة التقرير</button>
-                            <button id="modal-excel-btn" onclick="" class="btn btn-outline-success btn-sm fw-bold"><i class="fa-solid fa-file-excel me-1"></i> تحميل إكسيل</button>
-                            <button onclick="closeFinanceModal()" class="btn btn-sm btn-outline-secondary">إغلاق <i class="fa-solid fa-xmark"></i></button>
-                        </div>
-                    </div>
-                    <div class="table-responsive" style="max-height: 250px; overflow-y: auto;">
-                        <table class="table table-sm table-bordered align-middle small">
-                            <thead class="table-light" id="modal-table-head"></thead>
-                            <tbody id="modal-table-body"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="card p-4 mb-4">
-                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                        <h6 class="fw-bold text-primary m-0"><i class="fa-solid fa-building-columns me-1"></i> أرصدة وحركة الخزينة والبنوك</h6>
-                        <div class="d-flex gap-2">
-                            <button onclick="printSectionReport('حركة الخزينة والبنوك')" class="btn btn-outline-primary btn-sm fw-bold"><i class="fa-solid fa-print me-1"></i> طباعة تقرير الخزينة</button>
-                            <button onclick="exportTreasuryExcel()" class="btn btn-outline-success btn-sm fw-bold"><i class="fa-solid fa-file-excel me-1"></i> تحميل إكسيل الخزينة</button>
-                        </div>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <div class="p-3 text-center bg-light border rounded-3">
-                                <small class="text-muted d-block mb-1">خزينة الكاش المباشر</small>
-                                <h5 id="treasury-cash" class="fw-bold text-success m-0">0</h5>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="p-3 text-center bg-light border rounded-3">
-                                <small class="text-muted d-block mb-1">حساب InstaPay / تحويلات</small>
-                                <h5 id="treasury-bank" class="fw-bold text-primary m-0">0</h5>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="p-3 text-center bg-light border rounded-3">
-                                <small class="text-muted d-block mb-1">جهاز الشبكة / فيزا (POS)</small>
-                                <h5 id="treasury-pos" class="fw-bold text-info m-0">0</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row mb-4 g-3">
-                    <div class="col-md-6">
-                        <div class="card p-3 h-100">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h6 class="fw-bold text-danger m-0"><i class="fa-solid fa-wallet me-1"></i> تسجيل المصروفات والنثريات</h6>
-                                <div class="d-flex gap-1">
-                                    <button onclick="printSectionReport('المصروفات التفصيلية')" class="btn btn-outline-danger btn-sm py-0 fw-bold" title="طباعة المصروفات"><i class="fa-solid fa-print"></i> طباعة</button>
-                                    <button onclick="exportExpensesExcel()" class="btn btn-outline-success btn-sm py-0 fw-bold" title="تحميل إكسيل المصروفات"><i class="fa-solid fa-file-excel"></i> إكسيل</button>
-                                </div>
-                            </div>
-                            <form onsubmit="event.preventDefault(); addExpenseRecord();">
-                                <div class="row g-2 mb-2">
-                                    <div class="col-4">
-                                        <select id="exp-category" class="form-select form-select-sm rounded-3">
-                                            <option value="مستحضرات وخامات تجميل">مستحضرات وخامات</option>
-                                            <option value="أجور ومرتبات">أجور ومرتبات</option>
-                                            <option value="فواتير تشغيلية (كهرباء/إيجار)">فواتير تشغيلية</option>
-                                            <option value="صيانة ونثريات عامة">صيانة ونثريات</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-4"><input type="text" required id="exp-desc" class="form-control form-control-sm rounded-3" placeholder="البيان..."></div>
-                                    <div class="col-4"><input type="number" required id="exp-amount" class="form-control form-control-sm rounded-3" placeholder="المبلغ" min="0"></div>
-                                </div>
-                                <button type="submit" class="btn btn-outline-danger btn-sm fw-bold w-100 rounded-3">تسجيل المصروف وتوثيقه</button>
-                            </form>
-                            <div class="table-responsive mt-2" style="max-height: 140px; overflow-y: auto;">
-                                <table class="table table-sm table-bordered align-middle small mb-0">
-                                    <thead class="table-light"><tr><th>البند</th><th>البيان</th><th>المبلغ</th><th>المسؤول</th><th>حذف</th></tr></thead>
-                                    <tbody id="expenses-tbody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card p-3 h-100">
-                            <h6 class="fw-bold text-success mb-2"><i class="fa-solid fa-percent me-1"></i> عمولات الخبراء التفصيلية (حسب الجلسات)</h6>
-                            <div id="expert-commissions-summary" class="small text-muted p-2 border rounded bg-light" style="max-height: 180px; overflow-y: auto;">
-                                جاري حساب العمولات لكل خبير...
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                        <h6 class="fw-bold text-primary m-0"><i class="fa-solid fa-file-invoice-dollar me-1"></i> حركة الإيرادات والجلسات الشاملة</h6>
-                        <div class="d-flex gap-2 flex-wrap">
-                            <button onclick="printSectionReport('إجمالي الإيرادات')" class="btn btn-outline-primary btn-sm fw-bold rounded-3"><i class="fa-solid fa-print me-1"></i> طباعة تقرير الإيرادات</button>
-                            <button onclick="exportRevenueExcel()" class="btn btn-outline-success btn-sm fw-bold rounded-3"><i class="fa-solid fa-file-excel me-1"></i> إكسيل الإيرادات</button>
-                            <button onclick="printCashReceipt()" class="btn btn-outline-secondary btn-sm fw-bold rounded-3"><i class="fa-solid fa-receipt me-1"></i> إيصال نقدية</button>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped align-middle">
-                            <thead class="table-light small"><tr><th>العميل</th><th>التاريخ</th><th>الخدمة</th><th>طريقة الدفع</th><th>المسؤول</th><th>المطلوب</th><th>المدفوع</th><th>المتبقي</th><th>فاتورة</th></tr></thead>
-                            <tbody id="finance-tbody" class="small"></tbody>
-                        </table>
-                    </div>
-                </div>
+                <div class="card p-4"><div class="table-responsive"><table class="table table-striped align-middle small"><thead class="table-light"><tr><th>العميل</th><th>التاريخ</th><th>الخدمة</th><th>طريقة الدفع</th><th>المسؤول</th><th>المطلوب</th><th>المدفوع</th></tr></thead><tbody id="finance-tbody"></tbody></table></div></div>
             </div>
 
-            <!-- TAB 6: باقات وعروض التجميل -->
+            <!-- TAB 6: الخدمات -->
             <div id="tab-beauty-services" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 col-12 mb-3">
                         <div class="card p-4">
                             <form onsubmit="event.preventDefault(); addServiceSetting();">
-                                <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-scissors me-1"></i> إضافة خدمة أو باقة تجميل جديدة</h6>
-                                <div class="mb-2"><label class="small fw-bold">اسم الخدمة / الباقة</label><input type="text" required id="serv-name-in" class="form-control form-control-sm rounded-3" placeholder="مثال: تنظيف بشرة عميق، صبغة شعر..."></div>
-                                <div class="mb-3"><label class="small fw-bold">السعر (<span class="currency-lbl">EGP</span>)</label><input type="number" required id="serv-price-in" class="form-control form-control-sm rounded-3" placeholder="السعر" min="0"></div>
+                                <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-scissors me-1"></i> إضافة خدمة جديدة</h6>
+                                <div class="mb-2"><input type="text" required id="serv-name-in" class="form-control form-control-sm rounded-3" placeholder="اسم الخدمة..."></div>
+                                <div class="mb-3"><input type="number" required id="serv-price-in" class="form-control form-control-sm rounded-3" placeholder="السعر..." min="0"></div>
                                 <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إضافة الخدمة</button>
                             </form>
                         </div>
                     </div>
                     <div class="col-lg-7 col-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold mb-3">دليل الخدمات والباقات المتاحة</h6>
-                            <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
-                                <table class="table table-bordered table-sm align-middle">
-                                    <thead class="table-light small"><tr><th>الخدمة</th><th>السعر (<span class="currency-lbl">EGP</span>)</th><th>حذف</th></tr></thead>
-                                    <tbody id="services-settings-tbody" class="small"></tbody>
-                                </table>
-                            </div>
+                            <h6 class="fw-bold mb-3">دليل الخدمات والباقات</h6>
+                            <div class="table-responsive"><table class="table table-bordered table-sm align-middle"><thead class="table-light small"><tr><th>الخدمة</th><th>السعر</th><th>حذف</th></tr></thead><tbody id="services-settings-tbody"></tbody></table></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 7: مخزون مستحضرات التجميل -->
-            <div id="tab-beauty-inventory" class="tab-content hidden">
-                <div class="card p-4 mb-3" style="background: #fdf2f8;">
-                    <h4 class="fw-bold text-primary mb-2"><i class="fa-solid fa-boxes-stacked me-2"></i> مخزون مستحضرات التجميل ومنتجات العناية</h4>
-                    <p class="text-muted small">إدارة كميات المنتجات، أسعارها، وتواريخ الصلاحية مع التنبيه التلقائي.</p>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-12"><div id="pharmacy-expiry-alerts-box"></div></div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 mb-3">
-                        <div class="card p-4">
-                            <form onsubmit="event.preventDefault(); addPharmacyItem();">
-                                <h6 class="fw-bold text-primary mb-3">إضافة منتج جديد للمخزن</h6>
-                                <div class="mb-2"><label class="small fw-bold">اسم المنتج / المستحضر</label><input type="text" required id="ph-drug-name" class="form-control form-control-sm rounded-3"></div>
-                                <div class="mb-2"><label class="small fw-bold">الكمية المتاحة</label><input type="number" required id="ph-drug-qty" class="form-control form-control-sm rounded-3" placeholder="عدد العبوات" min="0"></div>
-                                <div class="row mb-2">
-                                    <div class="col-6"><label class="small fw-bold">السعر</label><input type="number" required id="ph-drug-price" class="form-control form-control-sm rounded-3" min="0"></div>
-                                    <div class="col-6"><label class="small fw-bold">الصلاحية</label><input type="date" required id="ph-drug-expiry" class="form-control form-control-sm rounded-3"></div>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إضافة للمخزن</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-md-12">
-                        <div class="card p-4">
-                            <h6 class="fw-bold mb-3">أرصدة المخزون</h6>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle small">
-                                    <thead class="table-light"><tr><th>المنتج</th><th>الرصيد</th><th>السعر</th><th>الصلاحية</th><th>حذف</th></tr></thead>
-                                    <tbody id="pharmacy-tbody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 8: رواتب وعمولات الموظفين والسلف -->
+            <!-- TAB 8: الرواتب -->
             <div id="tab-payroll" class="tab-content hidden">
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <div class="card p-4 border-success">
-                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                                <div>
-                                    <h4 class="fw-bold text-success mb-1"><i class="fa-solid fa-wallet me-2"></i> نظام الموظفين، الرواتب، وإدارة السلف (Payroll)</h4>
-                                    <p class="text-muted small m-0">إضافة الموظفين مع رواتبهم الأساسية، وتسجيل السلف، المكافآت، والخصومات بدقة.</p>
-                                </div>
-                                <div class="d-flex gap-2">
-                                    <button onclick="printSectionReport('الرواتب والمستحقات')" class="btn btn-outline-success btn-sm py-1 fw-bold"><i class="fa-solid fa-print me-1"></i> طباعة كشف الرواتب</button>
-                                    <button onclick="exportPayrollExcel()" class="btn btn-outline-primary btn-sm py-1 fw-bold"><i class="fa-solid fa-file-excel me-1"></i> تحميل إكسيل الرواتب</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-lg-4 col-md-12 mb-3">
                         <div class="card p-4">
                             <form onsubmit="event.preventDefault(); addPayrollTransaction();">
-                                <h6 class="fw-bold text-primary mb-3">تسجيل سلفة، مكافأة، أو خصم لموظف</h6>
-                                <div class="mb-2">
-                                    <label class="small fw-bold">اختر الموظف / الخبير</label>
-                                    <div class="input-group input-group-sm mb-1">
-                                        <select id="payroll-staff-select" required class="form-select form-select-sm rounded-3"></select>
-                                        <button type="button" onclick="quickAddStaffPrompt()" class="btn btn-outline-success" title="إضافة موظف جديد"><i class="fa-solid fa-plus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <label class="small fw-bold">نوع المعاملة:</label>
-                                    <select id="payroll-trans-type" class="form-select form-select-sm rounded-3">
-                                        <option value="advance">سلفة مالية (خصم من الراتب) (-)</option>
-                                        <option value="bonus">مكافأة / حافز إضافي (+)</option>
-                                        <option value="deduction">جزاء / خصم إداري (-)</option>
-                                    </select>
-                                </div>
-                                <div class="mb-2"><label class="small fw-bold">المبلغ (<span class="currency-lbl">EGP</span>)</label><input type="number" required id="payroll-trans-amount" class="form-control form-control-sm rounded-3" min="1"></div>
-                                <div class="mb-3"><label class="small fw-bold">البيان / السبب</label><input type="text" required id="payroll-trans-note" class="form-control form-control-sm rounded-3" placeholder="سبب السلفة أو المكافأة..."></div>
-                                <button type="submit" class="btn btn-success btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm">حفظ السلفة أو المعاملة</button>
+                                <h6 class="fw-bold text-primary mb-3">تسجيل سلفة أو مكافأة</h6>
+                                <div class="mb-2"><select id="payroll-staff-select" required class="form-select form-select-sm rounded-3"></select></div>
+                                <div class="mb-2"><select id="payroll-trans-type" class="form-select form-select-sm rounded-3"><option value="advance">سلفة مالية (-)</option><option value="bonus">مكافأة (+)</option><option value="deduction">خصم (-)</option></select></div>
+                                <div class="mb-2"><input type="number" required id="payroll-trans-amount" class="form-control form-control-sm rounded-3" placeholder="المبلغ..." min="1"></div>
+                                <div class="mb-3"><input type="text" required id="payroll-trans-note" class="form-control form-control-sm rounded-3" placeholder="البيان..."></div>
+                                <button type="submit" class="btn btn-success btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm">حفظ المعاملة</button>
                             </form>
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-12">
                         <div class="card p-4">
-                            <h6 class="fw-bold mb-3">كشف حساب الرواتب، السلف، وصافي المستحقات</h6>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle small">
-                                    <thead class="table-light"><tr><th>الموظف</th><th>الأساسي</th><th>المكافآت</th><th>السلف والخصومات</th><th>الصافي المستحق</th><th>إيصال صرف</th></tr></thead>
-                                    <tbody id="payroll-summary-tbody"></tbody>
-                                </table>
-                            </div>
+                            <h6 class="fw-bold mb-3">كشف حساب الرواتب</h6>
+                            <div class="table-responsive"><table class="table table-hover align-middle small"><thead class="table-light"><tr><th>الموظف</th><th>الأساسي</th><th>المكافآت</th><th>الخصومات</th><th>الصافي</th></tr></thead><tbody id="payroll-summary-tbody"></tbody></table></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 9: الإعدادات والضرائب (ZATCA) -->
+            <!-- TAB 9: الإعدادات والضرائب -->
             <div id="tab-settings" class="tab-content hidden">
                 <div class="card p-4 border border-info shadow-sm w-75 mx-auto">
                     <form onsubmit="event.preventDefault(); saveCenterSettings();">
-                        <h5 class="fw-bold text-info mb-3"><i class="fa-solid fa-file-invoice"></i> إعدادات الفاتورة والضرائب (ZATCA / ETA)</h5>
-                        <div class="mb-3">
-                            <label class="small fw-bold">الرقم الضريبي للمركز:</label>
-                            <input type="text" id="set-tax-number" class="form-control form-control-sm" placeholder="الرقم الضريبي لطباعته في الفاتورة">
-                        </div>
-                        <div class="mb-3">
-                            <label class="small fw-bold">نسبة ضريبة القيمة المضافة (VAT) %:</label>
-                            <input type="number" id="set-tax-rate" class="form-control form-control-sm" placeholder="مثال: 14 أو 15" min="0" max="100">
-                            <small class="text-muted d-block mt-1">يتم حساب الضريبة تلقائياً داخل الفاتورة مع توليد QR Code.</small>
-                        </div>
-                        <div class="mb-4">
-                            <label class="small fw-bold">رسالة ترحيب وتذكير للواتساب الآلي:</label>
-                            <textarea id="set-wa-msg" class="form-control form-control-sm" rows="2" placeholder="مرحباً بك في مركزنا..."></textarea>
-                        </div>
+                        <h5 class="fw-bold text-info mb-3"><i class="fa-solid fa-file-invoice"></i> إعدادات الفاتورة والضرائب (ZATCA)</h5>
+                        <div class="mb-3"><label class="small fw-bold">الرقم الضريبي:</label><input type="text" id="set-tax-number" class="form-control form-control-sm" placeholder="الرقم الضريبي لطباعته في الفاتورة"></div>
+                        <div class="mb-3"><label class="small fw-bold">نسبة الضريبة (VAT) %:</label><input type="number" id="set-tax-rate" class="form-control form-control-sm" placeholder="14 أو 15" min="0" max="100"></div>
                         <button type="submit" class="btn btn-info text-white w-100 fw-bold rounded-3">حفظ الإعدادات</button>
                     </form>
                 </div>
             </div>
 
-            <!-- TAB 10: إدارة الفروع واختيار العملات -->
+            <!-- TAB 10: الفروع -->
             <div id="tab-clinics" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
                             <form onsubmit="event.preventDefault(); addNewClinic();">
-                                <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> إنشاء مركز أو فرع وتحديد العملة</h6>
+                                <h6 class="fw-bold text-primary mb-3">إنشاء مركز أو فرع</h6>
                                 
                                 <div class="mb-2 master-admin-only hidden">
-                                    <label class="small fw-bold text-secondary">الفرع الرئيسي (للمطورين فقط):</label>
-                                    <select id="clinic-parent-select" class="form-select form-select-sm rounded-3 border-primary" onchange="toggleMaxBranchesInput()"></select>
+                                    <select id="clinic-parent-select" class="form-select form-select-sm rounded-3 bg-light border-primary" onchange="toggleMaxBranchesInput()"></select>
                                 </div>
                                 <div class="mb-2 master-admin-only hidden" id="max-branches-group">
-                                    <label class="small fw-bold text-secondary">الحد الأقصى للفروع:</label>
-                                    <input type="number" id="clinic-max-branches" class="form-control form-control-sm rounded-3" value="3">
+                                    <input type="number" id="clinic-max-branches" class="form-control form-control-sm rounded-3" value="3" placeholder="الحد الأقصى للفروع">
                                 </div>
 
-                                <div class="mb-2"><label class="small fw-bold text-secondary">اسم الفرع (مثل: فرع الرياض، فرع القاهرة...)</label><input type="text" required id="clinic-name-in" class="form-control form-control-sm rounded-3"></div>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">اسم مدير أو مسؤول الفرع</label><input type="text" required id="doc-name-in" class="form-control form-control-sm rounded-3"></div>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">عملة المركز / الفرع:</label>
+                                <div class="mb-2"><input type="text" required id="clinic-name-in" class="form-control form-control-sm rounded-3" placeholder="اسم المركز / الفرع..."></div>
+                                <div class="mb-2"><input type="text" required id="doc-name-in" class="form-control form-control-sm rounded-3" placeholder="اسم المسؤول..."></div>
+                                <div class="mb-2">
                                     <select id="clinic-currency-in" class="form-select form-select-sm rounded-3">
                                         <option value="EGP">جنيه مصري (EGP)</option>
                                         <option value="SAR">ريال سعودي (SAR)</option>
                                         <option value="AED">درهم إماراتي (AED)</option>
                                         <option value="KWD">دينار كويتي (KWD)</option>
-                                        <option value="QAR">ريال قطري (QAR)</option>
-                                        <option value="BHD">دينار بحريني (BHD)</option>
                                         <option value="USD">دولار أمريكي (USD)</option>
                                     </select>
                                 </div>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم للدخول</label><input type="text" required id="doc-user-in" class="form-control form-control-sm rounded-3"></div>
-                                <div class="mb-3"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" required id="doc-pass-in" class="form-control form-control-sm rounded-3"></div>
-                                <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إنشاء وتفعيل الفرع</button>
+                                <div class="mb-2"><input type="text" required id="doc-user-in" class="form-control form-control-sm rounded-3" placeholder="اسم المستخدم للدخول..."></div>
+                                <div class="mb-3"><input type="password" required id="doc-pass-in" class="form-control form-control-sm rounded-3" placeholder="كلمة المرور..."></div>
+                                <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إنشاء وتفعيل</button>
                             </form>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> فروع المركز (اضغط على أي فرع لاستعراضه والتحكم به)</h6>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle small">
-                                    <thead class="table-light"><tr><th>الفرع والمسؤول</th><th>العملة</th><th>انتهاء الصلاحية</th><th>إدارة ودخول</th></tr></thead>
-                                    <tbody id="clinics-list-tbody"></tbody>
-                                </table>
-                            </div>
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> فروع المركز</h6>
+                            <div class="table-responsive"><table class="table table-hover align-middle small"><thead class="table-light"><tr><th>الفرع/المركز</th><th>العملة</th><th>الحالة</th><th>إدارة ودخول</th></tr></thead><tbody id="clinics-list-tbody"></tbody></table></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 11: موظفي الفرع وتوزيع الصلاحيات -->
+            <!-- TAB 11: الموظفين -->
             <div id="tab-doc-staff" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
                             <form onsubmit="event.preventDefault(); addClinicStaff();">
-                                <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-plus me-1"></i> إضافة موظف وتحديد دوره وصلاحياته</h6>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">اسم الموظف الثلاثي</label><input type="text" required id="staff-name" class="form-control form-control-sm rounded-3"></div>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">الراتب الأساسي (<span class="currency-lbl">EGP</span>)</label><input type="number" required id="staff-salary-in" class="form-control form-control-sm rounded-3" value="4000" min="0"></div>
+                                <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-plus me-1"></i> إضافة موظف</h6>
+                                <div class="mb-2"><input type="text" required id="staff-name" class="form-control form-control-sm rounded-3" placeholder="الاسم الثلاثي..."></div>
+                                <div class="mb-2"><input type="number" required id="staff-salary-in" class="form-control form-control-sm rounded-3" value="4000" min="0"></div>
                                 <div class="mb-2">
-                                    <label class="small fw-bold text-secondary">الدور الوظيفي والصلاحيات:</label>
                                     <select id="staff-role-select" class="form-select form-select-sm rounded-3">
-                                        <option value="reception">موظف استقبال (Reception - حجوزات وطابور)</option>
-                                        <option value="secretary">سكرتارية (Secretary - ملفات ومواعيد)</option>
-                                        <option value="accountant">محاسب (Accountant - حسابات وإيرادات ومصروفات)</option>
-                                        <option value="expert">خبير تجميل / موظف (Staff)</option>
+                                        <option value="reception">استقبال</option>
+                                        <option value="accountant">محاسب</option>
+                                        <option value="expert">خبير تجميل</option>
                                     </select>
                                 </div>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم</label><input type="text" required id="staff-user" class="form-control form-control-sm rounded-3"></div>
-                                <div class="mb-3"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" required id="staff-pass" class="form-control form-control-sm rounded-3"></div>
-                                <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">حفظ الموظف والصلاحيات</button>
+                                <div class="mb-2"><input type="text" required id="staff-user" class="form-control form-control-sm rounded-3" placeholder="اسم المستخدم..."></div>
+                                <div class="mb-3"><input type="password" required id="staff-pass" class="form-control form-control-sm rounded-3" placeholder="كلمة المرور..."></div>
+                                <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">حفظ الموظف</button>
                             </form>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-users me-1"></i> طاقم العمل بـ <span id="my-clinic-title-label">--</span></h6>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle small">
-                                    <thead class="table-light"><tr><th>الاسم</th><th>الدور الوظيفي</th><th>الراتب الأساسي</th><th>المستخدم</th><th>حذف</th></tr></thead>
-                                    <tbody id="doc-staff-tbody"></tbody>
-                                </table>
-                            </div>
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-users me-1"></i> طاقم العمل</h6>
+                            <div class="table-responsive"><table class="table table-hover align-middle small"><thead class="table-light"><tr><th>الاسم</th><th>الدور الوظيفي</th><th>الراتب الأساسي</th><th>المستخدم</th><th>حذف</th></tr></thead><tbody id="doc-staff-tbody"></tbody></table></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 12: لوحة تحكم المطور الشاملة -->
+            <!-- TAB 12: لوحة المطور -->
             <div id="tab-dev-panel" class="tab-content hidden">
                 <div class="row">
                     <div class="col-12 mb-3">
                         <div class="card p-4 border-warning shadow-lg">
-                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Master Dashboard)</h4>
-                            <p class="text-muted small">من هنا يمكنك وحدك إدارة "أيام التفعيل" الخاصة باشتراكات الفروع، تجميدها، تمديدها، وسحب الإكسيل الشامل.</p>
+                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور (Master Dashboard)</h4>
+                            <p class="text-muted small">إدارة السيرفر بالكامل وسحب التقارير.</p>
                             
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <div class="p-3 border rounded-3 bg-light">
-                                        <h6 class="fw-bold text-primary">إجمالي الفروع والمراكز</h6>
-                                        <h3 id="dev-total-clinics" class="fw-bold m-0">0</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="p-3 border rounded-3 bg-light">
-                                        <h6 class="fw-bold text-success">إجمالي المستخدمين</h6>
-                                        <h3 id="dev-total-users" class="fw-bold m-0">0</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="p-3 border rounded-3 bg-light">
-                                        <h6 class="fw-bold text-danger">حالة المزامنة السحابية</h6>
-                                        <h3 class="fw-bold text-success m-0"><i class="fa-solid fa-circle-check"></i> متصل (Firebase)</h3>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="mt-4">
-                                <h5 class="fw-bold text-dark mb-3">التحكم السريع في المنصة:</h5>
                                 <button onclick="exportMasterServerExcelReport()" class="btn btn-success btn-sm fw-bold me-2 mb-2"><i class="fa-solid fa-file-excel me-1"></i> 📥 تصدير الإكسيل الشامل (لبيانات السيرفر)</button>
-                                <button onclick="exportSystemBackup()" class="btn btn-outline-dark btn-sm fw-bold me-2 mb-2"><i class="fa-solid fa-download me-1"></i> تحميل نسخة احتياطية (Backup)</button>
                                 <button onclick="clearSystemCache()" class="btn btn-danger btn-sm fw-bold mb-2"><i class="fa-solid fa-trash-can me-1"></i> مسح وتفريغ السيرفر بالكامل</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="dev-footer no-print">
-                Developed by <strong>Sapry El-Deeb</strong> | V28 (Solid SaaS) | Tel: <a href="https://wa.me/201065826742">01065826742</a> | Email: sapry.eldeep@gmail.com
             </div>
 
         </div>
@@ -936,6 +344,7 @@
     import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
+    // إعدادات المستخدم الخاصة بالسيرفر
     const firebaseConfig = {
         apiKey: "AIzaSyDYAt4D7h8EGJlP9aL8r11mTtOcFXBKVx8",
         authDomain: "beauty-center-40ee0.firebaseapp.com",
@@ -951,9 +360,9 @@
     const analytics = getAnalytics(app);
     const db = getDatabase(app);
 
-    const DB_PATH = 'shamelBeautyCenterPlatformV28'; 
+    const DB_PATH = 'shamelBeautyCenterPlatformV29'; 
 
-    // الفلتر السحري: يجبر الفايربيز يقرا الحاجة كمصفوفة عشان ميحصلش Crash
+    // الفلتر السحري: يجبر الفايربيز يقرا الحاجة كمصفوفة عشان ميحصلش Crash واختفاء للبيانات
     window.safeArr = function(obj) {
         if (!obj) return [];
         if (Array.isArray(obj)) return obj.filter(Boolean);
@@ -961,22 +370,23 @@
     };
 
     window.platformData = {
-        users: [ { name: "صبري الديب", user: "sapry eldeep", pass: "159632", role: "master_admin", clinicId: "master" } ],
+        users: [{ name: "صبري الديب", user: "sapry eldeep", pass: "159632", role: "master_admin", clinicId: "master" }],
         clinics: [], queue: {}, archive: {}, appointments: {}, beautyNotesStore: {}, expensesStore: {}, pharmacyStore: {}, staffDirectory: {}, payrollStore: {}, settings: {},
-        services: [
-            { name: "جلسة تنظيف بشرة عميق", price: 450 },
-            { name: "قص وتصفيف شعر", price: 250 },
-            { name: "جلسة لیرز إزالة شعر", price: 800 },
-            { name: "مكياج سهرة عرائس", price: 1200 }
-        ],
-        lastDate: ""
+        services: [{ name: "جلسة تنظيف بشرة عميق", price: 450 }]
     };
 
+    // الدالة الخارقة اللي بتراقب الحفظ، وتطلع إنذار لو السيرفر مقفول أو الداتا باظت
     window.saveToFirebase = function() {
         try { 
-            // JSON stringify & parse بيشيل أي قيم undefined عشان السيرفر ميرفضش يحفظ الداتا
             const cleanData = JSON.parse(JSON.stringify(window.platformData));
-            set(ref(db, DB_PATH), cleanData); 
+            set(ref(db, DB_PATH), cleanData)
+            .then(() => {
+                console.log("تم تحديث السحابة بنجاح!");
+            })
+            .catch((error) => {
+                alert("🚨 عذراً! تم رفض الحفظ من السيرفر. برجاء الدخول لموقع Firebase وتغيير الـ Rules إلى true. التفاصيل: " + error.message);
+                console.error("Firebase Sync Error", error);
+            });
         } catch(e) { console.error("Sync Error:", e); }
     };
 
@@ -984,7 +394,7 @@
         if(confirm("تحذير خطير: هل أنت متأكد من مسح كافة بيانات السيرفر نهائياً وتفريغ الجداول بالكامل؟")) {
             window.platformData = {
                 users: [{ name: "صبري الديب", user: "sapry eldeep", pass: "159632", role: "master_admin", clinicId: "master" }],
-                clinics: [], queue: {}, archive: {}, appointments: {}, beautyNotesStore: {}, expensesStore: {}, pharmacyStore: {}, staffDirectory: {}, payrollStore: {}, settings: {}, services: []
+                clinics: [], queue: {}, archive: {}, appointments: {}, beautyNotesStore: {}, expensesStore: {}, pharmacyStore: {}, staffDirectory: {}, payrollStore: {}, settings: {}, services: {}
             };
             window.saveToFirebase();
             alert("تم مسح السيرفر وتنظيفه بالكامل.");
@@ -997,17 +407,14 @@
         if (data) {
             window.platformData.users = window.safeArr(data.users);
             window.platformData.clinics = window.safeArr(data.clinics);
-            window.platformData.services = window.safeArr(data.services);
-            window.platformData.beautyNotesStore = data.beautyNotesStore || {};
             window.platformData.settings = data.settings || {};
             
-            ['queue', 'archive', 'appointments', 'expensesStore', 'pharmacyStore', 'staffDirectory', 'payrollStore'].forEach(key => {
+            ['queue', 'archive', 'appointments', 'services', 'expensesStore', 'pharmacyStore', 'staffDirectory', 'payrollStore'].forEach(key => {
                 window.platformData[key] = data[key] || {};
                 Object.keys(window.platformData[key]).forEach(cId => {
                     window.platformData[key][cId] = window.safeArr(window.platformData[key][cId]);
                 });
             });
-            window.platformData.lastDate = data.lastDate || "";
             
             const adminExists = window.platformData.users.find(x => x && x.user === 'sapry eldeep');
             if (!adminExists) {
@@ -1021,8 +428,6 @@
         if (window.currentUser) {
             renderAllUI();
         }
-    }, (error) => {
-        console.warn("Connection Error:", error);
     });
     </script>
 
@@ -1037,14 +442,6 @@
         window.currentUser = null;
         window.activeProfilePatient = null;
         window.viewingBranchId = null;
-
-        document.addEventListener("DOMContentLoaded", () => {
-            if (window.location.search.includes("booking=true") || window.location.hash.includes("booking")) {
-                document.getElementById('public-booking-portal').classList.remove('hidden');
-                document.getElementById('login-section').classList.add('hidden');
-                renderPublicServicesSelect();
-            }
-        });
 
         function getCurrentClinicId() {
             if (window.viewingBranchId) return window.viewingBranchId;
@@ -1092,10 +489,7 @@
             if (clinicId === 'master' || clinicId === 'main_branch') return true;
             const cl = window.platformData.clinics.find(x => x && x.id === clinicId);
             if (!cl) return true;
-            
-            const today = new Date().setHours(0,0,0,0);
-            const expiryDate = new Date(cl.expiryDate).setHours(0,0,0,0);
-            return today <= expiryDate;
+            return new Date().setHours(0,0,0,0) <= new Date(cl.expiryDate).setHours(0,0,0,0);
         }
 
         function handleLogin() {
@@ -1131,10 +525,6 @@
                 
                 document.getElementById('user-role-badge').innerText = roleName;
                 document.getElementById('current-specialty-badge').innerText = (window.currentUser.role === 'master_admin' ? 'الإدارة المركزية' : (window.platformData.clinics.find(x => x && x.id === cId)?.name || 'فرع تجميل'));
-                
-                if(document.getElementById('my-clinic-title-label')) {
-                    document.getElementById('my-clinic-title-label').innerText = document.getElementById('current-specialty-badge').innerText;
-                }
 
                 applyPermissions();
                 if(window.currentUser.role === 'master_admin') { switchTab('dev-panel', document.querySelector('.developer-only')); } 
@@ -1162,14 +552,8 @@
                 document.querySelector('.nav-sec-finance').classList.add('hidden');
                 document.querySelector('.nav-sec-payroll').classList.add('hidden');
                 document.querySelector('.nav-sec-services').classList.add('hidden');
-                document.querySelector('.nav-sec-inventory').classList.add('hidden');
-            } else if (window.currentUser.role === 'secretary') {
-                document.querySelector('.nav-sec-finance').classList.add('hidden');
-                document.querySelector('.nav-sec-payroll').classList.add('hidden');
-                document.querySelector('.nav-sec-inventory').classList.add('hidden');
             } else if (window.currentUser.role === 'accountant') {
                 document.querySelector('.nav-sec-queue').classList.add('hidden');
-                document.querySelector('.nav-sec-appointments').classList.add('hidden');
             }
 
             if (window.currentUser.role === 'master_admin' && window.viewingBranchId !== null) {
@@ -1252,7 +636,6 @@
             renderClinicsList();
             
             document.getElementById('clinic-name-in').value = '';
-            document.getElementById('doc-name-in').value = '';
             document.getElementById('doc-user-in').value = '';
             document.getElementById('doc-pass-in').value = '';
             alert(`تم إنشاء المركز/الفرع بنجاح!`);
@@ -1294,18 +677,10 @@
             }
         }
 
-        function searchClinicsList() {
-            const q = document.getElementById('search-clinics-input').value.toLowerCase();
-            document.querySelectorAll('#clinics-list-tbody tr').forEach(r => {
-                if(r.children.length > 0) r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none';
-            });
-        }
-
         function viewBranchData(branchId, branchName) {
             window.viewingBranchId = branchId;
             document.getElementById('current-clinic-badge').innerText = `معاينة: ${branchName} (${getCurrentCurrency()})`;
             document.getElementById('current-specialty-badge').innerText = branchName;
-            if(document.getElementById('my-clinic-title-label')) document.getElementById('my-clinic-title-label').innerText = branchName;
             applyPermissions();
             switchTab('dashboard', document.querySelector('.nav-sec-queue'));
             renderAllUI();
@@ -1354,13 +729,7 @@
             return [...getClinicQueue(), ...getClinicArchive()];
         }
 
-        function getExpensesRecordsForModal() {
-            const cId = getCurrentClinicId();
-            if(cId === 'master') return [];
-            return (window.platformData.expensesStore && window.platformData.expensesStore[cId]) ? window.platformData.expensesStore[cId] : [];
-        }
-
-        // ================= الإضافة: تصدير إكسيل للمطور الشامل =================
+        // ================= تصدير الإكسيل للمطور الشامل =================
         window.exportMasterServerExcelReport = function() {
             if (!window.currentUser || window.currentUser.role !== 'master_admin') { alert("صلاحية مخصصة للمطور!"); return; }
             
@@ -1387,7 +756,7 @@
             document.body.appendChild(link); link.click(); document.body.removeChild(link);
         };
 
-        // ================= الإعدادات الضريبية (ZATCA) والفاتورة =================
+        // ================= الإعدادات الضريبية والفاتورة =================
         function saveCenterSettings() {
             const cId = getCurrentClinicId();
             if(cId === 'master') { alert("الرجاء الدخول لفرع محدد لحفظ إعداداته."); return; }
@@ -1415,12 +784,10 @@
             const cId = getCurrentClinicId();
             const set = (window.platformData.settings || {})[cId] || {};
             
-            // حساب الضريبة بشكل عكسي لإظهارها في الفاتورة
             const taxRate = parseFloat(set.vatRate) || 0;
             const baseAmount = (total / (1 + (taxRate / 100))).toFixed(2);
             const taxAmount = (total - baseAmount).toFixed(2);
 
-            // توليد QR Code 
             let qrHtml = '';
             if(set.taxNumber && taxRate > 0) {
                 const qrData = encodeURIComponent(`المركز: شامل | الضريبي: ${set.taxNumber} | العميل: ${name} | الإجمالي: ${total} | الضريبة: ${taxAmount}`);
@@ -1486,121 +853,23 @@
             invoiceWin.document.close();
         }
 
-        // ================= باقى دوال النظام الأساسية (بدون مساس) =================
-        function openFinanceModal(title, records) {
-            const modal = document.getElementById('finance-detail-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const thead = document.getElementById('modal-table-head');
-            const tbody = document.getElementById('modal-table-body');
-            if(!modal) return;
-
-            modal.classList.remove('hidden');
-            modalTitle.innerText = `تفاصيل: ${title} (${getCurrentCurrency()})`;
-            tbody.innerHTML = '';
-
-            if(title.includes('المصروفات')) {
-                thead.innerHTML = `<tr><th>التاريخ</th><th>البند</th><th>البيان</th><th>المبلغ</th><th>المسؤول</th></tr>`;
-                records.forEach(ex => { tbody.innerHTML += `<tr><td>${ex.date || '--'}</td><td><span class="badge bg-secondary">${ex.category || 'عام'}</span></td><td>${ex.desc}</td><td class="text-danger fw-bold">${ex.amount}</td><td>${ex.handler || '--'}</td></tr>`; });
-            } else {
-                thead.innerHTML = `<tr><th>التاريخ</th><th>العميل</th><th>الخدمات</th><th>طريقة الدفع</th><th>المطلوب</th><th>المدفوع</th></tr>`;
-                records.forEach(r => { tbody.innerHTML += `<tr><td>${r.isoDate || r.date}</td><td><strong>${r.name}</strong></td><td>${r.service}</td><td>${r.payMethod || 'نقدي'}</td><td>${r.total}</td><td class="text-success">${r.paid}</td></tr>`; });
-            }
-        }
-
-        function closeFinanceModal() { document.getElementById('finance-detail-modal').classList.add('hidden'); }
-
-        function sendWhatsAppReminder() {
-            const queueList = getClinicQueue();
-            const waiting = queueList.find(p => p.status === 'waiting');
-            if(!waiting || !waiting.phone) { alert("لا يوجد عميل برقم هاتف في الطابور!"); return; }
-            const cId = getCurrentClinicId();
-            const set = (window.platformData.settings || {})[cId] || {};
-            const baseMsg = set.waWelcome || `مرحباً بك في مركزنا..`;
-            const msg = `${baseMsg}\nيا ${waiting.name}، نذكرك بموعد جلستك اليوم.`;
-            window.open(`https://wa.me/2${waiting.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        function copyOnlineLink() {
-            const linkInput = document.getElementById('online-booking-link');
-            const currentUrl = window.location.href.split('?')[0].split('#')[0] + "?booking=true";
-            linkInput.value = currentUrl; linkInput.select(); navigator.clipboard.writeText(linkInput.value);
-            alert("تم النسخ!");
-        }
-
-        function submitPublicBookingRequest() {
-            const name = document.getElementById('pub-name').value.trim();
-            const phone = document.getElementById('pub-phone').value.trim();
-            const date = document.getElementById('pub-date').value;
-            const time = document.getElementById('pub-time').value;
-
-            let selectedServices = [];
-            document.querySelectorAll('.pub-service-chk:checked').forEach(chk => selectedServices.push(chk.value));
-            const serviceStr = selectedServices.join(' + ') || 'جلسة تجميل';
-
-            if(!name || !phone || !date || !time) return;
-
-            const cId = getCurrentClinicId();
-            if(!window.platformData.appointments[cId]) window.platformData.appointments[cId] = [];
-
-            window.platformData.appointments[cId].push({ id: Date.now(), name, phone: phone + " (أونلاين)", date, time, service: serviceStr });
-            window.saveToFirebase();
-
-            document.getElementById('conf-name').innerText = name;
-            document.getElementById('conf-services').innerText = serviceStr;
-            document.getElementById('conf-date').innerText = date;
-            document.getElementById('conf-time').innerText = time;
-
-            document.getElementById('portal-form-card').classList.add('hidden');
-            document.getElementById('portal-thankyou-card').classList.remove('hidden');
-        }
-
-        function addAppointment() {
-            const name = document.getElementById('app-name').value.trim();
-            const phone = document.getElementById('app-phone').value.trim();
-            const date = document.getElementById('app-date').value;
-            const time = document.getElementById('app-time').value;
-            if(!name || !date || !time) return;
-
-            const cId = getCurrentClinicId();
-            if(cId === 'master') { alert("يجب الدخول لفرع لتسجيل موعد."); return; }
-            if(!window.platformData.appointments[cId]) window.platformData.appointments[cId] = [];
-
-            window.platformData.appointments[cId].push({ id: Date.now(), name, phone, date, time });
-            window.saveToFirebase(); renderAppointments();
-            document.getElementById('app-name').value = ''; document.getElementById('app-phone').value = '';
-            alert("تم الحجز بنجاح!");
-        }
-
-        function renderAppointments() {
-            const tb = document.getElementById('app-tbody'); if(!tb) return;
-            tb.innerHTML = '';
-            const cId = getCurrentClinicId();
-            (window.platformData.appointments[cId] || []).forEach(a => {
-                tb.innerHTML += `<tr><td>${a.name}</td><td>${a.phone || '--'}</td><td>${a.date}</td><td>${a.time || '--'}</td><td><button onclick="deleteAppointment('${cId}', ${a.id})" class="btn btn-danger btn-sm py-0"><i class="fa-solid fa-trash"></i></button></td></tr>`;
-            });
-        }
-
-        function deleteAppointment(cId, id) {
-            window.platformData.appointments[cId] = window.platformData.appointments[cId].filter(x => x.id !== id);
-            window.saveToFirebase(); renderAppointments();
-        }
-
+        // ================= باقى دوال النظام الأساسية =================
         function savePatientToQueue() {
             const cId = getCurrentClinicId();
             if(cId === 'master') { alert("يجب الدخول لفرع لتسجيل الجلسات!"); return; }
 
             const name = document.getElementById('p-name').value.trim();
-            const age = document.getElementById('p-age').value.trim();
             const phone = document.getElementById('p-phone').value.trim();
-            const expert = document.getElementById('p-expert-select')?.value || (window.currentUser ? window.currentUser.name : 'غير محدد');
             const total = Math.max(0, parseFloat(document.getElementById('p-total').value) || 0);
             const paid = Math.max(0, parseFloat(document.getElementById('p-paid').value) || 0);
-            const payMethod = document.getElementById('p-pay-method').value;
-
+            const expert = document.getElementById('p-expert-select')?.value || 'غير محدد';
+            
             let servs = []; document.querySelectorAll('.service-chk:checked').forEach(c => servs.push(c.value));
             
+            if(!name || !phone) return;
+
             if(!window.platformData.queue[cId]) window.platformData.queue[cId] = [];
-            window.platformData.queue[cId].push({ id: Date.now(), name, age, phone, service: servs.join('+')||'جلسة تجميل', total, paid, payMethod, handler: expert, due: total - paid, status: 'waiting', isoDate: getTodayISO(), date: getFormattedDateTime() });
+            window.platformData.queue[cId].push({ id: Date.now(), name, phone, service: servs.join('+')||'جلسة تجميل', total, paid, payMethod: document.getElementById('p-pay-method').value, handler: expert, due: total - paid, status: 'waiting', isoDate: getTodayISO(), date: getFormattedDateTime() });
 
             window.saveToFirebase(); renderAllUI();
             document.getElementById('p-name').value=''; document.getElementById('p-phone').value=''; document.getElementById('p-total').value=''; document.getElementById('p-paid').value='';
@@ -1640,7 +909,6 @@
 
         function finishExam(id) {
             const cId = getCurrentClinicId();
-            let found = false;
             if (cId && window.platformData.queue[cId]) {
                 const itemIdx = window.platformData.queue[cId].findIndex(x => x.id == id);
                 if(itemIdx > -1) {
@@ -1657,21 +925,9 @@
         function renderArchiveTable(records) {
             const tb = document.getElementById('archive-tbody'); if(!tb) return;
             tb.innerHTML = '';
-            if (!records || records.length === 0) {
-                tb.innerHTML = '<tr><td colspan="8" class="text-center text-muted">لا توجد سجلات للأرشيف</td></tr>';
-                return;
-            }
             records.forEach((r) => {
-                tb.innerHTML += `<tr>
-                    <td><strong>${r.isoDate || r.date}</strong></td>
-                    <td>${r.name}</td>
-                    <td>${r.phone || '--'}</td>
-                    <td>${r.service}</td>
-                    <td><span class="badge bg-light text-dark border">${r.payMethod || 'نقدي'}</span></td>
-                    <td>${r.handler || '--'}</td>
-                    <td>${r.total}</td>
-                    <td><button onclick="printOfficialInvoice('${r.name}', '${r.service}', ${r.total}, ${r.paid}, '${r.payMethod}', '${r.handler}', '${r.date}')" class="btn btn-sm btn-outline-danger py-0"><i class="fa-solid fa-print"></i></button></td>
-                </tr>`;
+                tb.innerHTML += `<tr><td>${r.isoDate}</td><td>${r.name}</td><td>${r.phone || '--'}</td><td>${r.service}</td><td><span class="badge bg-light text-dark border">${r.payMethod}</span></td><td>${r.handler}</td><td>${r.total}</td>
+                <td><button onclick="printOfficialInvoice('${r.name}', '${r.service}', ${r.total}, ${r.paid}, '${r.payMethod}', '${r.handler}', '${r.date}')" class="btn btn-sm btn-outline-danger py-0"><i class="fa-solid fa-print"></i></button></td></tr>`;
             });
         }
 
@@ -1723,47 +979,11 @@
             document.getElementById('patient-profile-card').classList.remove('hidden');
             document.getElementById('prof-p-name').innerText = name;
             document.getElementById('prof-p-phone').innerText = pVisits[0].phone || '--';
-            document.getElementById('prof-p-age').innerText = pVisits[0].age || '--';
 
             let totalPaidAll = 0;
             pVisits.forEach(v => totalPaidAll += (v.paid || 0));
             document.getElementById('prof-p-points').innerText = Math.floor(totalPaidAll / 100) + " نقطة";
 
-            if(!window.platformData.beautyNotesStore) window.platformData.beautyNotesStore = {};
-            document.getElementById('beauty-notes-input').value = window.platformData.beautyNotesStore[name] || '';
-
-            renderPatientServicesTable(pVisits);
-        }
-
-        function saveBeautyNotes() {
-            if(!window.activeProfilePatient) return;
-            const val = document.getElementById('beauty-notes-input').value;
-            if(!window.platformData.beautyNotesStore) window.platformData.beautyNotesStore = {};
-            window.platformData.beautyNotesStore[window.activeProfilePatient] = val;
-            window.saveToFirebase();
-        }
-
-        function deletePatientCompletely() {
-            if(!window.activeProfilePatient) return;
-            if(confirm(`هل أنت متأكد من حذف العميل (${window.activeProfilePatient}) وكافة جلساته؟`)) {
-                const name = window.activeProfilePatient;
-                Object.keys(window.platformData.queue).forEach(k => {
-                    window.platformData.queue[k] = window.platformData.queue[k].filter(x => x.name !== name);
-                });
-                Object.keys(window.platformData.archive).forEach(k => {
-                    window.platformData.archive[k] = window.platformData.archive[k].filter(x => x.name !== name);
-                });
-                if(window.platformData.beautyNotesStore) delete window.platformData.beautyNotesStore[name];
-
-                window.saveToFirebase();
-                document.getElementById('patient-profile-card').classList.add('hidden');
-                document.getElementById('patient-profile-empty').classList.remove('hidden');
-                window.activeProfilePatient = null;
-                renderAllUI();
-            }
-        }
-
-        function renderPatientServicesTable(pVisits) {
             let tot = 0, pd = 0, du = 0;
             const tb = document.getElementById('prof-p-history');
             tb.innerHTML = '';
@@ -1775,29 +995,6 @@
             document.getElementById('prof-p-total').innerText = tot;
             document.getElementById('prof-p-paid').innerText = pd;
             document.getElementById('prof-p-due').innerText = du;
-        }
-
-        function addExtraServiceToPatient() {
-            if(!window.activeProfilePatient) return;
-            const pVisits = getCombinedAllRecords().filter(x => x.name === window.activeProfilePatient);
-            if(pVisits.length === 0) return;
-            const ref = pVisits[0];
-
-            const servName = prompt("اسم الخدمة أو الجلسة الجديدة:");
-            if(!servName) return;
-            const total = Math.max(0, parseFloat(prompt("المبلغ المطلوب:", "0")) || 0);
-            const paid = Math.max(0, parseFloat(prompt("المبلغ المدفوع:", "0")) || 0);
-            const payMethod = prompt("طريقة الدفع (نقدي / تحويل بنكي / فيزا):", "نقدي") || "نقدي";
-            const handler = window.currentUser ? window.currentUser.name : 'غير محدد';
-
-            const cId = getCurrentClinicId();
-            if(!window.platformData.queue[cId]) window.platformData.queue[cId] = [];
-
-            const record = { id: Date.now(), name: ref.name, age: ref.age, phone: ref.phone, service: servName, total: total, paid: paid, payMethod, handler, due: total - paid, status: 'done', isoDate: getTodayISO(), date: getFormattedDateTime() };
-            window.platformData.queue[cId].push(record);
-            window.saveToFirebase();
-            renderAllUI();
-            alert("تم إضافة الجلسة بنجاح!");
         }
 
         function payExtraFromProfile() {
@@ -1826,67 +1023,53 @@
         }
 
         function renderFinance() {
-            let tot = 0, pd = 0, du = 0;
+            let tot = 0, pd = 0;
             const tb = document.getElementById('finance-tbody');
             if(!tb) return;
             tb.innerHTML = '';
             getCombinedAllRecords().forEach(p => {
-                let itemDue = (p.total || 0) - (p.paid || 0);
-                tot += p.total; pd += p.paid; du += itemDue;
-                tb.innerHTML += `<tr>
-                    <td>${p.name}</td>
-                    <td>${p.isoDate || p.date}</td>
-                    <td>${p.service}</td>
-                    <td><span class="badge bg-light text-dark border">${p.payMethod || 'نقدي'}</span></td>
-                    <td>${p.handler || '--'}</td>
-                    <td>${p.total}</td>
-                    <td class="text-success">${p.paid}</td>
-                    <td class="text-danger">${itemDue}</td>
-                    <td><button onclick="printOfficialInvoice('${p.name}', '${p.service}', ${p.total}, ${p.paid}, '${p.payMethod}', '${p.handler}', '${p.date}')" class="btn btn-outline-danger btn-sm py-0"><i class="fa-solid fa-print"></i></button></td>
-                </tr>`;
+                tot += p.total; pd += p.paid;
+                tb.innerHTML += `<tr><td>${p.name}</td><td>${p.isoDate || p.date}</td><td>${p.service}</td><td>${p.payMethod || 'نقدي'}</td><td>${p.handler || '--'}</td><td>${p.total}</td><td class="text-success">${p.paid}</td></tr>`;
             });
-            document.getElementById('fin-total').innerText = tot;
-            document.getElementById('fin-paid').innerText = pd;
+            if(document.getElementById('fin-total')) document.getElementById('fin-total').innerText = tot;
+            if(document.getElementById('fin-paid')) document.getElementById('fin-paid').innerText = pd;
         }
 
         function addServiceSetting() {
             const name = document.getElementById('serv-name-in').value.trim();
             const price = Math.max(0, parseFloat(document.getElementById('serv-price-in').value) || 0);
             if(!name) return;
-            window.platformData.services.push({ name, price });
+            const cId = getCurrentClinicId();
+            if(cId === 'master') { alert("يجب الدخول لفرع!"); return; }
+            if(!window.platformData.services[cId]) window.platformData.services[cId] = [];
+            window.platformData.services[cId].push({ name, price });
             window.saveToFirebase();
-            renderServicesSettings();
-            renderMultiServicesCheckboxes();
             document.getElementById('serv-name-in').value = '';
             document.getElementById('serv-price-in').value = '';
+            renderAllUI();
         }
 
         function renderServicesSettings() {
             const tb = document.getElementById('services-settings-tbody');
             if(!tb) return;
             tb.innerHTML = '';
-            window.platformData.services.forEach((s, i) => { tb.innerHTML += `<tr><td>${s.name}</td><td>${s.price}</td><td><button onclick="deleteService(${i})" class="btn btn-danger btn-sm py-0"><i class="fa-solid fa-trash"></i></button></td></tr>`; });
-        }
-
-        function deleteService(i) {
-            window.platformData.services.splice(i, 1);
-            window.saveToFirebase();
-            renderServicesSettings();
-            renderMultiServicesCheckboxes();
+            const cId = getCurrentClinicId();
+            const list = window.platformData.services[cId] || [];
+            list.forEach((s, i) => { tb.innerHTML += `<tr><td>${s.name}</td><td>${s.price}</td><td><button onclick="window.platformData.services['${cId}'].splice(${i},1); window.saveToFirebase(); renderAllUI();" class="btn btn-danger btn-sm py-0"><i class="fa-solid fa-trash"></i></button></td></tr>`; });
         }
 
         function renderMultiServicesCheckboxes() {
             const container = document.getElementById('multi-services-checkboxes');
             if(!container) return;
             container.innerHTML = '';
-            if(window.platformData.services) {
-                window.platformData.services.forEach((s, idx) => {
-                    container.innerHTML += `<div class="form-check">
-                        <input class="form-check-input service-chk" type="checkbox" value="${s.name}" data-price="${s.price}" id="srv_${idx}" onchange="calculateMultiServicesTotal()">
-                        <label class="form-check-label small" for="srv_${idx}">${s.name} (${s.price} ${getCurrentCurrency()})</label>
-                    </div>`;
-                });
-            }
+            const cId = getCurrentClinicId();
+            const list = window.platformData.services[cId] || [];
+            list.forEach((s, idx) => {
+                container.innerHTML += `<div class="form-check">
+                    <input class="form-check-input service-chk" type="checkbox" value="${s.name}" data-price="${s.price}" id="srv_${idx}" onchange="calculateMultiServicesTotal()">
+                    <label class="form-check-label small" for="srv_${idx}">${s.name} (${s.price} ${getCurrentCurrency()})</label>
+                </div>`;
+            });
         }
 
         function calculateMultiServicesTotal() {
@@ -1894,13 +1077,11 @@
             document.querySelectorAll('.service-chk:checked').forEach(chk => {
                 total += parseFloat(chk.dataset.price) || 0;
             });
-            
-            // حساب وإضافة الضريبة للإجمالي
             const cId = getCurrentClinicId();
             const set = (window.platformData.settings || {})[cId] || {};
             const taxRate = parseFloat(set.vatRate) || 0;
             const finalTotal = total + (total * taxRate / 100);
-
+            
             document.getElementById('p-total').value = finalTotal;
             document.getElementById('p-paid').value = finalTotal;
         }
@@ -1914,6 +1095,7 @@
             if(cId === 'master') { alert("يجب الدخول لفرع لتسجيل الموظفين!"); return; }
             if(!name || !user || !pass) return;
 
+            if(!window.platformData.staffDirectory) window.platformData.staffDirectory = {};
             if(!window.platformData.staffDirectory[cId]) window.platformData.staffDirectory[cId] = [];
             window.platformData.staffDirectory[cId].push({ id: Date.now(), name, role, salary: document.getElementById('staff-salary-in').value });
             window.platformData.users.push({ name, user, pass, role, clinicId: cId });
@@ -1938,7 +1120,6 @@
                 renderQueue();
                 renderArchiveTable(getCombinedAllRecords());
                 renderPatientsDir();
-                renderAppointments();
                 renderFinance();
                 renderDocStaff();
                 updateCurrencyLabels();
