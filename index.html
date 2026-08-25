@@ -154,20 +154,20 @@
 </head>
 <body>
 
-    <!-- شاشة الحظر الحمراء عند انتهاء اشتراك المركز -->
+    <!-- شاشة الحظر الحمراء لانتهاء اشتراك المركز -->
     <div id="expired-lock-screen" class="hidden" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#b02a37; z-index:99999; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; padding:20px;">
         <div class="card p-5 bg-white text-dark shadow-lg rounded-4" style="max-width: 500px; width: 100%;">
             <i class="fa-solid fa-triangle-exclamation text-danger fa-4x mb-3"></i>
             <h2 class="fw-bold mb-2">عذراً، انتهت صلاحية اشتراك هذا الحساب!</h2>
             <p class="text-muted mb-4">يرجى التواصل مع المطور لتجديد الاشتراك واستعادة صلاحية الوصول للنظام.</p>
             <div class="p-3 bg-light rounded-3 mb-3 text-secondary fw-bold">
-                المطور: صبري الديب[cite: 2]| الهاتف: 01065826742[cite: 2]
+                المطور: صبري الديب[cite: 2] | الهاتف: 01065826742[cite: 2]
             </div>
             <button onclick="logout()" class="btn btn-dark w-100 fw-bold">العودة لتسجيل الدخول</button>
         </div>
     </div>
 
-    <!-- بوابة حجز المواعيد المباشرة للعملاء (تفتح عبر الرابط العام) -->
+    <!-- بوابة حجز المواعيد المباشرة للعملاء -->
     <div id="public-booking-portal" class="hidden">
         <div id="portal-form-card" class="card p-4 p-md-5 shadow-lg" style="width: 100%; max-width: 550px; border-radius: 24px;">
             <div class="text-center mb-4">
@@ -197,7 +197,6 @@
             </div>
         </div>
 
-        <!-- الشاشة الترحيبية وتأكيد الحجز للعميل -->
         <div id="portal-thankyou-card" class="card p-4 p-md-5 text-center shadow-lg border-0 rounded-4 hidden" style="width: 100%; max-width: 500px; background: #ffffff;">
             <div class="mb-3">
                 <div class="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-circle" style="width: 75px; height: 75px; box-shadow: 0 10px 20px rgba(25, 135, 84, 0.25);">
@@ -206,34 +205,7 @@
             </div>
             <h4 class="fw-bold text-dark mb-1">أهلاً بكِ في مركز التجميل والعناية</h4>
             <p class="text-success fw-bold mb-3 fs-6">تم تأكيد حجزك بنجاح ونزل في جدول المركز!</p>
-            
-            <div class="border rounded-3 p-3 text-start mb-3" style="background-color: #fdf2f8; font-size: 13.5px;">
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="text-muted">اسم العميل:</span>
-                    <strong class="text-dark" id="conf-name">--</strong>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="text-muted">الخدمات المختارة:</span>
-                    <strong class="text-dark" id="conf-services">--</strong>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="text-muted">تاريخ الموعد:</span>
-                    <strong class="text-primary" id="conf-date">--</strong>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span class="text-muted">توقيت الجلسة:</span>
-                    <strong class="text-primary" id="conf-time">--</strong>
-                </div>
-            </div>
-
-            <p class="text-muted small mb-4">
-                <i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> 
-                يسعدنا حضوركِ قبل الموعد بـ 10 دقائق لضمان تقديم أفضل تجربة عناية لكِ.
-            </p>
-
-            <button onclick="resetPublicPortal()" class="btn btn-primary btn-sm w-100 py-2 fw-bold rounded-3" style="background: var(--primary-gradient); border: none;">
-                حجز موعد آخر
-            </button>
+            <button onclick="resetPublicPortal()" class="btn btn-primary btn-sm w-100 py-2 fw-bold rounded-3" style="background: var(--primary-gradient); border: none;">حجز موعد آخر</button>
         </div>
     </div>
 
@@ -287,9 +259,9 @@
                 <a class="nav-link nav-sec-inventory" href="#" onclick="switchTab('beauty-inventory', this)"><i class="fa-solid fa-boxes-stacked text-info me-1"></i> مخزون المستحضرات</a>
                 <a class="nav-link nav-sec-payroll" href="#" onclick="switchTab('payroll', this)"><i class="fa-solid fa-wallet text-success me-1"></i> رواتب وعمولات الخبراء والسلف</a>
 
-                <!-- ظهور تبويب إدارة الفروع للمطور فقط -->
-                <a class="nav-link master-admin-only hidden" href="#" onclick="switchTab('clinics', this)"><i class="fa-solid fa-network-wired text-warning me-1"></i> إدارة وفروع المركز والعملات</a>
-                <!-- ظهور تبويب الموظفين لمدير المركز والفرع لإدارة موظفيهم باستقلالية -->
+                <!-- شجرة الإدارة الهرمية: المطور ينشئ المراكز، والمركز ينشئ فروعه ضمن السقف، والفرع يدير موظفيه -->
+                <a class="nav-link master-admin-only hidden" href="#" onclick="switchTab('clinics', this)"><i class="fa-solid fa-network-wired text-warning me-1"></i> إدارة المراكز الرئيسية وفروعها</a>
+                <a class="nav-link center-owner-only hidden" href="#" onclick="switchTab('center-branches', this)"><i class="fa-solid fa-sitemap text-warning me-1"></i> إدارة فروع مركزي والحد الأقصى</a>
                 <a class="nav-link doctor-only hidden" href="#" onclick="switchTab('doc-staff', this)"><i class="fa-solid fa-users-gear me-1"></i> موظفي الفرع والصلاحيات</a>
                 
                 <a class="nav-link developer-only hidden" href="#" onclick="switchTab('dev-panel', this)"><i class="fa-solid fa-terminal text-warning me-1"></i> لوحة تحكم المطور</a>
@@ -311,7 +283,6 @@
                     </div>
                 </div>
                 
-                <!-- محدد العملة التفاعلي الخاص بالمركز النشط -->
                 <div class="d-flex align-items-center gap-2">
                     <div class="input-group input-group-sm" style="width: auto;">
                         <span class="input-group-text bg-light fw-bold text-secondary"><i class="fa-solid fa-coins text-warning me-1"></i> عملة المركز:</span>
@@ -779,19 +750,19 @@
                 </div>
             </div>
 
-            <!-- TAB 9: إدارة الفروع واختيار العملات -->
+            <!-- TAB 9: إدارة المركز الرئيسي وفروعه (للمطور والمركز الرئيسي فقط) -->
             <div id="tab-clinics" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> إنشاء مركز أو فرع وتحديد العملة والصلاحية</h6>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم الفرع / المركز</label><input type="text" id="clinic-name-in" class="form-control form-control-sm rounded-3"></div>
+                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> (المطور) إنشاء مركز رئيسي وسقف فروعه</h6>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المركز الرئيسي</label><input type="text" id="clinic-name-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم المسؤول</label><input type="text" id="doc-name-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="row mb-2">
                                 <div class="col-6"><label class="small fw-bold text-secondary">الحد الأقصى للفروع</label><input type="number" id="clinic-max-branches-in" class="form-control form-control-sm rounded-3" value="3" min="1"></div>
                                 <div class="col-6"><label class="small fw-bold text-secondary">أيام الصلاحية</label><input type="number" id="clinic-days-in" class="form-control form-control-sm rounded-3" value="30" min="1"></div>
                             </div>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">عملة الفرع / المركز:</label>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">عملة المركز:</label>
                                 <select id="clinic-currency-in" class="form-select form-select-sm rounded-3">
                                     <option value="EGP">جنيه مصري (EGP)</option>
                                     <option value="SAR">ريال سعودي (SAR)</option>
@@ -809,10 +780,10 @@
                     </div>
                     <div class="col-lg-7 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> مراكز وفروع النظام (استعراض وتحكم)</h6>
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> المراكز الرئيسية المسجلة</h6>
                             <div class="table-responsive">
                                 <table class="table table-hover align-middle small">
-                                    <thead class="table-light"><tr><th>المركز والمسؤول</th><th>العملة</th><th>الصلاحية والفروع</th><th>إدارة ودخول</th></tr></thead>
+                                    <thead class="table-light"><tr><th>المركز والمسؤول</th><th>العملة</th><th>الصلاحية وفروعها</th><th>إدارة ودخول</th></tr></thead>
                                     <tbody id="clinics-list-tbody"></tbody>
                                 </table>
                             </div>
@@ -821,7 +792,36 @@
                 </div>
             </div>
 
-            <!-- TAB 10: موظفي الفرع المستقل وصلاحياتهم -->
+            <!-- TAB 9 مكرر: مدير المركز الرئيسي لإدارة فروعه ضمن العداد -->
+            <div id="tab-center-branches" class="tab-content hidden">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 mb-3">
+                        <div class="card p-4">
+                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-sitemap me-1"></i> إدارة فروع مركزي والحد الأقصى</h6>
+                            <div class="p-2 mb-3 bg-light border rounded small">استهلاك الفروع المسموحة: <strong id="center-branch-counter-label" class="text-primary">0 من 3</strong></div>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم الفرع التابع</label><input type="text" id="sub-branch-name-in" class="form-control form-control-sm rounded-3" placeholder="مثال: فرع المعادي..."></div>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم مدير الفرع</label><input type="text" id="sub-branch-mgr-in" class="form-control form-control-sm rounded-3"></div>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم</label><input type="text" id="sub-branch-user-in" class="form-control form-control-sm rounded-3"></div>
+                            <div class="mb-3"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="sub-branch-pass-in" class="form-control form-control-sm rounded-3"></div>
+                            <button onclick="addSubBranchByCenterOwner()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إضافة الفرع ضمن العداد</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-12 mb-3">
+                        <div class="card p-4">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-chart-pie me-1"></i> الحسابات التجميعية الشاملة لفروع مركزي</h6>
+                            <div id="center-consolidated-financials-box" class="p-3 border rounded bg-light mb-3 small">جاري تجميع إيرادات ومصروفات الفروع التابعة...</div>
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle small">
+                                    <thead class="table-light"><tr><th>اسم الفرع التابع</th><th>المسؤول</th><th>الحالة</th><th>استعراض الفرع</th></tr></thead>
+                                    <tbody id="center-sub-branches-tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 10: موظفي الفرع وتوزيع الصلاحيات (معزولة لكل فرع) -->
             <div id="tab-doc-staff" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
@@ -891,13 +891,13 @@
             </div>
 
             <div class="dev-footer no-print">
-                Developed by <strong>Sapry El-Deeb</strong>[cite: 2] | Tel: <a href="https://wa.me/201065826742">01065826742</a>[cite: 2]
+                Developed by <strong>Sapry El-Deeb</strong>[cite: 2] | Tel: <a href="https://wa.me/201065826742">01065826742</a>[cite: 2] | Email: sapry.eldeep@gmail.com[cite: 2]
             </div>
 
         </div>
     </div>
 
-    <!-- Firebase SDK Imports مع خاصية الإصلاح التلقائي Self-Healing -->
+    <!-- Firebase SDK Imports مع ميزة الإصلاح الذاتي Self-Healing للبيانات -->
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -923,6 +923,7 @@
             { name: "صبري الديب", user: "sapry eldeep", pass: "159632", role: "master_admin", clinicId: "master" }
         ],
         clinics: [],
+        centers: [],
         queue: {},
         archive: {},
         appointments: {},
@@ -953,6 +954,7 @@
         if (data && data.users && data.users.length > 0) {
             window.platformData.users = data.users;
             window.platformData.clinics = data.clinics || [];
+            window.platformData.centers = data.centers || [];
             window.platformData.services = data.services || window.platformData.services;
             window.platformData.queue = data.queue || {};
             window.platformData.archive = data.archive || {};
@@ -973,8 +975,9 @@
                 users: [
                     { name: "صبري الديب", user: "sapry eldeep", pass: "159632", role: "master_admin", clinicId: "master" }
                 ],
-                clinics: [
-                    { id: 'main_branch', name: 'المركز الرئيسي', currency: 'EGP', maxBranches: 3, expiryDate: new Date(Date.now() + 365*86400000).toISOString() }
+                clinics: [],
+                centers: [
+                    { id: 'center_main', name: 'المركز الرئيسي', currency: 'EGP', maxBranches: 3, expiryDate: new Date(Date.now() + 365*86400000).toISOString(), branches: [] }
                 ],
                 queue: {},
                 archive: {},
@@ -1044,7 +1047,13 @@
         function getCurrentCurrency() {
             const cId = getCurrentClinicId();
             const cl = window.platformData.clinics.find(x => x.id === cId);
-            return cl ? (cl.currency || 'EGP') : 'EGP';
+            if(cl) return cl.currency || 'EGP';
+            for(let center of (window.platformData.centers || [])) {
+                if(center.id === cId) return center.currency || 'EGP';
+                let sub = (center.branches || []).find(b => b.id === cId);
+                if(sub) return center.currency || 'EGP';
+            }
+            return 'EGP';
         }
 
         function updateCurrencyLabels() {
@@ -1076,11 +1085,11 @@
             let cl = window.platformData.clinics.find(x => x.id === cId);
             if(cl) {
                 cl.currency = newCurrency;
-            } else if (cId === 'main_branch' || cId === 'master') {
-                if(!window.platformData.clinics[0]) {
-                    window.platformData.clinics.push({ id: 'main_branch', name: 'المركز الرئيسي', currency: newCurrency, expiryDate: new Date(Date.now() + 365*86400000).toISOString() });
-                } else {
-                    window.platformData.clinics[0].currency = newCurrency;
+            } else {
+                for(let center of (window.platformData.centers || [])) {
+                    if(center.id === cId || (center.branches || []).some(b => b.id === cId)) {
+                        center.currency = newCurrency;
+                    }
                 }
             }
             window.saveToFirebase();
@@ -1098,14 +1107,12 @@
             return now.toLocaleDateString('ar-EG') + ' - ' + now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
         }
 
-        function checkClinicSubscription(clinicId) {
-            if (clinicId === 'master' || clinicId === 'main_branch') return true;
-            const cl = window.platformData.clinics.find(x => x.id === clinicId);
-            if (!cl) return true;
-            
+        function checkCenterSubscription(centerId) {
+            const center = (window.platformData.centers || []).find(x => x.id === centerId);
+            if(!center || !center.expiryDate) return true;
             const today = new Date().setHours(0,0,0,0);
-            const expiryDate = new Date(cl.expiryDate).setHours(0,0,0,0);
-            return today <= expiryDate;
+            const expiry = new Date(center.expiryDate).setHours(0,0,0,0);
+            return today <= expiry;
         }
 
         function handleLogin() {
@@ -1119,9 +1126,8 @@
             const found = window.platformData.users.find(x => x.user === u && x.pass === p);
 
             if (found) {
-                const cId = found.clinicId;
-                if (cId && cId !== 'master') {
-                    if (!checkClinicSubscription(cId)) {
+                if (found.role === 'center_owner' && found.centerId) {
+                    if (!checkCenterSubscription(found.centerId)) {
                         document.getElementById('expired-lock-screen').classList.remove('hidden');
                         document.getElementById('login-section').classList.add('hidden');
                         return;
@@ -1136,15 +1142,13 @@
                 document.getElementById('current-user-name').innerText = window.currentUser.name;
                 
                 let roleName = 'Master Admin';
-                if(window.currentUser.role === 'doctor') roleName = 'مدير المركز/الفرع';
+                if(window.currentUser.role === 'center_owner') roleName = 'مدير المركز الرئيسي';
+                else if(window.currentUser.role === 'branch_manager' || window.currentUser.role === 'doctor') roleName = 'مدير الفرع التابع';
                 else if(window.currentUser.role === 'reception') roleName = 'موظف استقبال';
-                else if(window.currentUser.role === 'secretary') roleName = 'سكرتارية';
-                else if(window.currentUser.role === 'accountant') roleName = 'محاسب';
-                else if(window.currentUser.role === 'staff') roleName = 'خبير تجميل';
                 
                 document.getElementById('user-role-badge').innerText = roleName;
-                document.getElementById('current-specialty-badge').innerText = (window.currentUser.role === 'master_admin' ? 'الإدارة المركزية' : (window.platformData.clinics.find(x => x.id === cId)?.name || 'فرع تجميل'));
-                document.getElementById('sidebar-clinic-name').innerText = found.role === 'master_admin' ? 'إدارة المراكز والفروع' : (window.platformData.clinics.find(x => x.id === cId)?.name || 'مركز التجميل');
+                document.getElementById('current-specialty-badge').innerText = (window.currentUser.role === 'master_admin' ? 'الإدارة المركزية' : 'إدارة الفرع');
+                document.getElementById('sidebar-clinic-name').innerText = found.role === 'master_admin' ? 'إدارة المنظومة' : 'الفرع التشغيلي';
 
                 applyPermissions();
                 renderAllUI();
@@ -1157,27 +1161,18 @@
             if(!window.currentUser) return;
             document.querySelectorAll('.sidebar .nav-link').forEach(e => e.classList.remove('hidden'));
             document.querySelectorAll('.master-admin-only').forEach(e => e.classList.add('hidden'));
+            document.querySelectorAll('.center-owner-only').forEach(e => e.classList.add('hidden'));
             document.querySelectorAll('.doctor-only').forEach(e => e.classList.add('hidden'));
             document.querySelectorAll('.developer-only').forEach(e => e.classList.add('hidden'));
 
             if (window.currentUser.role === 'master_admin') {
                 document.querySelectorAll('.master-admin-only').forEach(e => e.classList.remove('hidden'));
-                document.querySelectorAll('.doctor-only').forEach(e => e.classList.remove('hidden'));
                 document.querySelectorAll('.developer-only').forEach(e => e.classList.remove('hidden'));
-            } else if (window.currentUser.role === 'doctor') {
+            } else if (window.currentUser.role === 'center_owner') {
+                document.querySelectorAll('.center-owner-only').forEach(e => e.classList.remove('hidden'));
                 document.querySelectorAll('.doctor-only').forEach(e => e.classList.remove('hidden'));
-            } else if (window.currentUser.role === 'reception') {
-                document.querySelector('.nav-sec-finance').classList.add('hidden');
-                document.querySelector('.nav-sec-payroll').classList.add('hidden');
-                document.querySelector('.nav-sec-services').classList.add('hidden');
-                document.querySelector('.nav-sec-inventory').classList.add('hidden');
-            } else if (window.currentUser.role === 'secretary') {
-                document.querySelector('.nav-sec-finance').classList.add('hidden');
-                document.querySelector('.nav-sec-payroll').classList.add('hidden');
-                document.querySelector('.nav-sec-inventory').classList.add('hidden');
-            } else if (window.currentUser.role === 'accountant') {
-                document.querySelector('.nav-sec-queue').classList.add('hidden');
-                document.querySelector('.nav-sec-appointments').classList.add('hidden');
+            } else if (window.currentUser.role === 'branch_manager' || window.currentUser.role === 'doctor') {
+                document.querySelectorAll('.doctor-only').forEach(e => e.classList.remove('hidden'));
             }
         }
 
@@ -1190,6 +1185,7 @@
             if (window.innerWidth < 992) toggleTabletSidebar();
         }
 
+        // --- المطور: إنشاء مركز رئيسي مع حد أقصى للفروع ومدة الصلاحية ---
         function addNewClinic() {
             const name = document.getElementById('clinic-name-in').value.trim();
             const docName = document.getElementById('doc-name-in').value.trim();
@@ -1204,12 +1200,23 @@
             const exists = window.platformData.users.some(x => x.user === user);
             if(exists) { alert("اسم المستخدم مستخدم مسبقاً!"); return; }
 
-            const clinicId = 'branch_' + Date.now();
+            const centerId = 'center_' + Date.now();
             const expiryDate = new Date();
             expiryDate.setDate(expiryDate.getDate() + daysCount);
 
-            window.platformData.clinics.push({ id: clinicId, name, docName, currency, maxBranches, daysCount, expiryDate: expiryDate.toISOString() });
-            window.platformData.users.push({ name: docName, user, pass, role: 'doctor', clinicId: clinicId });
+            if(!window.platformData.centers) window.platformData.centers = [];
+            window.platformData.centers.push({ 
+                id: centerId, 
+                name, 
+                docName, 
+                currency, 
+                maxBranches, 
+                daysCount, 
+                expiryDate: expiryDate.toISOString(), 
+                branches: [] 
+            });
+
+            window.platformData.users.push({ name: docName, user, pass, role: 'center_owner', centerId: centerId });
 
             window.saveToFirebase();
             renderClinicsList();
@@ -1218,7 +1225,78 @@
             document.getElementById('doc-name-in').value = '';
             document.getElementById('doc-user-in').value = '';
             document.getElementById('doc-pass-in').value = '';
-            alert(`تم إنشاء المركز وتحديد سقف فروعه (${maxBranches}) وصلاحيته بنجاح!`);
+            alert(`تم إنشاء المركز الرئيسي وتحديد سقف فروعه (${maxBranches}) وصلاحيته بنجاح!`);
+        }
+
+        // --- مدير المركز الرئيسي: إضافة فروع ضمن الحد الأقصى فقط ---
+        function addSubBranchByCenterOwner() {
+            if(!window.currentUser || window.currentUser.role !== 'center_owner') return;
+            let center = (window.platformData.centers || []).find(x => x.id === window.currentUser.centerId);
+            if(!center) return;
+
+            if(!center.branches) center.branches = [];
+            if(center.branches.length >= center.maxBranches) {
+                alert(`عذراً، لقد استنفدت الحد الأقصى للفروع المسموحة (${center.maxBranches} فروع)!`);
+                return;
+            }
+
+            const name = document.getElementById('sub-branch-name-in').value.trim();
+            const mgr = document.getElementById('sub-branch-mgr-in').value.trim();
+            const user = document.getElementById('sub-branch-user-in').value.trim();
+            const pass = document.getElementById('sub-branch-pass-in').value.trim();
+
+            if(!name || !user || !pass) { alert("أدخل كافة بيانات الفرع التابع!"); return; }
+
+            const branchId = 'branch_' + Date.now();
+            center.branches.push({ id: branchId, name, manager: mgr || 'مدير فرع' });
+            window.platformData.users.push({ name: mgr || name, user, pass, role: "branch_manager", clinicId: branchId });
+
+            window.saveToFirebase();
+            renderCenterSubBranches();
+            
+            document.getElementById('sub-branch-name-in').value = '';
+            document.getElementById('sub-branch-mgr-in').value = '';
+            document.getElementById('sub-branch-user-in').value = '';
+            document.getElementById('sub-branch-pass-in').value = '';
+            alert("تم إنشاء الفرع التابع ضمن الحصة بنجاح!");
+        }
+
+        function renderCenterSubBranches() {
+            if(!window.currentUser || window.currentUser.role !== 'center_owner') return;
+            let center = (window.platformData.centers || []).find(x => x.id === window.currentUser.centerId);
+            if(!center) return;
+
+            if(!center.branches) center.branches = [];
+            document.getElementById('center-branch-counter-label').innerText = `${center.branches.length} من أصل ${center.maxBranches} فروع`;
+
+            const tbody = document.getElementById('center-sub-branches-tbody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+
+            let totalRev = 0, totalExp = 0;
+            center.branches.forEach(b => {
+                let rev = 0;
+                (window.platformData.archive[b.id] || []).forEach(r => rev += (r.paid || 0));
+                (window.platformData.queue[b.id] || []).forEach(r => rev += (r.paid || 0));
+                totalRev += rev;
+
+                let exp = 0;
+                (window.platformData.expensesStore[b.id] || []).forEach(ex => exp += ex.amount);
+                totalExp += exp;
+
+                tbody.innerHTML += `<tr>
+                    <td><strong>${b.name}</strong></td>
+                    <td>${b.manager}</td>
+                    <td><span class="badge bg-success">نشط</span></td>
+                    <td><button onclick="viewBranchData('${b.id}', '${b.name}')" class="btn btn-outline-success btn-sm py-0"><i class="fa-solid fa-eye"></i> استعراض</button></td>
+                </tr>`;
+            });
+
+            document.getElementById('center-consolidated-financials-box').innerHTML = `
+                <h6 class="fw-bold text-primary mb-1">الحسابات التجميعية لفروع المركز (${center.currency}):</h6>
+                <div>إجمالي إيرادات الفروع: <strong class="text-success">${totalRev} ${center.currency}</strong></div>
+                <div>إجمالي مصروفات الفروع: <strong class="text-danger">${totalExp} ${center.currency}</strong></div>
+            `;
         }
 
         function renderClinicsList() {
@@ -1226,20 +1304,24 @@
             if(!tbody) return;
             tbody.innerHTML = '';
             
-            window.platformData.clinics.forEach((cl) => {
-                const expiryFormatted = new Date(cl.expiryDate).toLocaleDateString('ar-EG');
-                
+            (window.platformData.centers || []).forEach((c) => {
+                const expiryFormatted = new Date(c.expiryDate).toLocaleDateString('ar-EG');
                 tbody.innerHTML += `<tr>
-                    <td><strong>${cl.name}</strong><br><small class="text-primary">المسؤول: ${cl.docName}</small></td>
-                    <td><span class="badge bg-secondary">${cl.currency || 'EGP'}</span></td>
-                    <td>الصلاحية: ${expiryFormatted}<br><small class="text-muted">الحد الأقصى للفروع: ${cl.maxBranches || 3}</small></td>
+                    <td><strong>${c.name}</strong><br><small class="text-primary">المسؤول: ${c.docName}</small></td>
+                    <td><span class="badge bg-secondary">${c.currency || 'EGP'}</span></td>
+                    <td>الصلاحية: ${expiryFormatted}<br><small class="text-muted">الحد الأقصى للفروع: ${c.maxBranches || 3}</small></td>
                     <td>
-                        <button onclick="viewBranchData('${cl.id}', '${cl.name}')" class="btn btn-outline-success btn-sm py-0 mb-1"><i class="fa-solid fa-eye"></i> استعراض</button>
-                        ${window.currentUser && window.currentUser.role === 'master_admin' ? `<button onclick="promptExtendDays('${cl.id}')" class="btn btn-outline-primary btn-sm py-0 mb-1">+تفعيل</button>` : ''}
-                        <button onclick="deleteClinic('${cl.id}')" class="btn btn-danger btn-sm py-0 mb-1"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="viewBranchData('${c.id}', '${c.name}')" class="btn btn-outline-success btn-sm py-0 mb-1"><i class="fa-solid fa-eye"></i> استعراض</button>
+                        ${window.currentUser && window.currentUser.role === 'master_admin' ? `<button onclick="promptExtendDays('${c.id}')" class="btn btn-outline-primary btn-sm py-0 mb-1">+تفعيل</button>` : ''}
+                        <button onclick="deleteClinic('${c.id}')" class="btn btn-danger btn-sm py-0 mb-1"><i class="fa-solid fa-trash"></i></button>
                     </td>
                 </tr>`;
             });
+
+            if(document.getElementById('dev-total-clinics')) {
+                document.getElementById('dev-total-clinics').innerText = (window.platformData.centers || []).length;
+                document.getElementById('dev-total-users').innerText = (window.platformData.users || []).length;
+            }
         }
 
         function viewBranchData(branchId, branchName) {
@@ -1253,12 +1335,12 @@
             const daysStr = prompt("أدخل عدد أيام التفعيل المراد إضافتها للاشتراك:", "30");
             if(daysStr && !isNaN(daysStr)) {
                 const addDays = parseInt(daysStr);
-                const cl = window.platformData.clinics.find(x => x.id === cId);
-                if(cl) {
-                    let currentExpiry = new Date(cl.expiryDate);
+                const c = (window.platformData.centers || []).find(x => x.id === cId);
+                if(c) {
+                    let currentExpiry = new Date(c.expiryDate);
                     if (currentExpiry < new Date()) currentExpiry = new Date();
                     currentExpiry.setDate(currentExpiry.getDate() + addDays);
-                    cl.expiryDate = currentExpiry.toISOString();
+                    c.expiryDate = currentExpiry.toISOString();
                     window.saveToFirebase();
                     renderClinicsList();
                     alert(`تم تحديث وتمديد أيام التفعيل بنجاح!`);
@@ -1268,8 +1350,8 @@
 
         function deleteClinic(cId) {
             if(confirm("هل أنت متأكد من حذف المركز؟")) {
-                window.platformData.clinics = window.platformData.clinics.filter(x => x.id !== cId);
-                window.platformData.users = window.platformData.users.filter(x => x.clinicId !== cId);
+                window.platformData.centers = (window.platformData.centers || []).filter(x => x.id !== cId);
+                window.platformData.users = window.platformData.users.filter(x => x.centerId !== cId && x.clinicId !== cId);
                 window.saveToFirebase();
                 renderClinicsList();
             }
@@ -1288,11 +1370,23 @@
         }
 
         function getCombinedAllRecords() {
+            const cId = getCurrentClinicId();
+            if(cId === 'master' || cId === 'main_branch') {
+                let all = [];
+                Object.values(window.platformData.queue).forEach(arr => all.push(...arr));
+                Object.values(window.platformData.archive).forEach(arr => all.push(...arr));
+                return all;
+            }
             return [...getClinicQueue(), ...getClinicArchive()];
         }
 
         function getExpensesRecordsForModal() {
             const cId = getCurrentClinicId();
+            if(cId === 'master') {
+                let allEx = [];
+                Object.values(window.platformData.expensesStore).forEach(arr => allEx.push(...arr));
+                return allEx;
+            }
             return (window.platformData.expensesStore && window.platformData.expensesStore[cId]) ? window.platformData.expensesStore[cId] : [];
         }
 
@@ -1976,6 +2070,7 @@
             renderPharmacyStore();
             renderServicesSettings();
             renderClinicsList();
+            renderCenterSubBranches();
             renderDocStaff();
             populatePayrollStaffSelect();
             renderPayrollSummary();
