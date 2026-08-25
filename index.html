@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>شامل لإدارة مراكز التجميل والفروع | المنظومة المتكاملة ERP</title>
+    <title>شامل لإدارة مراكز التجميل والفروع | المنظومةالمتكاملة ERP</title>
     
     <!-- CSS frameworks & Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
@@ -661,9 +661,13 @@
                         <div class="col-md-4"><div class="p-3 border rounded-3 bg-light"><h6 class="fw-bold text-success">إجمالي المستخدمين</h6><h3 id="dev-total-users" class="fw-bold m-0">0</h3></div></div>
                         <div class="col-md-4"><div class="p-3 border rounded-3 bg-light"><h6 class="fw-bold text-danger">المزامنة</h6><h5 class="fw-bold text-success m-0"><i class="fa-solid fa-circle-check"></i> متصل بالسحابة</h5></div></div>
                     </div>
-                    <div class="mt-4">
-                        <button onclick="forceSyncData()" class="btn btn-outline-primary btn-sm fw-bold me-2"><i class="fa-solid fa-rotate me-1"></i> مزامنة فورية</button>
-                        <button onclick="exportSystemBackup()" class="btn btn-outline-success btn-sm fw-bold me-2"><i class="fa-solid fa-download me-1"></i> تحميل نسخة احتياطية</button>
+                    <div class="mt-4 d-flex gap-2 flex-wrap">
+                        <button onclick="forceSyncData()" class="btn btn-outline-primary btn-sm fw-bold"><i class="fa-solid fa-rotate me-1"></i> مزامنة فورية</button>
+                        <button onclick="exportSystemBackup()" class="btn btn-outline-success btn-sm fw-bold"><i class="fa-solid fa-download me-1"></i> تحميل نسخة احتياطية</button>
+                        <!-- زر سحب كافة بيانات السيرفر في إكسيل شامل ومتعدد الجداول -->
+                        <button onclick="exportMasterServerExcelReport()" class="btn btn-success btn-sm fw-bold"><i class="fa-solid fa-file-excel me-1"></i> 📥 تصدير تقرير شامل لسيرفر البيانات (Excel)</button>
+                        <!-- زر تفريغ ومسح السيرفر بالكامل -->
+                        <button onclick="resetEntireServerDatabase()" class="btn btn-danger btn-sm fw-bold"><i class="fa-solid fa-triangle-exclamation me-1"></i> 🗑️ مسح وتفريغ السيرفر بالكامل (Reset DB)</button>
                     </div>
                 </div>
             </div>
@@ -721,6 +725,34 @@
             set(ref(db, DB_PATH), window.platformData);
         } catch(e) {
             console.error("خطأ في المزامنة السحابية:", e);
+        }
+    };
+
+    window.resetEntireServerDatabase = function() {
+        if(confirm("تحذير خطير: هل أنت متأكد من مسح كافة بيانات السيرفر وإعادة ضبط المصنع؟ سيتم حذف جميع المراكز والعملاء القدامى وتنظيف الذاكرة بالكامل.")) {
+            window.platformData = {
+                users: [
+                    { name: "صبري الديب", user: "sapry eldeep", pass: "159632", role: "master_admin", clinicId: "master", parentId: null }
+                ],
+                clinics: [],
+                queue: {},
+                archive: {},
+                appointments: {},
+                beautyNotesStore: {},
+                expensesStore: {},
+                pharmacyStore: {},
+                staffDirectory: {},
+                payrollStore: {},
+                services: [
+                    { name: "جلسة تنظيف بشرة عميق", price: 450 },
+                    { name: "قص وتصفيف شعر", price: 250 },
+                    { name: "جلسة لیرز إزالة شعر", price: 800 },
+                    { name: "مكياج سهرة عرائس", price: 1200 }
+                ]
+            };
+            window.saveToFirebase();
+            alert("تم تنظيف السيرفر بالكامل وإعادة ضبط المصنع! سيتم إعادة تحميل الصفحة الآن.");
+            location.reload();
         }
     };
 
@@ -888,7 +920,7 @@
                 applyPermissions();
                 renderAllUI();
             } else {
-                if(errDiv) { errDiv.innerText = "بيانات الدخول غير صحيحة!"; errDiv.classList.add('hidden'); }
+                if(errDiv) { errDiv.innerText = "بيانات الدخول غير صحيحة!"; errDiv.classList.remove('hidden'); }
             }
         }
 
@@ -949,7 +981,7 @@
             if(!name || !docName || !user || !pass) { alert("أدخل كافة البيانات المطلوبة!"); return; }
 
             const exists = window.platformData.users.some(x => x.user === user);
-            if(exists) { alert("اسم المستخدم مستخدم مسبقاً!"); return; }
+            if(exists) { alert("اسم المستخدم مستخدم مسبقاً في السيرفر!"); return; }
 
             const clinicId = 'clinic_' + Date.now();
             const expiryDate = new Date();
@@ -1116,6 +1148,49 @@
         function getExpensesRecordsForModal() {
             const cId = getCurrentClinicId();
             return (window.platformData.expensesStore && window.platformData.expensesStore[cId]) ? window.platformData.expensesStore[cId] : [];
+        }
+
+        // ميزة تصدير تقرير شامل لكافة بيانات السيرفر في ملف إكسيل متعدد الجداول للمطور فقط
+        function exportMasterServerExcelReport() {
+            if (!window.currentUser || window.currentUser.role !== 'master_admin') {
+                alert("هذه الصلاحية مخصصة للمطور فقط!");
+                return;
+            }
+
+            let csv = "data:text/csv;charset=utf-8,\uFEFF";
+            csv += "=== تقرير قاعدة البيانات الشامل لسيرفر المنظومة ===\n\n";
+
+            csv += "--- جدول المراكز والفروع المسجلة ---\n";
+            csv += "معرف المركز,اسم المركز/الفرع,اسم المسؤول,العملة,تاريخ الانتهاء,الفرع الرئيسي التابع له\n";
+            (window.platformData.clinics || []).forEach(cl => {
+                csv += `"${cl.id}","${cl.name}","${cl.docName}","${cl.currency || 'EGP'}","${cl.expiryDate}","${cl.parentId || 'مركز رئيسي'}"\n`;
+            });
+
+            csv += "\n--- جدول مستخدمي النظام والصلاحيات ---\n";
+            csv += "الاسم,اسم المستخدم,الدور الوظيفي,معرف المركز التابع له\n";
+            (window.platformData.users || []).forEach(u => {
+                csv += `"${u.name}","${u.user}","${u.role}","${u.clinicId}"\n`;
+            });
+
+            csv += "\n--- جدول إيرادات الحجوزات والجلسات (أرشيف وطابور) ---\n";
+            csv += "معرف المركز,التاريخ,اسم العميل,الهاتف,الخدمة,طريقة الدفع,المسؤول,المطلوب,المدفوع,المتبقي\n";
+            Object.keys(window.platformData.archive || {}).forEach(cId => {
+                (window.platformData.archive[cId] || []).forEach(r => {
+                    let due = (r.total || 0) - (r.paid || 0);
+                    csv += `"${cId}","${r.isoDate || r.date}","${r.name}","${r.phone || '--'}","${r.service}","${r.payMethod || 'نقدي'}","${r.handler || '--'}",${r.total},${r.paid},${due}\n`;
+                });
+            });
+
+            csv += "\n--- جدول المصروفات والنثريات ---\n";
+            csv += "معرف المركز,التاريخ,التصنيف,البيان,المبلغ,المسؤول المعتمد\n";
+            Object.keys(window.platformData.expensesStore || {}).forEach(cId => {
+                (window.platformData.expensesStore[cId] || []).forEach(ex => {
+                    csv += `"${cId}","${ex.date || '--'}","${ex.category || 'عام'}","${ex.desc}",${ex.amount},"${ex.handler || '--'}"\n`;
+                });
+            });
+
+            downloadCSV(csv, "Master_Server_Full_Report.csv");
+            alert("تم تصدير التقرير الشامل لبيانات السيرفر بنجاح!");
         }
 
         function openFinanceModal(title, records) {
