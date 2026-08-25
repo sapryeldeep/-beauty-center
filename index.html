@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>شامل لإدارة مراكز التجميل والفروع | المنظومة السحابية المتكاملة ERP</title>
+    <title>شامل لإدارة مراكز التجميل والفروع |   ERP</title>
     
     <meta name="theme-color" content="#d63384">
     <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22%D8%B4%D8%A7%D9%85%D9%84%20ERP%22%2C%22short_name%22%3A%22%D8%B4%D8%A7%D9%85%D9%84%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23fdf2f8%22%2C%22theme_color%22%3A%22%23d63384%22%7D">
@@ -84,7 +84,7 @@
                 <div class="mb-4 text-start"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="password" required class="form-control form-control-lg fs-6 rounded-3" placeholder="••••••••"></div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold fs-6 rounded-3 shadow-sm" style="background: var(--primary-gradient); border: none;">تسجيل الدخول[cite: 1]</button>
             </form>
-            <div class="dev-footer mt-4">نظام إدارة مراكز التجميل الاحترافي | V32 SaaS</div>
+            <div class="dev-footer mt-4">نظام إدارة مراكز التجميل الاحترافي | V33 Ultimate SaaS</div>
         </div>
     </div>
 
@@ -108,7 +108,10 @@
                 <a class="nav-link nav-sec-payroll" href="#" onclick="switchTab('payroll', this)"><i class="fa-solid fa-wallet text-success me-1"></i> رواتب وعمولات الخبراء[cite: 1]</a>
 
                 <a class="nav-link doctor-only master-admin-only hidden" href="#" onclick="switchTab('settings', this)"><i class="fa-solid fa-gear text-info me-1"></i> الإعدادات والضرائب (ZATCA)[cite: 1]</a>
+                
+                <!-- تبويب إدارة وفروع المركز (متاح للمطور ولمدير المركز فقط) -->
                 <a class="nav-link doctor-only master-admin-only hidden" href="#" onclick="switchTab('clinics', this)"><i class="fa-solid fa-network-wired text-warning me-1"></i> <span id="branches-nav-label">إدارة الفروع والعملات</span>[cite: 1]</a>
+                
                 <a class="nav-link doctor-only hidden" href="#" onclick="switchTab('doc-staff', this)"><i class="fa-solid fa-users-gear me-1"></i> موظفي الفرع والصلاحيات[cite: 1]</a>
                 <a class="nav-link developer-only hidden" href="#" onclick="switchTab('dev-panel', this)"><i class="fa-solid fa-terminal text-warning me-1"></i> لوحة تحكم المطور[cite: 1]</a>
 
@@ -328,7 +331,7 @@
                 </div>
             </div>
 
-            <!-- TAB 10: الفروع وإدارة الفروع للمركز والمطور -->
+            <!-- TAB 10: الفروع وإدارة الفروع بناءً على الصلاحيات -->
             <div id="tab-clinics" class="tab-content hidden">
                 <div class="row">
                     <div class="col-lg-5 mb-3">
@@ -336,6 +339,7 @@
                             <form onsubmit="event.preventDefault(); addNewClinic();">
                                 <h6 class="fw-bold text-primary mb-3" id="create-clinic-heading">إدارة وإنشاء الفرع[cite: 1]</h6>
                                 
+                                <!-- خانة نوع الكيان (تظهر للمطور فقط) -->
                                 <div class="mb-2 master-admin-only hidden" id="parent-clinic-wrapper">
                                     <label class="small fw-bold text-secondary">تحديد نوع الكيان:</label>
                                     <select id="clinic-parent-select" class="form-select form-select-sm rounded-3 bg-light border-primary" onchange="toggleMaxBranchesInput()">
@@ -343,7 +347,7 @@
                                     </select>
                                 </div>
                                 <div class="mb-2 master-admin-only hidden" id="max-branches-group">
-                                    <label class="small fw-bold text-secondary">الحد الأقصى للفروع المسموحة:</label>
+                                    <label class="small fw-bold text-secondary">الحد الأقصى للفروع:</label>
                                     <input type="number" id="clinic-max-branches" class="form-control form-control-sm rounded-3" value="3">
                                 </div>
 
@@ -374,7 +378,7 @@
                 </div>
             </div>
 
-            <!-- TAB 12: لوحة المطور (Master Financials & Shamel SaaS Dashboard) -->
+            <!-- TAB 12: لوحة تحكم المطور الشاملة (Master Financials) -->
             <div id="tab-dev-panel" class="tab-content hidden">
                 <div class="card p-4 border-warning shadow-lg">
                     <h4 class="fw-bold text-dark mb-3"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم الحسابات الشاملة للمطور (Master Financials Dashboard)[cite: 1]</h4>
@@ -419,7 +423,7 @@
     const analytics = getAnalytics(app);
     const db = getDatabase(app);
 
-    const DB_PATH = 'shamelBeautyCenterPlatformV32'; 
+    const DB_PATH = 'shamelBeautyCenterPlatformV33'; 
 
     window.safeArr = function(obj) {
         if (!obj) return [];
@@ -634,6 +638,7 @@
                 if(branchesNavLabel) branchesNavLabel.innerText = "إدارة المراكز والفروع[cite: 1]";
                 if(createClinicHeading) createClinicHeading.innerText = "إنشاء مركز رئيسي أو فرع[cite: 1]";
             } else if (window.currentUser.role === 'doctor') {
+                // مدير المركز (يستطيع إنشاء فروعه بنفسه بداخل مركزه فقط بدون رؤية شجرة المطور)
                 document.querySelectorAll('.doctor-only').forEach(e => e.classList.remove('hidden'));
                 if(parentWrapper) parentWrapper.classList.add('hidden');
                 if(branchesNavLabel) branchesNavLabel.innerText = "إدارة فروع مركزي[cite: 1]";
@@ -712,6 +717,7 @@
                 if(pSel && pSel !== 'main') { parentId = pSel; assignedRole = 'doctor'; }
                 else { maxBranches = parseInt(document.getElementById('clinic-max-branches')?.value) || 3; }
             } else if (window.currentUser.role === 'doctor') {
+                // مدير المركز ينشئ فرع تابع لمركزه مباشرة مع التحقق من الحد الأقصى
                 parentId = window.currentUser.clinicId; 
                 const pCenter = window.platformData.clinics.find(cl => cl && cl.id === parentId);
                 const limit = pCenter ? (pCenter.maxBranches || 3) : 3;
@@ -784,7 +790,7 @@
             renderMasterFinancials();
         }
 
-        // لوحة حسابات المطور الشاملة (تستعرض إجمالي تداول وإيرادات كل الفروع والمراكز مجتمعة)
+        // حسابات المطور الشاملة (تستعرض إجمالي تداول وإيرادات كل الفروع والمراكز مجتمعة)
         function renderMasterFinancials() {
             if(!window.currentUser || window.currentUser.role !== 'master_admin') return;
             if(document.getElementById('dev-total-clinics')) document.getElementById('dev-total-clinics').innerText = window.platformData.clinics.length;
@@ -888,7 +894,7 @@
 
         function saveCenterSettings() {
             const cId = getCurrentClinicId();
-            if(cId === 'master') { alert("الرجاء الدخول لفرع محدد لحفظ إعداداته[cite: 1]."); return; }
+            if(cId === 'master') { alert("الرجاء الدخول لفرع محدد لحفظ إعداداته.[cite: 1]"); return; }
             if(!window.platformData.settings) window.platformData.settings = {};
             window.platformData.settings[cId] = {
                 taxNumber: document.getElementById('set-tax-number').value.trim(),
@@ -1058,7 +1064,7 @@
             if(!name || !date || !time) return;
 
             const cId = getCurrentClinicId();
-            if(cId === 'master') { alert("يجب الدخول لفرع لتسجيل موعد[cite: 1]."); return; }
+            if(cId === 'master') { alert("يجب الدخول لفرع لتسجيل موعد.[cite: 1]"); return; }
             if(!window.platformData.appointments[cId]) window.platformData.appointments[cId] = [];
 
             window.platformData.appointments[cId].push({ id: Date.now(), name, phone, date, time });
@@ -1136,6 +1142,7 @@
 
         function finishExam(id) {
             const cId = getCurrentClinicId();
+            let found = false;
             if (cId && window.platformData.queue[cId]) {
                 const itemIdx = window.platformData.queue[cId].findIndex(x => x.id == id);
                 if(itemIdx > -1) {
@@ -1264,6 +1271,31 @@
             document.getElementById('prof-p-due').innerText = du;
         }
 
+        function payExtraFromProfile() {
+            if(!window.activeProfilePatient) return;
+            const amt = prompt(`أدخل المبلغ المحصل من العميل (${window.activeProfilePatient}):[cite: 1]`);
+            if(amt && !isNaN(amt)) {
+                let rem = Math.max(0, parseFloat(amt));
+                const payLogic = (arr) => {
+                    if(!arr) return;
+                    arr.forEach(p => {
+                        let due = (p.total || 0) - (p.paid || 0);
+                        if(p.name === window.activeProfilePatient && due > 0 && rem > 0) {
+                            let pay = Math.min(due, rem);
+                            p.paid += pay;
+                            p.due = (p.total || 0) - p.paid;
+                            rem -= pay;
+                        }
+                    });
+                };
+                Object.keys(window.platformData.queue).forEach(k => payLogic(window.platformData.queue[k]));
+                Object.keys(window.platformData.archive).forEach(k => payLogic(window.platformData.archive[k]));
+                window.saveToFirebase();
+                renderAllUI();
+                alert("تم التحصيل بنجاح![cite: 1]");
+            }
+        }
+
         function renderFinance() {
             let tot = 0, pd = 0, du = 0;
             const tb = document.getElementById('finance-tbody');
@@ -1296,6 +1328,7 @@
             window.platformData.services.push({ name, price });
             window.saveToFirebase();
             renderServicesSettings();
+            renderServicesSelect();
             renderMultiServicesCheckboxes();
             document.getElementById('serv-name-in').value = '';
             document.getElementById('serv-price-in').value = '';
@@ -1312,6 +1345,7 @@
             window.platformData.services.splice(i, 1);
             window.saveToFirebase();
             renderServicesSettings();
+            renderServicesSelect();
             renderMultiServicesCheckboxes();
         }
 
