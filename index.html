@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>شامل لإدارة مراكز التجميل والفروع | المنظومة  المتكاملة ERP</title>
+    <title>شامل لإدارة مراكز التجميل والفروع | المنصة  المتقدمة ERP</title>
     
     <!-- CSS frameworks & Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
@@ -209,6 +209,7 @@
         </div>
     </div>
 
+    <!-- زر واتساب تفاعلي -->
     <a href="https://wa.me/201065826742?text=مرحباً، أود الاستفسار عن حجز المواعيد والخدمات" class="whatsapp-float no-print" target="_blank" title="تواصل معنا">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
@@ -220,7 +221,7 @@
         <div class="card login-card p-4 p-md-5 text-center" style="width: 100%; max-width: 420px;">
             <div class="mb-3 text-primary"><i class="fa-solid fa-wand-magic-sparkles fa-3x" style="color: var(--primary-color);"></i></div>
             <h3 class="fw-bold text-dark mb-1">إدارة مراكز التجميل والفروع</h3>
-            <p class="text-muted small mb-4">المنصة السحابية المتقدمة (ERP)</p>
+            <p class="text-muted small mb-4">المنصة السحابية المتقدمة (ERP)[cite: 3]</p>
             <div id="login-error" class="alert alert-danger py-2 small hidden"></div>
             <div class="mb-3 text-start">
                 <label class="small fw-bold text-secondary">اسم المستخدم</label>
@@ -233,7 +234,7 @@
             <button onclick="handleLogin()" class="btn btn-primary btn-lg w-100 fw-bold fs-6 rounded-3 shadow-sm" style="background: var(--primary-gradient); border: none;">تسجيل الدخول</button>
             
             <div class="dev-footer mt-4">
-                نظام إدارة مراكز التجميل الاحترافي
+                نظام إدارة مراكز التجميل الاحترافي[cite: 3]
             </div>
         </div>
     </div>
@@ -811,8 +812,8 @@
                 <div class="row">
                     <div class="col-12 mb-3">
                         <div class="card p-4 border-warning">
-                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)</h4>
-                            <p class="text-muted small">من هنا يمكنك وحدك إدارة "أيام التفعيل" الخاصة باشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase).</p>
+                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)[cite: 2, 3]</h4>
+                            <p class="text-muted small">من هنا يمكنك وحدك إدارة "أيام التفعيل" الخاصة باشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase)[cite: 2, 3].</p>
                             
                             <hr>
                             <div class="row g-3">
@@ -848,7 +849,7 @@
             </div>
 
             <div class="dev-footer no-print">
-                Developed by <strong>Sapry El-Deeb</strong> | Tel: <a href="https://wa.me/201065826742">01065826742</a> | Email: sapry.eldeep@gmail.com
+                Developed by <strong>Sapry El-Deeb</strong>[cite: 2, 3] | Tel: <a href="https://wa.me/201065826742">01065826742</a> | Email: sapry.eldeep@gmail.com[cite: 2, 3]
             </div>
 
         </div>
@@ -899,13 +900,13 @@
 
     window.saveToFirebase = function() {
         try {
-            set(ref(db, 'shamelBeautyCenterPlatformV27'), window.platformData);
+            set(ref(db, 'shamelBeautyCenterPlatformV20'), window.platformData);
         } catch(e) {
             console.error("خطأ في المزامنة السحابية:", e);
         }
     };
 
-    onValue(ref(db, 'shamelBeautyCenterPlatformV27'), (snapshot) => {
+    onValue(ref(db, 'shamelBeautyCenterPlatformV20'), (snapshot) => {
         const data = snapshot.val();
         if (data) {
             window.platformData.users = data.users || window.platformData.users;
@@ -2214,44 +2215,6 @@
                     <td><button onclick="printSalaryReceipt('${st.name}', ${st.salary}, ${bonuses}, ${deductions}, ${netSalary})" class="btn btn-outline-success btn-sm py-0"><i class="fa-solid fa-receipt me-1"></i> إيصال</button></td>
                 </tr>`;
             });
-        }
-
-        function printSalaryReceipt(name, basic, bonuses, deductions, net) {
-            const receiptWin = window.open('', '_blank');
-            receiptWin.document.write(`
-                <html dir="rtl">
-                <head>
-                    <title>إيصال استلام راتب - ${name}</title>
-                    <style>
-                        body { font-family: 'Cairo', sans-serif; padding: 25px; color: #333; }
-                        .receipt { border: 2px solid #198754; padding: 25px; max-width: 450px; margin: auto; border-radius: 12px; background: #fff; }
-                        h3 { text-align: center; color: #198754; margin-bottom: 2px; }
-                        .sub { text-align: center; font-size: 12px; color: #666; margin-bottom: 15px; }
-                        p { margin: 6px 0; font-size: 14px; }
-                        .footer { text-align: center; margin-top: 25px; font-size: 11px; color: #666; border-top: 1px dashed #999; padding-top: 10px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="receipt">
-                        <h3>مركز التجميل المتكامل</h3>
-                        <div class="sub">إيصال صرف راتب ومستحقات مالية</div>
-                        <hr>
-                        <p><strong>التاريخ:</strong> ${getFormattedDateTime()}</p>
-                        <p><strong>اسم الموظف:</strong> ${name}</p>
-                        <hr>
-                        <p>الراتب الأساسي: <strong>${basic} EGP</strong></p>
-                        <p>المكافآت والحوافز: <strong style="color: #198754;">+${bonuses} EGP</strong></p>
-                        <p>السلف والخصومات: <strong style="color: #dc3545;">-${deductions} EGP</strong></p>
-                        <hr>
-                        <p style="font-size: 16px;">صافي الراتب المستحق: <strong style="color: #d63384;">${net} EGP</strong></p>
-                        <p><strong>المسؤول المعتمد:</strong> ${window.currentUser ? window.currentUser.name : '--'}</p>
-                        <div class="footer">توقيع المستلم: ........................ | توقيع الإدارة: ........................</div>
-                    </div>
-                    <script>window.print();<\/script>
-                </body>
-                </html>
-            `);
-            receiptWin.document.close();
         }
 
         function checkPharmacyExpiryAlerts() {
