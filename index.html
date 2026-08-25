@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>شامل لإدارة مراكز التجميل والفروع | المنظومة المتقدمة ERP</title>
+    <title>شامل لإدارة مراكز التجميل والفروع | المنظومة  المتكاملة ERP</title>
     
     <!-- CSS frameworks & Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
@@ -220,7 +220,7 @@
         <div class="card login-card p-4 p-md-5 text-center" style="width: 100%; max-width: 420px;">
             <div class="mb-3 text-primary"><i class="fa-solid fa-wand-magic-sparkles fa-3x" style="color: var(--primary-color);"></i></div>
             <h3 class="fw-bold text-dark mb-1">إدارة مراكز التجميل والفروع</h3>
-            <p class="text-muted small mb-4">المنصة السحابية المتقدمة (ERP)[cite: 3]</p>
+            <p class="text-muted small mb-4">المنصة السحابية المتقدمة (ERP)</p>
             <div id="login-error" class="alert alert-danger py-2 small hidden"></div>
             <div class="mb-3 text-start">
                 <label class="small fw-bold text-secondary">اسم المستخدم</label>
@@ -233,7 +233,7 @@
             <button onclick="handleLogin()" class="btn btn-primary btn-lg w-100 fw-bold fs-6 rounded-3 shadow-sm" style="background: var(--primary-gradient); border: none;">تسجيل الدخول</button>
             
             <div class="dev-footer mt-4">
-                نظام إدارة مراكز التجميل الاحترافي[cite: 3]
+                نظام إدارة مراكز التجميل الاحترافي
             </div>
         </div>
     </div>
@@ -258,7 +258,6 @@
                 <a class="nav-link nav-sec-inventory" href="#" onclick="switchTab('beauty-inventory', this)"><i class="fa-solid fa-boxes-stacked text-info me-1"></i> مخزون المستحضرات</a>
                 <a class="nav-link nav-sec-payroll" href="#" onclick="switchTab('payroll', this)"><i class="fa-solid fa-wallet text-success me-1"></i> رواتب وعمولات الخبراء والسلف</a>
 
-                <!-- الإدارة والفروع: تظهر فقط للـ Master وللمركز الرئيسي (لإضافة فروع فقط) -->
                 <a class="nav-link center-owner-link hidden" href="#" onclick="switchTab('clinics', this)"><i class="fa-solid fa-network-wired text-warning me-1"></i> <span id="branches-nav-label">إدارة الفروع والعملات</span></a>
                 <a class="nav-link doctor-only hidden" href="#" onclick="switchTab('doc-staff', this)"><i class="fa-solid fa-users-gear me-1"></i> موظفي الفرع والصلاحيات</a>
                 
@@ -812,8 +811,8 @@
                 <div class="row">
                     <div class="col-12 mb-3">
                         <div class="card p-4 border-warning">
-                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)[cite: 2, 3]</h4>
-                            <p class="text-muted small">من هنا يمكنك وحدك إدارة "أيام التفعيل" الخاصة باشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase)[cite: 2, 3].</p>
+                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)</h4>
+                            <p class="text-muted small">من هنا يمكنك وحدك إدارة "أيام التفعيل" الخاصة باشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase).</p>
                             
                             <hr>
                             <div class="row g-3">
@@ -849,7 +848,7 @@
             </div>
 
             <div class="dev-footer no-print">
-                Developed by <strong>Sapry El-Deeb</strong>[cite: 2, 3] | Tel: <a href="https://wa.me/201065826742">01065826742</a> | Email: sapry.eldeep@gmail.com[cite: 2, 3]
+                Developed by <strong>Sapry El-Deeb</strong> | Tel: <a href="https://wa.me/201065826742">01065826742</a> | Email: sapry.eldeep@gmail.com
             </div>
 
         </div>
@@ -950,7 +949,6 @@
         window.activeProfilePatient = null;
         window.viewingBranchId = null;
 
-        // ربط مفتاح Enter لتسجيل الدخول
         document.addEventListener("DOMContentLoaded", () => {
             const loginInputs = document.querySelectorAll(".login-input");
             loginInputs.forEach(input => {
@@ -962,7 +960,6 @@
                 });
             });
 
-            // فحص فتح الرابط المباشر لحجز العملاء
             if (window.location.search.includes("booking=true") || window.location.hash.includes("booking")) {
                 document.getElementById('public-booking-portal').classList.remove('hidden');
                 document.getElementById('login-section').classList.add('hidden');
@@ -1078,7 +1075,6 @@
             }
         }
 
-        // تطبيق الصلاحيات الهرمية الصارمة
         function applyPermissions() {
             if(!window.currentUser) return;
             document.querySelectorAll('.sidebar .nav-link').forEach(e => e.classList.remove('hidden'));
@@ -1094,13 +1090,11 @@
                 document.getElementById('branches-nav-label').innerText = "إدارة المراكز والفروع والعملات";
                 document.getElementById('create-branch-heading').innerText = "إنشاء مركز رئيسي أو فرع جديد";
             } else if (window.currentUser.role === 'doctor') {
-                // مدير المركز الرئيسي: يمكنه إضافة فروع تابعة لمركزه فقط ولا يرى باقي المراكز
                 document.querySelectorAll('.center-owner-link').forEach(e => e.classList.remove('hidden'));
                 document.querySelectorAll('.doctor-only').forEach(e => e.classList.remove('hidden'));
                 document.getElementById('branches-nav-label').innerText = "إدارة فروع المركز";
                 document.getElementById('create-branch-heading').innerText = "إنشاء فرع جديد تابع لمركزك";
             } else if (window.currentUser.role === 'branch_manager') {
-                // مدير الفرع: لا يمكنه إضافة فروع ولا حذف الحساب، فقط إدارة موظفي فرعه
                 document.querySelectorAll('.doctor-only').forEach(e => e.classList.remove('hidden'));
             } else if (window.currentUser.role === 'reception') {
                 document.querySelector('.nav-sec-finance').classList.add('hidden');
@@ -1126,7 +1120,6 @@
             if (window.innerWidth < 992) toggleTabletSidebar();
         }
 
-        // إنشاء مركز أو فرع مع التثبيت الهرمي (Parent ID)
         function addNewClinic() {
             const name = document.getElementById('clinic-name-in').value.trim();
             const docName = document.getElementById('doc-name-in').value.trim();
@@ -1144,13 +1137,12 @@
             const expiryDate = new Date();
             expiryDate.setDate(expiryDate.getDate() + daysCount);
 
-            // تحديد ما إذا كان المنشأ مركز رئيسي أم فرع تابع
             let parentId = null;
             let assignedRole = 'doctor';
 
             if (window.currentUser.role === 'doctor') {
-                parentId = window.currentUser.clinicId; // تابع للمركز الرئيسي الحالي
-                assignedRole = 'branch_manager'; // مدير فرع فقط
+                parentId = window.currentUser.clinicId;
+                assignedRole = 'branch_manager';
             }
 
             window.platformData.clinics.push({ 
@@ -1182,7 +1174,6 @@
             alert(parentId ? `تم إنشاء الفرع التابع بنجاح!` : `تم إنشاء المركز بنجاح!`);
         }
 
-        // عرض المراكز والفروع وفق الهرمية المخصصة
         function renderClinicsList() {
             const tbody = document.getElementById('clinics-list-tbody');
             if(!tbody) return;
@@ -1190,25 +1181,21 @@
             
             let list = window.platformData.clinics || [];
 
-            // تصفية العرض: إذا كان مدير مركز رئيسي، يرى فقط فروعه التابعة له
             if (window.currentUser && window.currentUser.role === 'doctor') {
                 list = list.filter(cl => cl.parentId === window.currentUser.clinicId || cl.id === window.currentUser.clinicId);
             }
 
             list.forEach((cl) => {
                 const isActive = checkClinicSubscription(cl.id);
-                const isMainCenter = (cl.id === window.currentUser?.clinicId && window.currentUser?.role === 'doctor');
                 const isBranch = cl.parentId !== null;
 
                 let deleteBtn = '';
                 let extendBtn = '';
 
-                // المطور فقط هو من يمكنه تمديد الأيام وحذف أي حساب
                 if (window.currentUser && window.currentUser.role === 'master_admin') {
                     extendBtn = `<button onclick="promptExtendDays('${cl.id}')" class="btn btn-outline-primary btn-sm py-0 mb-1">+تفعيل</button>`;
                     deleteBtn = `<button onclick="deleteClinic('${cl.id}')" class="btn btn-danger btn-sm py-0 mb-1"><i class="fa-solid fa-trash"></i></button>`;
                 } else if (window.currentUser && window.currentUser.role === 'doctor') {
-                    // مدير المركز لا يمكنه حذف مركزه الرئيسي أبداً، يمكنه فقط حذف الفروع التابعة له
                     if (isBranch) {
                         deleteBtn = `<button onclick="deleteClinic('${cl.id}')" class="btn btn-danger btn-sm py-0 mb-1"><i class="fa-solid fa-trash"></i></button>`;
                     }
@@ -2227,6 +2214,241 @@
                     <td><button onclick="printSalaryReceipt('${st.name}', ${st.salary}, ${bonuses}, ${deductions}, ${netSalary})" class="btn btn-outline-success btn-sm py-0"><i class="fa-solid fa-receipt me-1"></i> إيصال</button></td>
                 </tr>`;
             });
+        }
+
+        function printSalaryReceipt(name, basic, bonuses, deductions, net) {
+            const receiptWin = window.open('', '_blank');
+            receiptWin.document.write(`
+                <html dir="rtl">
+                <head>
+                    <title>إيصال استلام راتب - ${name}</title>
+                    <style>
+                        body { font-family: 'Cairo', sans-serif; padding: 25px; color: #333; }
+                        .receipt { border: 2px solid #198754; padding: 25px; max-width: 450px; margin: auto; border-radius: 12px; background: #fff; }
+                        h3 { text-align: center; color: #198754; margin-bottom: 2px; }
+                        .sub { text-align: center; font-size: 12px; color: #666; margin-bottom: 15px; }
+                        p { margin: 6px 0; font-size: 14px; }
+                        .footer { text-align: center; margin-top: 25px; font-size: 11px; color: #666; border-top: 1px dashed #999; padding-top: 10px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="receipt">
+                        <h3>مركز التجميل المتكامل</h3>
+                        <div class="sub">إيصال صرف راتب ومستحقات مالية</div>
+                        <hr>
+                        <p><strong>التاريخ:</strong> ${getFormattedDateTime()}</p>
+                        <p><strong>اسم الموظف:</strong> ${name}</p>
+                        <hr>
+                        <p>الراتب الأساسي: <strong>${basic} EGP</strong></p>
+                        <p>المكافآت والحوافز: <strong style="color: #198754;">+${bonuses} EGP</strong></p>
+                        <p>السلف والخصومات: <strong style="color: #dc3545;">-${deductions} EGP</strong></p>
+                        <hr>
+                        <p style="font-size: 16px;">صافي الراتب المستحق: <strong style="color: #d63384;">${net} EGP</strong></p>
+                        <p><strong>المسؤول المعتمد:</strong> ${window.currentUser ? window.currentUser.name : '--'}</p>
+                        <div class="footer">توقيع المستلم: ........................ | توقيع الإدارة: ........................</div>
+                    </div>
+                    <script>window.print();<\/script>
+                </body>
+                </html>
+            `);
+            receiptWin.document.close();
+        }
+
+        function checkPharmacyExpiryAlerts() {
+            const box = document.getElementById('pharmacy-expiry-alerts-box');
+            if(!box) return;
+            box.innerHTML = '';
+
+            const cId = getCurrentClinicId();
+            const list = (window.platformData.pharmacyStore && window.platformData.pharmacyStore[cId]) ? window.platformData.pharmacyStore[cId] : [];
+
+            let expiredCount = 0;
+            let nearExpiryCount = 0;
+            const today = new Date();
+
+            list.forEach(p => {
+                if(p.expiry && p.expiry !== 'بدون تاريخ') {
+                    const expDate = new Date(p.expiry);
+                    const diffDays = Math.ceil((expDate - today) / (1000 * 60 * 60 * 24));
+                    if(diffDays < 0) expiredCount++;
+                    else if(diffDays <= 30) nearExpiryCount++;
+                }
+            });
+
+            if(expiredCount > 0 || nearExpiryCount > 0) {
+                box.innerHTML = `<div class="alert alert-danger py-2 px-3 small rounded-3">
+                    <i class="fa-solid fa-triangle-exclamation me-1"></i> <strong>تنبيه مخزني:</strong> توجد (${expiredCount}) منتجات منتهية الصلاحية و (${nearExpiryCount}) منتجات تنتهي خلال شهر!
+                </div>`;
+            }
+        }
+
+        function addPharmacyItem() {
+            const name = document.getElementById('ph-drug-name').value.trim();
+            const qty = Math.max(0, parseInt(document.getElementById('ph-drug-qty').value) || 0);
+            const price = Math.max(0, parseFloat(document.getElementById('ph-drug-price').value) || 0);
+            const expiry = document.getElementById('ph-drug-expiry').value;
+
+            if(!name) { alert("أدخل اسم المنتج!"); return; }
+            let cur = getCurrentCurrency();
+            const cId = getCurrentClinicId();
+            if(!window.platformData.pharmacyStore) window.platformData.pharmacyStore = {};
+            if(!window.platformData.pharmacyStore[cId]) window.platformData.pharmacyStore[cId] = [];
+
+            window.platformData.pharmacyStore[cId].push({ id: Date.now(), name, qty, price, expiry: expiry || 'بدون تاريخ' });
+            window.saveToFirebase();
+            renderPharmacyStore();
+            document.getElementById('ph-drug-name').value = '';
+            document.getElementById('ph-drug-qty').value = '';
+            document.getElementById('ph-drug-price').value = '';
+            document.getElementById('ph-drug-expiry').value = '';
+            alert("تم إضافة المنتج للمخزن بنجاح!");
+        }
+
+        function renderPharmacyStore() {
+            const tbody = document.getElementById('pharmacy-tbody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            let cur = getCurrentCurrency();
+            const cId = getCurrentClinicId();
+            const list = (window.platformData.pharmacyStore && window.platformData.pharmacyStore[cId]) ? window.platformData.pharmacyStore[cId] : [];
+            
+            if(list.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">المخزن فارغ</td></tr>';
+                return;
+            }
+
+            list.forEach((p, idx) => {
+                tbody.innerHTML += `<tr>
+                    <td><strong>${p.name}</strong></td>
+                    <td class="fw-bold text-primary">${p.qty} عبوة</td>
+                    <td>${p.price} ${cur}</td>
+                    <td><small class="text-muted">${p.expiry}</small></td>
+                    <td><button onclick="deletePharmacyItem('${cId}', ${idx})" class="btn btn-sm btn-outline-danger py-0"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>`;
+            });
+            checkPharmacyExpiryAlerts();
+        }
+
+        function deletePharmacyItem(cId, idx) {
+            window.platformData.pharmacyStore[cId].splice(idx, 1);
+            window.saveToFirebase();
+            renderPharmacyStore();
+        }
+
+        function addExpenseRecord() {
+            const category = document.getElementById('exp-category').value;
+            const desc = document.getElementById('exp-desc').value.trim();
+            const amount = Math.max(0, parseFloat(document.getElementById('exp-amount').value) || 0);
+            if(!desc || amount <= 0) { alert("أدخل بيان ومبلغ المصروف الصحيح!"); return; }
+
+            const cId = getCurrentClinicId();
+            if(!window.platformData.expensesStore) window.platformData.expensesStore = {};
+            if(!window.platformData.expensesStore[cId]) window.platformData.expensesStore[cId] = [];
+
+            window.platformData.expensesStore[cId].push({ id: Date.now(), category, desc, amount, handler: window.currentUser ? window.currentUser.name : '--', date: getFormattedDateTime() });
+            window.saveToFirebase();
+            renderExpensesList();
+            document.getElementById('exp-desc').value = '';
+            document.getElementById('exp-amount').value = '';
+        }
+
+        function renderExpensesList() {
+            const tbody = document.getElementById('expenses-tbody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            let cur = getCurrentCurrency();
+            const cId = getCurrentClinicId();
+            const list = (window.platformData.expensesStore && window.platformData.expensesStore[cId]) ? window.platformData.expensesStore[cId] : [];
+            
+            list.forEach((ex, idx) => {
+                tbody.innerHTML += `<tr>
+                    <td><span class="badge bg-secondary">${ex.category || 'عام'}</span></td>
+                    <td>${ex.desc}</td>
+                    <td class="text-danger fw-bold">${ex.amount} ${cur}</td>
+                    <td><small class="text-muted">${ex.handler || '--'}</small></td>
+                    <td><button onclick="deleteExpenseItem('${cId}', ${idx})" class="btn btn-sm btn-outline-danger py-0" style="font-size:10px;"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>`;
+            });
+            calculateDoctorCommissions();
+        }
+
+        function deleteExpenseItem(cId, idx) {
+            window.platformData.expensesStore[cId].splice(idx, 1);
+            window.saveToFirebase();
+            renderExpensesList();
+        }
+
+        function calculateDoctorCommissions() {
+            let totalPaid = 0;
+            let cashTotal = 0;
+            let bankTotal = 0;
+            let posTotal = 0;
+            let cur = getCurrentCurrency();
+
+            getCombinedAllRecords().forEach(p => { 
+                let paid = (p.paid || 0);
+                totalPaid += paid;
+                if(p.payMethod && p.payMethod.includes('تحويل')) bankTotal += paid;
+                else if(p.payMethod && p.payMethod.includes('شبكة')) posTotal += paid;
+                else cashTotal += paid;
+            });
+            
+            const cId = getCurrentClinicId();
+            let totalExp = 0;
+            const list = (window.platformData.expensesStore && window.platformData.expensesStore[cId]) ? window.platformData.expensesStore[cId] : [];
+            list.forEach(ex => totalExp += ex.amount);
+
+            document.getElementById('treasury-cash').innerText = cashTotal + " " + cur;
+            document.getElementById('treasury-bank').innerText = bankTotal + " " + cur;
+            document.getElementById('treasury-pos').innerText = posTotal + " " + cur;
+
+            const rate = parseFloat(document.getElementById('doc-comm-rate')?.value) || 40;
+            const staffShare = (totalPaid * rate) / 100;
+            const centerShare = totalPaid - staffShare;
+            const netProfit = totalPaid - staffShare - totalExp;
+
+            if(document.getElementById('comm-gross')) document.getElementById('comm-gross').innerText = totalPaid + " " + cur;
+            if(document.getElementById('fin-total')) document.getElementById('fin-total').innerText = totalPaid;
+            if(document.getElementById('fin-paid')) document.getElementById('fin-paid').innerText = totalPaid;
+            if(document.getElementById('fin-expenses')) document.getElementById('fin-expenses').innerText = totalExp;
+            if(document.getElementById('fin-net')) document.getElementById('fin-net').innerText = netProfit.toFixed(1);
+
+            const staffList = (window.platformData.staffDirectory && window.platformData.staffDirectory[cId]) ? window.platformData.staffDirectory[cId] : [];
+            const commBox = document.getElementById('expert-commissions-summary');
+            if(commBox) {
+                if(staffList.length === 0) {
+                    commBox.innerHTML = 'لا توجد موظفين مسجلين لحساب العمولات.';
+                } else {
+                    let commHtml = '';
+                    staffList.forEach(st => {
+                        let stRev = 0;
+                        getCombinedAllRecords().filter(r => r.handler === st.name).forEach(r => stRev += (r.paid || 0));
+                        let stComm = (stRev * rate) / 100;
+                        commHtml += `<div><strong>${st.name}</strong>: حصيلته (${stRev} ${cur}) ➔ عمولته (${stComm.toFixed(1)} ${cur})</div>`;
+                    });
+                    commBox.innerHTML = commHtml;
+                }
+            }
+            updateCurrencyLabels();
+        }
+
+        function forceSyncData() {
+            window.saveToFirebase();
+            alert("تم فرض المزامنة السحابية بنجاح!");
+        }
+
+        function exportSystemBackup() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(window.platformData, null, 2));
+            const dlAnchorElem = document.createElement('a');
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", "Beauty_Center_Backup.json");
+            dlAnchorElem.click();
+        }
+
+        function clearSystemCache() {
+            if(confirm("هل تريد مسح الذاكرة المؤقتة وإعادة تحميل البيانات؟")) {
+                location.reload();
+            }
         }
 
         function renderAllUI() {
