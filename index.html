@@ -178,6 +178,11 @@
         </div>
     </div>
 
+    <!-- زر واتساب تفاعلي -->
+    <a href="https://wa.me/201065826742?text=مرحباً، أود الاستفسار عن حجز المواعيد والخدمات" class="whatsapp-float no-print" target="_blank" title="تواصل معنا">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
     <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleTabletSidebar()"></div>
 
     <!-- 1. شاشة تسجيل الدخول -->
@@ -185,7 +190,7 @@
         <div class="card login-card p-4 p-md-5 text-center" style="width: 100%; max-width: 420px;">
             <div class="mb-3 text-primary"><i class="fa-solid fa-wand-magic-sparkles fa-3x" style="color: var(--primary-color);"></i></div>
             <h3 class="fw-bold text-dark mb-1">إدارة مراكز التجميل والفروع</h3>
-            <p class="text-muted small mb-4">المنظومة السحابية الموحدة (ERP)</p>
+            <p class="text-muted small mb-4">المنصة السحابية المتقدمة (ERP)</p>
             <div id="login-error" class="alert alert-danger py-2 small hidden"></div>
             <div class="mb-3 text-start">
                 <label class="small fw-bold text-secondary">اسم المستخدم</label>
@@ -575,7 +580,7 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> <span id="create-branch-heading">إنشاء مركز رئيسي أو فرع</span></h6>
+                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> <span id="create-branch-heading">إنشاء مركز أو فرع</span></h6>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم المركز / الفرع</label><input type="text" id="clinic-name-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم المسؤول</label><input type="text" id="doc-name-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">العملة:</label>
@@ -591,8 +596,8 @@
                             </div>
                             <!-- خيار تحديد عدد الفروع المسموحة (يظهر للمطور فقط عند إنشاء مركز رئيسي) -->
                             <div class="mb-2 master-admin-only" id="max-branches-group">
-                                <label class="small fw-bold text-secondary">حدود الفروع المسموحة لهذا المركز:</label>
-                                <input type="number" id="clinic-max-branches" class="form-control form-control-sm rounded-3" value="3" min="0" max="20" title="عدد الفروع المتاحة لإنشائها">
+                                <label class="small fw-bold text-secondary">حد الفروع المسموحة لهذا المركز:</label>
+                                <input type="number" id="clinic-max-branches" class="form-control form-control-sm rounded-3" value="3" min="0" max="20">
                             </div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم</label><input type="text" id="doc-user-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-3"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="doc-pass-in" class="form-control form-control-sm rounded-3"></div>
@@ -811,7 +816,7 @@
                 cl.currency = newCurrency;
             } else {
                 if(!window.platformData.clinics[0]) {
-                    window.platformData.clinics.push({ id: 'main_branch', name: 'المركز الرئيسي', currency: newCurrency, expiryDate: new Date(Date.now() + 365*86400000).toISOString(), parentId: null, maxBranches: 5 });
+                    window.platformData.clinics.push({ id: 'main_branch', name: 'المركز الرئيسي', currency: newCurrency, expiryDate: new Date(Date.now() + 365*86400000).toISOString(), parentId: null, maxBranches: 3 });
                 } else {
                     window.platformData.clinics[0].currency = newCurrency;
                 }
@@ -898,13 +903,12 @@
             if (window.currentUser.role === 'master_admin') {
                 document.querySelectorAll('.developer-only').forEach(e => e.classList.remove('hidden'));
                 document.querySelectorAll('.center-owner-link').forEach(e => e.classList.remove('hidden'));
-                document.querySelectorAll('.master-admin-only').forEach(e => e.classList.remove('hidden')); // لإظهار تحديد حد الفروع للمطور
+                document.querySelectorAll('.master-admin-only').forEach(e => e.classList.remove('hidden'));
                 document.getElementById('branches-nav-label').innerText = "إدارة المراكز والفروع";
                 document.getElementById('create-branch-heading').innerText = "إنشاء مركز رئيسي جديد";
             } else if (window.currentUser.role === 'doctor') {
                 document.querySelectorAll('.center-owner-link').forEach(e => e.classList.remove('hidden'));
                 document.querySelectorAll('.doctor-only').forEach(e => e.classList.remove('hidden'));
-                // إخفاء حقل حد الفروع عن صاحب المركز الرئيسي لأنه لا يحدد لنفسه
                 document.querySelectorAll('.master-admin-only').forEach(e => e.classList.add('hidden'));
                 document.getElementById('branches-nav-label').innerText = "إدارة فروع مركزي";
                 document.getElementById('create-branch-heading').innerText = "إنشاء فرع جديد تابع لمركزك";
@@ -934,7 +938,6 @@
             if (window.innerWidth < 992) toggleTabletSidebar();
         }
 
-        // دالة إنشاء مركز رئيسي أو فرع مع التحقق من حدود الفروع المسموحة
         function addNewClinic() {
             const name = document.getElementById('clinic-name-in').value.trim();
             const docName = document.getElementById('doc-name-in').value.trim();
@@ -954,17 +957,17 @@
 
             let parentId = null;
             let assignedRole = 'doctor';
-            let maxBranches = 3; // الحد الافتراضي للفروع المسموحة
+            let maxBranches = 3;
 
             if (window.currentUser && window.currentUser.role === 'master_admin') {
                 parentId = null; // مركز رئيسي جديد ينشئه المطور
                 assignedRole = 'doctor'; // مالك المركز الرئيسي
                 maxBranches = parseInt(document.getElementById('clinic-max-branches')?.value) || 3;
             } else if (window.currentUser && window.currentUser.role === 'doctor') {
-                parentId = window.currentUser.clinicId; // فرع تابع للمركز الحالي
+                parentId = window.currentUser.clinicId; // فرع تابع للمركز الرئيسي الحالي
                 assignedRole = 'branch_manager';
 
-                // التحقق من أن المركز لم يتجاوز حد الفروع المسموح به
+                // التحقق من حدود الفروع المسموحة للمركز
                 const existingBranches = (window.platformData.clinics || []).filter(cl => cl.parentId === parentId);
                 const parentCenter = (window.platformData.clinics || []).find(cl => cl.id === parentId);
                 const allowedLimit = parentCenter ? (parentCenter.maxBranches || 3) : 3;
@@ -1024,6 +1027,12 @@
             list.forEach((cl) => {
                 const isActive = checkClinicSubscription(cl.id);
                 const isBranch = cl.parentId !== null;
+                
+                let parentCenterName = '';
+                if (isBranch) {
+                    const pCenter = window.platformData.clinics.find(x => x.id === cl.parentId);
+                    parentCenterName = pCenter ? ` (تابع للمركز: ${pCenter.name})` : '';
+                }
 
                 let deleteBtn = '';
                 let extendBtn = '';
@@ -1038,7 +1047,7 @@
                 }
 
                 tbody.innerHTML += `<tr>
-                    <td><strong>${cl.name}</strong> ${isBranch ? '<span class="badge bg-light text-dark border ms-1">فرع تابع</span>' : `<span class="badge bg-primary ms-1">مركز رئيسي (حد الفروع: ${cl.maxBranches || 3})</span>`}<br><small class="text-primary">المسؤول: ${cl.docName}</small></td>
+                    <td><strong>${cl.name}</strong> ${isBranch ? `<span class="badge bg-light text-dark border ms-1">فرع تابع${parentCenterName}</span>` : `<span class="badge bg-primary ms-1">مركز رئيسي (حد الفروع: ${cl.maxBranches || 3})</span>`}<br><small class="text-primary">المسؤول: ${cl.docName}</small></td>
                     <td><span class="badge bg-secondary">${cl.currency || 'EGP'}</span></td>
                     <td>${isActive ? '<span class="badge bg-success">ساري</span>' : '<span class="badge bg-danger">منتهي</span>'}</td>
                     <td>
