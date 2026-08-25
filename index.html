@@ -154,6 +154,19 @@
 </head>
 <body>
 
+    <!-- شاشة الحظر الحمراء عند انتهاء اشتراك المركز -->
+    <div id="expired-lock-screen" class="hidden" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#b02a37; z-index:99999; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; padding:20px;">
+        <div class="card p-5 bg-white text-dark shadow-lg rounded-4" style="max-width: 500px; width: 100%;">
+            <i class="fa-solid fa-triangle-exclamation text-danger fa-4x mb-3"></i>
+            <h2 class="fw-bold mb-2">عذراً، انتهت صلاحية الحساب!</h2>
+            <p class="text-muted mb-4">لقد انتهت مدة تفعيل هذا المركز الرئيسي. يرجى التواصل مع المطور لتجديد الاشتراك واستعادة صلاحية النظام.</p>
+            <div class="p-3 bg-light rounded-3 mb-3 text-secondary fw-bold">
+                تواصل مع المطور: صبري الديب[cite: 2] (01065826742)
+            </div>
+            <button onclick="logout()" class="btn btn-dark w-100 fw-bold">العودة لتسجيل الدخول</button>
+        </div>
+    </div>
+
     <!-- بوابة حجز المواعيد المباشرة للعملاء (تفتح عبر الرابط العام) -->
     <div id="public-booking-portal" class="hidden">
         <div id="portal-form-card" class="card p-4 p-md-5 shadow-lg" style="width: 100%; max-width: 550px; border-radius: 24px;">
@@ -755,9 +768,13 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> إنشاء مركز أو فرع وتحديد العملة</h6>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم الفرع (مثل: فرع الرياض، فرع القاهرة...)</label><input type="text" id="clinic-name-in" class="form-control form-control-sm rounded-3"></div>
-                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم مدير أو مسؤول الفرع</label><input type="text" id="doc-name-in" class="form-control form-control-sm rounded-3"></div>
+                            <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-network-wired me-1"></i> إنشاء مركز أو فرع وتحديد العملة والصلاحية</h6>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم المركز / الفرع الرئيسي</label><input type="text" id="clinic-name-in" class="form-control form-control-sm rounded-3"></div>
+                            <div class="mb-2"><label class="small fw-bold text-secondary">اسم مسؤول المركز</label><input type="text" id="doc-name-in" class="form-control form-control-sm rounded-3"></div>
+                            <div class="row mb-2">
+                                <div class="col-6"><label class="small fw-bold text-secondary">الحد الأقصى للفروع</label><input type="number" id="clinic-max-branches-in" class="form-control form-control-sm rounded-3" value="3" min="1"></div>
+                                <div class="col-6"><label class="small fw-bold text-secondary">أيام الصلاحية</label><input type="number" id="clinic-days-in" class="form-control form-control-sm rounded-3" value="30" min="1"></div>
+                            </div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">عملة المركز / الفرع:</label>
                                 <select id="clinic-currency-in" class="form-select form-select-sm rounded-3">
                                     <option value="EGP">جنيه مصري (EGP)</option>
@@ -771,16 +788,15 @@
                             </div>
                             <div class="mb-2"><label class="small fw-bold text-secondary">اسم المستخدم للدخول</label><input type="text" id="doc-user-in" class="form-control form-control-sm rounded-3"></div>
                             <div class="mb-3"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="doc-pass-in" class="form-control form-control-sm rounded-3"></div>
-                            <input type="hidden" id="clinic-days-in" value="30">
-                            <button onclick="addNewClinic()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إنشاء وتفعيل الفرع</button>
+                            <button onclick="addNewClinic()" class="btn btn-primary btn-sm fw-bold w-100 py-2 rounded-3 shadow-sm" style="background: var(--primary-gradient); border:none;">إنشاء وتفعيل المركز</button>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-12 mb-3">
                         <div class="card p-4">
-                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> فروع المركز (اضغط على أي فرع لاستعراضه والتحكم به)</h6>
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-hospital me-1"></i> مراكز وفروع المنصة (اضغط لاستعراضها)</h6>
                             <div class="table-responsive">
                                 <table class="table table-hover align-middle small">
-                                    <thead class="table-light"><tr><th>الفرع والمسؤول</th><th>العملة</th><th>انتهاء الصلاحية</th><th>إدارة ودخول</th></tr></thead>
+                                    <thead class="table-light"><tr><th>المركز والمسؤول</th><th>العملة</th><th>الصلاحية والفروع</th><th>إدارة ودخول</th></tr></thead>
                                     <tbody id="clinics-list-tbody"></tbody>
                                 </table>
                             </div>
@@ -830,7 +846,7 @@
                 <div class="row">
                     <div class="col-12 mb-3">
                         <div class="card p-4 border-warning">
-                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)</h4>
+                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)[cite: 2]</h4>
                             <p class="text-muted small">من هنا يمكنك وحدك إدارة "أيام التفعيل" الخاصة باشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase)[cite: 2].</p>
                             
                             <hr>
@@ -968,7 +984,6 @@
         window.activeProfilePatient = null;
         window.viewingBranchId = null;
 
-        // ربط مفتاح Enter لتسجيل الدخول
         document.addEventListener("DOMContentLoaded", () => {
             const loginInputs = document.querySelectorAll(".login-input");
             loginInputs.forEach(input => {
@@ -980,7 +995,6 @@
                 });
             });
 
-            // فحص فتح الرابط المباشر لحجز العملاء
             if (window.location.search.includes("booking=true") || window.location.hash.includes("booking")) {
                 document.getElementById('public-booking-portal').classList.remove('hidden');
                 document.getElementById('login-section').classList.add('hidden');
@@ -1012,7 +1026,6 @@
             if(selector) selector.value = cur;
         }
 
-        // دالة تغيير عملة المركز النشط وحفظها فورياً
         function changeActiveCenterCurrency(newCurrency) {
             const cId = getCurrentClinicId();
             let cl = window.platformData.clinics.find(x => x.id === cId);
@@ -1020,7 +1033,7 @@
                 cl.currency = newCurrency;
             } else if (cId === 'main_branch' || cId === 'master') {
                 if(!window.platformData.clinics[0]) {
-                    window.platformData.clinics.push({ id: 'main_branch', name: 'المركز الرئيسي', currency: newCurrency, expiryDate: new Date(Date.now() + 365*86400000).toISOString() });
+                    window.platformData.clinics.push({ id: 'main_branch', name: 'المركز الرئيسي', currency: newCurrency, expiryDate: new Date(Date.now() + 365*86400000).toISOString(), maxBranches: 3 });
                 } else {
                     window.platformData.clinics[0].currency = newCurrency;
                 }
@@ -1064,10 +1077,8 @@
                 const cId = found.clinicId;
                 if (cId && cId !== 'master') {
                     if (!checkClinicSubscription(cId)) {
-                        if(errDiv) {
-                            errDiv.innerText = "عذراً، لقد انتهت صلاحية اشتراك هذا الفرع. يرجى التواصل مع الإدارة للتجديد.";
-                            errDiv.classList.remove('hidden');
-                        }
+                        document.getElementById('expired-lock-screen').classList.remove('hidden');
+                        document.getElementById('login-section').classList.add('hidden');
                         return;
                     }
                 }
@@ -1075,6 +1086,7 @@
                 window.currentUser = found;
                 window.viewingBranchId = null;
                 document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('expired-lock-screen').classList.add('hidden');
                 document.getElementById('app-container').classList.remove('hidden');
                 document.getElementById('current-user-name').innerText = window.currentUser.name;
                 
@@ -1132,15 +1144,17 @@
             if (window.innerWidth < 992) toggleTabletSidebar();
         }
 
+        // --- تعديل: إنشاء المركز مع سقف الفروع وصلاحية الاشتراك ---
         function addNewClinic() {
             const name = document.getElementById('clinic-name-in').value.trim();
             const docName = document.getElementById('doc-name-in').value.trim();
             const currency = document.getElementById('clinic-currency-in').value;
+            const maxBranches = parseInt(document.getElementById('clinic-max-branches-in').value) || 3;
+            const daysCount = parseInt(document.getElementById('clinic-days-in').value) || 30;
             const user = document.getElementById('doc-user-in').value.trim();
             const pass = document.getElementById('doc-pass-in').value.trim();
-            const daysCount = 30;
 
-            if(!name || !docName || !user || !pass) { alert("أدخل كافة بيانات الفرع!"); return; }
+            if(!name || !docName || !user || !pass) { alert("أدخل كافة بيانات المركز!"); return; }
 
             const exists = window.platformData.users.some(x => x.user === user);
             if(exists) { alert("اسم المستخدم مستخدم مسبقاً!"); return; }
@@ -1149,7 +1163,16 @@
             const expiryDate = new Date();
             expiryDate.setDate(expiryDate.getDate() + daysCount);
 
-            window.platformData.clinics.push({ id: clinicId, name, docName, currency, daysCount, expiryDate: expiryDate.toISOString() });
+            window.platformData.clinics.push({ 
+                id: clinicId, 
+                name, 
+                docName, 
+                currency, 
+                maxBranches, 
+                daysCount, 
+                expiryDate: expiryDate.toISOString(), 
+                subBranches: [] 
+            });
             window.platformData.users.push({ name: docName, user, pass, role: 'doctor', clinicId: clinicId });
 
             window.saveToFirebase();
@@ -1159,7 +1182,7 @@
             document.getElementById('doc-name-in').value = '';
             document.getElementById('doc-user-in').value = '';
             document.getElementById('doc-pass-in').value = '';
-            alert(`تم إنشاء الفرع وتحديد عملته بنجاح!`);
+            alert(`تم إنشاء المركز وتحديد سقف فروعه (${maxBranches}) وصلاحيته بنجاح!`);
         }
 
         function renderClinicsList() {
@@ -1168,15 +1191,15 @@
             tbody.innerHTML = '';
             
             window.platformData.clinics.forEach((cl) => {
-                const isActive = checkClinicSubscription(cl.id);
                 const expiryFormatted = new Date(cl.expiryDate).toLocaleDateString('ar-EG');
+                let currentSubCount = (cl.subBranches || []).length;
                 
                 tbody.innerHTML += `<tr>
                     <td><strong>${cl.name}</strong><br><small class="text-primary">المسؤول: ${cl.docName}</small></td>
                     <td><span class="badge bg-secondary">${cl.currency || 'EGP'}</span></td>
-                    <td>${expiryFormatted}</td>
+                    <td>الصلاحية حتى: ${expiryFormatted}<br><small class="text-muted">الفروع: ${currentSubCount} / ${cl.maxBranches || 3}</small></td>
                     <td>
-                        <button onclick="viewBranchData('${cl.id}', '${cl.name}')" class="btn btn-outline-success btn-sm py-0 mb-1" title="استعراض تفاصيل الفرع"><i class="fa-solid fa-eye"></i> استعراض</button>
+                        <button onclick="viewBranchData('${cl.id}', '${cl.name}')" class="btn btn-outline-success btn-sm py-0 mb-1"><i class="fa-solid fa-eye"></i> استعراض</button>
                         ${window.currentUser && window.currentUser.role === 'master_admin' ? `<button onclick="promptExtendDays('${cl.id}')" class="btn btn-outline-primary btn-sm py-0 mb-1">+تفعيل</button>` : ''}
                         <button onclick="deleteClinic('${cl.id}')" class="btn btn-danger btn-sm py-0 mb-1"><i class="fa-solid fa-trash"></i></button>
                     </td>
@@ -1194,11 +1217,10 @@
             document.getElementById('current-clinic-badge').innerText = `معاينة: ${branchName} (${getCurrentCurrency()})`;
             switchTab('dashboard', document.querySelector('.nav-sec-queue'));
             renderAllUI();
-            alert(`تم الانتقال لبيانات وفروع (${branchName}). يمكنك الآن الاطلاع على طابوره وحساباته بعملة (${getCurrentCurrency()}).`);
         }
 
         function promptExtendDays(cId) {
-            const daysStr = prompt("أدخل عدد أيام التفعيل المراد إضافتها للاشتراك:", "30");
+            const daysStr = prompt("أدخل عدد أيام التفعيل الإضافية:", "30");
             if(daysStr && !isNaN(daysStr)) {
                 const addDays = parseInt(daysStr);
                 const cl = window.platformData.clinics.find(x => x.id === cId);
@@ -1209,13 +1231,13 @@
                     cl.expiryDate = currentExpiry.toISOString();
                     window.saveToFirebase();
                     renderClinicsList();
-                    alert(`تم تحديث وتمديد أيام التفعيل بنجاح!`);
+                    alert(`تم تمديد اشتراك المركز بنجاح!`);
                 }
             }
         }
 
         function deleteClinic(cId) {
-            if(confirm("هل أنت متأكد من حذف الفرع؟")) {
+            if(confirm("هل أنت متأكد من حذف المركز؟")) {
                 window.platformData.clinics = window.platformData.clinics.filter(x => x.id !== cId);
                 window.platformData.users = window.platformData.users.filter(x => x.clinicId !== cId);
                 window.saveToFirebase();
