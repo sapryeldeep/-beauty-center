@@ -161,7 +161,7 @@
             <h2 class="fw-bold mb-2">عذراً، انتهت صلاحية اشتراك هذا الحساب!</h2>
             <p class="text-muted mb-4">يرجى التواصل مع المطور لتجديد الاشتراك واستعادة صلاحية الوصول للنظام.</p>
             <div class="p-3 bg-light rounded-3 mb-3 text-secondary fw-bold">
-                المطور: صبري الديب[cite: 2] | الهاتف: 01065826742[cite: 2]
+                المطور: صبري الديب | الهاتف: 01065826742
             </div>
             <button onclick="logout()" class="btn btn-dark w-100 fw-bold">العودة لتسجيل الدخول</button>
         </div>
@@ -234,7 +234,7 @@
             <button onclick="handleLogin()" class="btn btn-primary btn-lg w-100 fw-bold fs-6 rounded-3 shadow-sm" style="background: var(--primary-gradient); border: none;">تسجيل الدخول</button>
             
             <div class="dev-footer mt-4">
-                Developed by <strong>Sapry El-Deeb</strong>[cite: 2]
+                Developed by <strong>Sapry El-Deeb</strong>
             </div>
         </div>
     </div>
@@ -259,7 +259,7 @@
                 <a class="nav-link nav-sec-inventory" href="#" onclick="switchTab('beauty-inventory', this)"><i class="fa-solid fa-boxes-stacked text-info me-1"></i> مخزون المستحضرات</a>
                 <a class="nav-link nav-sec-payroll" href="#" onclick="switchTab('payroll', this)"><i class="fa-solid fa-wallet text-success me-1"></i> رواتب وعمولات الخبراء والسلف</a>
 
-                <!-- أزرار الصلاحيات والشجرة الواضحة للمطور والمركز -->
+                <!-- أزرار الصلاحيات والهيكل الإداري الواضحة للمطور والمركز -->
                 <a class="nav-link master-admin-only hidden" href="#" onclick="switchTab('clinics', this)"><i class="fa-solid fa-network-wired text-warning me-1"></i> 👑 إدارة المراكز الرئيسية وفروعها</a>
                 <a class="nav-link center-owner-only hidden" href="#" onclick="switchTab('center-branches', this)"><i class="fa-solid fa-sitemap text-warning me-1"></i> إدارة فروع مركزي والحد الأقصى</a>
                 <a class="nav-link doctor-only hidden" href="#" onclick="switchTab('doc-staff', this)"><i class="fa-solid fa-users-gear me-1"></i> موظفي الفرع والصلاحيات</a>
@@ -484,7 +484,7 @@
                 </div>
             </div>
 
-            <!-- TAB 5: الحسابات التفصيلية التفاعلية مع إعدادات ضريبة القيمة المضافة -->
+            <!-- TAB 5: الحسابات التفصيلية والتفاعلية مع إعدادات ضريبة القيمة المضافة -->
             <div id="tab-finance" class="tab-content hidden">
                 <div class="row mb-3 g-2">
                     <div class="col-md-3 col-6">
@@ -862,8 +862,8 @@
                 <div class="row">
                     <div class="col-12 mb-3">
                         <div class="card p-4 border-warning">
-                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)[cite: 2]</h4>
-                            <p class="text-muted small">من هنا يمكنك وحدك إدارة اشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase)[cite: 2].</p>
+                            <h4 class="fw-bold text-dark mb-2"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم المطور والتحكم المطلق (Sapry El-Deeb)</h4>
+                            <p class="text-muted small">من هنا يمكنك وحدك إدارة اشتراكات الفروع، تجميدها، تمديدها، وفرض المزامنة (Firebase).</p>
                             <hr>
                             <div class="row g-3">
                                 <div class="col-md-4">
@@ -885,13 +885,22 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- الأزرار المطلوبة للمطور: مسح السيرفر وتصدير إكسيل شامل -->
+                            <div class="mt-4 p-3 border rounded bg-white shadow-sm">
+                                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-toolbox me-1 text-primary"></i> أدوات المطور الخاصة بالبيانات:</h5>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button onclick="resetServerDatabaseCompletely()" class="btn btn-danger btn-sm fw-bold"><i class="fa-solid fa-triangle-exclamation me-1"></i> مسح وتصفير كافة بيانات السيرفر (Reset)</button>
+                                    <button onclick="exportFullSystemExcelBackup()" class="btn btn-success btn-sm fw-bold"><i class="fa-solid fa-file-excel me-1"></i> تحميل كافة بيانات السيرفر والعملاء (Excel)</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="dev-footer no-print">
-                Developed by <strong>Sapry El-Deeb</strong>[cite: 2] | Tel: <a href="https://wa.me/201065826742">01065826742</a>[cite: 2] | Email: sapry.eldeep@gmail.com[cite: 2]
+                Developed by <strong>Sapry El-Deeb</strong> | Tel: <a href="https://wa.me/201065826742">01065826742</a> | Email: sapry.eldeep@gmail.com
             </div>
 
         </div>
@@ -1518,7 +1527,7 @@
             reportWin.document.close();
         }
 
-        // --- دالة طباعة الفاتورة الضريبية مع توليد QR Code الفعلي المعتمد ---
+        // --- طباعة الفاتورة الضريبية الفعلية والمضمونة مع الـ QR Code ---
         function printOfficialInvoice(name, service, total, paid, payMethod, handler, date) {
             const due = total - paid;
             let cur = getCurrentCurrency();
@@ -1595,6 +1604,71 @@
                 </html>
             `);
             invoiceWin.document.close();
+        }
+
+        // --- أدوات المطور الجديدة: مسح السيرفر وتصدير إكسيل شامل لجميع البيانات ---
+        function resetServerDatabaseCompletely() {
+            if(confirm("تحذير خطير: هل أنت متأكد من مسح كافة بيانات السيرفر (المراكز، الفروع، الطابور، العملاء)؟ لن يتبقى سوى حساب المطور الأساسي!")) {
+                window.platformData = {
+                    users: [
+                        { name: "صبري الديب", user: "sapry eldeep", pass: "159632", role: "master_admin", clinicId: "master" }
+                    ],
+                    clinics: [],
+                    centers: [
+                        { id: 'center_main', name: 'المركز الرئيسي', currency: 'EGP', maxBranches: 3, expiryDate: new Date(Date.now() + 365*86400000).toISOString(), branches: [] }
+                    ],
+                    queue: {},
+                    archive: {},
+                    appointments: {},
+                    beautyNotesStore: {},
+                    expensesStore: {},
+                    pharmacyStore: {},
+                    staffDirectory: {},
+                    payrollStore: {},
+                    services: [
+                        { name: "جلسة تنظيف بشرة عميق", price: 450 },
+                        { name: "قص وتصفيف شعر", price: 250 }
+                    ],
+                    lastDate: ""
+                };
+                window.saveToFirebase();
+                alert("تم تصفير ومسح كافة بيانات السيرفر بنجاح وعادت المنظومة نظيفة تماماً!");
+                location.reload();
+            }
+        }
+
+        function exportFullSystemExcelBackup() {
+            let cur = getCurrentCurrency();
+            let csv = `data:text/csv;charset=utf-8,--- تقرير شامل لكافة بيانات السيرفر والعملاء ---\n`;
+            csv += `نوع البيانات,الاسم/البيان,التفاصيل والعملة,المبلغ/الرصيد\n`;
+            
+            // مراكز وفروع
+            (window.platformData.centers || []).forEach(c => {
+                csv += `"مركز رئيسي","${c.name}","عملة: ${c.currency} | فروع: ${(c.branches||[]).length}/${c.maxBranches}","صلاحية حتى: ${c.expiryDate}"\n`;
+                (c.branches || []).forEach(b => {
+                    csv += `,"فرع تابع","${b.name} (المسؤول: ${b.manager})",""\n`;
+                });
+            });
+
+            // سجلات الإيرادات والعملاء
+            getCombinedAllRecords().forEach(r => {
+                csv += `"سجل جلسة وعميل","${r.name} (${r.phone || '--'})","${r.service} | دفع: ${r.payMethod || 'نقدي'}","المطلوب: ${r.total} | المدفوع: ${r.paid}"\n`;
+            });
+
+            // المصروفات
+            let allExps = getExpensesRecordsForModal();
+            allExps.forEach(ex => {
+                csv += `"مصروفات","${ex.category} - ${ex.desc}","التاريخ: ${ex.date}","المبلغ: ${ex.amount}"\n`;
+            });
+
+            const encodedUri = encodeURI(csv);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Shamel_ERP_Full_Server_Backup.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            alert("تم تنزيل ملف الإكسيل الشامل لكافة بيانات السيرفر بنجاح!");
         }
 
         function sendWhatsAppReminder() {
