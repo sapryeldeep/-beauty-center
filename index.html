@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>شامل لإدارة مراكز التجميل والفروع | المنظومة  المتكاملة ERP</title>
+    <title>شامل لإدارة مراكز التجميل والفروع | المنظومة السحابية المتكاملة ERP</title>
     
     <meta name="theme-color" content="#d63384">
     <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22%D8%B4%D8%A7%D9%85%D9%84%20ERP%22%2C%22short_name%22%3A%22%D8%B4%D8%A7%D9%85%D9%84%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23fdf2f8%22%2C%22theme_color%22%3A%22%23d63384%22%7D">
@@ -83,7 +83,7 @@
                 <div class="mb-4 text-start"><label class="small fw-bold text-secondary">كلمة المرور</label><input type="password" id="password" required class="form-control form-control-lg fs-6 rounded-3" placeholder="••••••••"></div>
                 <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold fs-6 rounded-3 shadow-sm" style="background: var(--primary-gradient); border: none;">تسجيل الدخول</button>
             </form>
-            <div class="dev-footer mt-4">نظام إدارة مراكز التجميل الاحترافي | V37 Global Pro ERP</div>
+            <div class="dev-footer mt-4">نظام إدارة مراكز التجميل الاحترافي | V40 Ultimate Certified ERP</div>
         </div>
     </div>
 
@@ -152,7 +152,7 @@
                                 <h6 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-file-invoice me-1"></i> تسجيل وحفظ الجلسة</h6>
                                 <div class="mb-2"><input type="text" id="p-name" required class="form-control form-control-sm rounded-3" placeholder="اسم العميل..."></div>
                                 <div class="row mb-2"><div class="col-6"><input type="number" id="p-age" class="form-control form-control-sm rounded-3" placeholder="العمر" min="0"></div><div class="col-6"><input type="text" id="p-phone" required class="form-control form-control-sm rounded-3" placeholder="الهاتف"></div></div>
-                                <div class="mb-2"><label class="small fw-bold text-secondary">الخدمات أو الباقات:</label><div id="multi-services-checkboxes" class="border p-2 rounded-3 bg-light" style="max-height: 120px; overflow-y: auto;"></div></div>
+                                <div class="mb-2"><label class="small fw-bold text-secondary">الخدمات أو الباقات:</label><div id="multi-services-checkboxes" class="border p-2 rounded-3 bg-light" style="max-height: 140px; overflow-y: auto;"></div></div>
                                 <div class="mb-2"><select id="p-expert-select" class="form-select form-select-sm rounded-3"></select></div>
                                 <div class="row mb-2"><div class="col-6"><input type="number" id="p-total" required class="form-control form-control-sm rounded-3" placeholder="المطلوب (شامل الضريبة)" min="0"></div><div class="col-6"><input type="number" id="p-paid" required class="form-control form-control-sm rounded-3" placeholder="المدفوع" min="0"></div></div>
                                 <div class="mb-3"><select id="p-pay-method" class="form-select form-select-sm rounded-3"><option value="نقدي">نقدي (كاش)</option><option value="تحويل بنكي">تحويل بنكي</option><option value="فيزا POS">شبكة / فيزا (POS)</option><option value="محفظة العميل">محفظة العميل مسبقة الدفع</option></select></div>
@@ -314,7 +314,7 @@
                                 <input type="text" required id="ph-drug-name" class="form-control form-control-sm mb-2" placeholder="اسم المستحضر...">
                                 <div class="row mb-2">
                                     <div class="col-6"><input type="number" required id="ph-drug-qty" class="form-control form-control-sm mb-2" placeholder="الكمية" min="0"></div>
-                                    <div class="col-6"><input type="number" required id="ph-drug-min" class="form-control form-control-sm mb-2" placeholder="حد الطلب للتنبيه" min="0"></div>
+                                    <div class="col-6"><input type="number" required id="ph-drug-min" class="form-control form-control-sm mb-2" placeholder="حد الطلب" min="0"></div>
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col-6"><input type="number" required id="ph-drug-price" class="form-control form-control-sm mb-2" placeholder="السعر" min="0"></div>
@@ -346,7 +346,7 @@
                             <h6 class="fw-bold text-success mb-2"><i class="fa-solid fa-fingerprint me-1"></i> دفتر الحضور والانصراف اليومي للخبراء والموظفين</h6>
                             <div class="row g-2">
                                 <div class="col-md-4"><select id="att-staff-select" class="form-select form-select-sm"></select></div>
-                                <div class="col-md-4"><select id="att-status" class="form-select form-select-sm"><option value="حضور">حضور في الموعد</option><option value="تأخير">تأخير (خصم 50)</option><option value="غیاب">غياب يوم (خصم يوم)</option></select></div>
+                                <div class="col-md-4"><select id="att-status" class="form-select form-select-sm"><option value="حضور">حضور في الموعد</option><option value="تأخير">تأخير (خصم 50)</option><option value="غياب">غياب يوم (خصم يوم)</option></select></div>
                                 <div class="col-md-4"><button onclick="recordStaffAttendance()" class="btn btn-success btn-sm w-100 fw-bold">تسجيل الحضور اليومي</button></div>
                             </div>
                         </div>
@@ -409,11 +409,39 @@
                 </div>
             </div>
 
-            <!-- TAB 11: الموظفين -->
+            <!-- TAB 11: موظفي الفرع والصلاحيات -->
             <div id="tab-doc-staff" class="tab-content hidden">
                 <div class="row">
-                    <div class="col-lg-4 mb-3"><div class="card p-4"><form onsubmit="event.preventDefault(); addClinicStaff();"><h6 class="fw-bold text-primary mb-3">إضافة موظف</h6><input type="text" required id="staff-name" class="form-control form-control-sm mb-2" placeholder="الاسم..."><input type="number" required id="staff-salary-in" class="form-control form-control-sm mb-2" value="4000"><select id="staff-role-select" class="form-select form-select-sm mb-2"><option value="reception">استقبال</option><option value="accountant">محاسب</option><option value="expert">خبير</option></select><input type="text" required id="staff-user" class="form-control form-control-sm mb-2" placeholder="مستخدم..."><input type="password" required id="staff-pass" class="form-control form-control-sm mb-3" placeholder="مرور..."><button type="submit" class="btn btn-primary w-100 btn-sm">حفظ</button></form></div></div>
-                    <div class="col-lg-8"><div class="card p-4"><table class="table table-hover align-middle small"><thead class="table-light"><tr><th>الاسم</th><th>الدور</th><th>الراتب</th><th>المستخدم</th><th>حذف</th></tr></thead><tbody id="doc-staff-tbody"></tbody></table></div></div>
+                    <div class="col-lg-5 mb-3">
+                        <div class="card p-4">
+                            <form onsubmit="event.preventDefault(); addClinicStaff();">
+                                <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-plus me-1"></i> إضافة موظف للفرع الحالي</h6>
+                                <div class="mb-2"><input type="text" required id="staff-name" class="form-control form-control-sm mb-2" placeholder="اسم الموظف الثلاثي..."></div>
+                                <div class="mb-2"><input type="number" required id="staff-salary-in" class="form-control form-control-sm mb-2" value="4000" min="0" placeholder="الراتب الأساسي..."></div>
+                                <div class="mb-2">
+                                    <select id="staff-role-select" class="form-select form-select-sm mb-2">
+                                        <option value="reception">استقبال (Reception)</option>
+                                        <option value="accountant">محاسب (Accountant)</option>
+                                        <option value="expert">خبير تجميل (Expert)</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2"><input type="text" required id="staff-user" class="form-control form-control-sm mb-2" placeholder="اسم المستخدم للدخول..."></div>
+                                <div class="mb-3"><input type="password" required id="staff-pass" class="form-control form-control-sm mb-3" placeholder="كلمة المرور..."></div>
+                                <button type="submit" class="btn btn-primary btn-sm fw-bold w-100 rounded-3 shadow-sm">حفظ الموظف</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 mb-3">
+                        <div class="card p-4">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-users me-1"></i> طاقم العمل بـ <span id="my-clinic-title-label">--</span></h6>
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle small">
+                                    <thead class="table-light"><tr><th>الاسم</th><th>الدور الوظيفي</th><th>الراتب الأساسي</th><th>المستخدم</th><th>حذف</th></tr></thead>
+                                    <tbody id="doc-staff-tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -430,7 +458,7 @@
                 </div>
             </div>
 
-            <!-- TAB 12: لوحة تحكم المطور الشاملة (Master Financials & Analytics) -->
+            <!-- TAB 12: لوحة تحكم المطور الشاملة (Master Financials) -->
             <div id="tab-dev-panel" class="tab-content hidden">
                 <div class="card p-4 border-warning shadow-lg">
                     <h4 class="fw-bold text-dark mb-3"><i class="fa-solid fa-terminal text-warning me-2"></i> لوحة تحكم الحسابات الشاملة للمطور (Master Financials Dashboard)</h4>
@@ -480,7 +508,7 @@
     const analytics = getAnalytics(app);
     const db = getDatabase(app);
 
-    const DB_PATH = 'shamelBeautyCenterPlatformV37'; 
+    const DB_PATH = 'shamelBeautyCenterPlatformV40'; 
 
     window.safeArr = function(obj) {
         if (!obj) return [];
@@ -494,7 +522,7 @@
         walletStore: {}, staffPermissionsStore: {}, attendanceStore: {},
         services: [
             { name: "جلسة تنظيف بشرة عميق", price: 450 },
-            { name: "بقة عروسة متكاملة (عروض خاصة)", price: 1800 }
+            { name: "باقة عروسة متكاملة", price: 1800 }
         ],
         lastDate: ""
     };
@@ -1000,61 +1028,189 @@
             } catch(e) {}
         }
 
+        // ================= طباعة الفاتورة الضريبية الرسمية مع QR Code المعتمد =================
         function printOfficialInvoice(name, service, total, paid, payMethod, handler, date) {
             const cur = getCurrentCurrency();
             const due = total - paid;
             const cId = getCurrentClinicId();
             const set = (window.platformData.settings || {})[cId] || {};
             
-            const taxRate = parseFloat(set.vatRate) || 0;
+            const taxRate = parseFloat(set.vatRate) || 15;
             const baseAmount = (total / (1 + (taxRate / 100))).toFixed(2);
             const taxAmount = (total - baseAmount).toFixed(2);
 
             let qrHtml = '';
-            if(set.taxNumber && taxRate > 0) {
-                const qrData = encodeURIComponent(`المركز: شامل | الضريبي: ${set.taxNumber} | العميل: ${name} | الإجمالي: ${total} | الضريبة: ${taxAmount}`);
-                qrHtml = `<div style="text-align:center; margin-top:20px;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=${qrData}" alt="QR Code"></div>`;
-            }
+            const qrText = `مركز شامل التجميلي\nالرقم الضريبي: ${set.taxNumber || 'غير مسجل'}\nالتاريخ: ${date}\nالإجمالي: ${total} ${cur}\nالضريبة: ${taxAmount} ${cur}`;
+            const qrDataEncoded = encodeURIComponent(qrText);
+            qrHtml = `<div style="text-align:center; margin-top:20px;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${qrDataEncoded}" alt="ZATCA QR Code"><div style="font-size:10px; color:#555; margin-top:5px;">رمز الاستجابة السريع المعتمد (QR)</div></div>`;
 
             const invoiceWin = window.open('', '_blank');
             invoiceWin.document.write(`
                 <html dir="rtl">
                 <head>
-                    <title>فاتورة ضريبية رسمية - ${name}</title>
+                    <title>فاتورة ضريبية إلكترونية - ${name}</title>
                     <style>
                         body { font-family: 'Cairo', sans-serif; padding: 30px; color: #333; background: #fff; }
-                        .invoice-box { max-width: 600px; margin: auto; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0,0,0,0.15); border-radius: 12px; }
-                        h2 { text-align: center; color: #d63384; margin-bottom: 5px; }
-                        .sub-title { text-align: center; font-size: 13px; color: #666; margin-bottom: 20px; }
-                        .info-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
+                        .invoice-box { max-width: 600px; margin: auto; padding: 30px; border: 1px solid #ddd; box-shadow: 0 0 15px rgba(0,0,0,0.1); border-radius: 12px; }
+                        h2 { text-align: center; color: #d63384; margin-bottom: 2px; }
+                        .sub-title { text-align: center; font-size: 13px; color: #666; margin-bottom: 15px; }
+                        .info-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
                         table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 20px; }
                         th, td { border: 1px solid #ddd; padding: 10px; text-align: right; font-size: 13px; }
                         th { background: #fdf2f8; color: #d63384; }
-                        .totals { text-align: left; font-size: 14px; margin-top: 15px; }
-                        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #666; border-top: 1px dashed #999; padding-top: 10px; }
+                        .totals { text-align: left; font-size: 14px; margin-top: 15px; line-height: 1.6; }
+                        .footer { text-align: center; margin-top: 25px; font-size: 11px; color: #666; border-top: 1px dashed #999; padding-top: 10px; }
                     </style>
                 </head>
                 <body>
                     <div class="invoice-box">
                         <h2>مركز التجميل والعناية المتكاملة</h2>
-                        <div class="sub-title">فاتورة ضريبية إلكترونية (Tax Invoice)</div>
-                        ${set.taxNumber ? `<div class="sub-title" style="font-weight:bold;">الرقم الضريبي: ${set.taxNumber}</div>` : ''}
+                        <div class="sub-title">فاتورة ضريبية إلكترونية مبسطة (Simplified Tax Invoice)</div>
+                        ${set.taxNumber ? `<div class="sub-title" style="font-weight:bold; color:#000;">الرقم الضريبي: ${set.taxNumber}</div>` : ''}
                         <hr>
                         <div class="info-row"><div><strong>اسم العميل:</strong> ${name}</div><div><strong>التاريخ:</strong> ${date}</div></div>
                         <div class="info-row"><div><strong>طريقة الدفع:</strong> ${payMethod || 'نقدي'}</div><div><strong>الموظف المسؤول:</strong> ${handler || '--'}</div></div>
                         <table>
-                            <thead><tr><th>الخدمة</th><th>المبلغ الأساسي</th><th>الضريبة (${taxRate}%)</th><th>الإجمالي</th></tr></thead>
+                            <thead><tr><th>الخدمة / الباقة</th><th>المبلغ الأساسي</th><th>الضريبة (${taxRate}%)</th><th>الإجمالي</th></tr></thead>
                             <tbody><tr><td>${service}</td><td>${baseAmount} ${cur}</td><td>${taxAmount} ${cur}</td><td style="font-weight:bold;">${total} ${cur}</td></tr></tbody>
                         </table>
-                        <div class="totals"><p><strong>الإجمالي المطلوب:</strong> ${total} ${cur}</p><p><strong>المبلغ المدفوع:</strong> <span style="color:#198754;">${paid} ${cur}</span></p><p><strong>المبلغ المتبقي:</strong> <span style="color:#dc3545;">${due} ${cur}</span></p></div>
+                        <div class="totals">
+                            <p><strong>الإجمالي المطلوب:</strong> ${total} ${cur}</p>
+                            <p><strong>المبلغ المدفوع:</strong> <span style="color:#198754;">${paid} ${cur}</span></p>
+                            <p><strong>المبلغ المتبقي:</strong> <span style="color:#dc3545;">${due} ${cur}</span></p>
+                        </div>
                         ${qrHtml}
-                        <div class="footer">رسمي ومعتمد من الإدارة</div>
+                        <div class="footer">رسمي ومعتمد متوافق مع الاشتراكات واللوائح الضريبية</div>
                     </div>
                     <script>window.print();<\/script>
                 </body>
                 </html>
             `);
             invoiceWin.document.close();
+        }
+
+        // ================= أزرار طباعة وتصدير التقارير والإكسيل المباشرة لكل الأقسام =================
+        function printSectionReport(sectionTitle) {
+            const cur = getCurrentCurrency();
+            const records = sectionTitle.includes('المصروفات') ? getExpensesRecordsForModal() : getCombinedAllRecords();
+            let rowsHtml = '';
+
+            if(sectionTitle.includes('المصروفات')) {
+                records.forEach(ex => {
+                    rowsHtml += `<tr><td>${ex.date || '--'}</td><td>${ex.category || 'عام'}</td><td>${ex.desc}</td><td>${ex.amount} ${cur}</td><td>${ex.handler || '--'}</td></tr>`;
+                });
+            } else {
+                records.forEach(r => {
+                    rowsHtml += `<tr><td>${r.isoDate || r.date}</td><td>${r.name}</td><td>${r.service}</td><td>${r.payMethod || 'نقدي'}</td><td>${r.total} ${cur}</td><td style="color:green;">${r.paid} ${cur}</td></tr>`;
+                });
+            }
+
+            const printWin = window.open('', '_blank');
+            printWin.document.write(`
+                <html dir="rtl">
+                <head>
+                    <title>تقرير ${sectionTitle}</title>
+                    <style>
+                        body { font-family: 'Cairo', sans-serif; padding: 25px; color: #333; }
+                        h3 { text-align: center; color: #d63384; margin-bottom: 5px; }
+                        .sub { text-align: center; font-size: 12px; color: #666; margin-bottom: 20px; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: right; font-size: 12px; }
+                        th { background: #fdf2f8; color: #d63384; }
+                    </style>
+                </head>
+                <body>
+                    <h3>تقرير ${sectionTitle}</h3>
+                    <div class="sub">تاريخ التقرير: ${getFormattedDateTime()} | العملة: ${cur}</div>
+                    <table>
+                        <thead>
+                            ${sectionTitle.includes('المصروفات') ? '<tr><th>التاريخ</th><th>البند</th><th>البيان</th><th>المبلغ</th><th>المسؤول</th></tr>' : '<tr><th>التاريخ</th><th>العميل</th><th>الخدمة</th><th>الدفع</th><th>المطلوب</th><th>المدفوع</th></tr>'}
+                        </thead>
+                        <tbody>${rowsHtml}</tbody>
+                    </table>
+                    <script>window.print();<\/script>
+                </body>
+                </html>
+            `);
+            printWin.document.close();
+        }
+
+        function exportRevenueExcel() {
+            let csv = "data:text/csv;charset=utf-8,\uFEFFالتاريخ,العميل,الهاتف,الخدمة,طريقة الدفع,المسؤول,المطلوب,المدفوع,المتبقي\n";
+            getCombinedAllRecords().forEach(r => {
+                csv += `"${r.isoDate || r.date}","${r.name}","${r.phone || '--'}","${r.service}","${r.payMethod || 'نقدي'}","${r.handler || '--'}",${r.total},${r.paid},${(r.total||0)-(r.paid||0)}\n`;
+            });
+            const encodedUri = encodeURI(csv);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Revenue_Report.csv");
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        }
+
+        function exportExpensesExcel() {
+            let csv = "data:text/csv;charset=utf-8,\uFEFFالتاريخ,البند,البيان,المبلغ,المسؤول\n";
+            getExpensesRecordsForModal().forEach(ex => {
+                csv += `"${ex.date || '--'}","${ex.category || 'عام'}","${ex.desc}",${ex.amount},"${ex.handler || '--'}"\n`;
+            });
+            const encodedUri = encodeURI(csv);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Expenses_Report.csv");
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        }
+
+        function exportTreasuryExcel() {
+            let cash = document.getElementById('treasury-cash').innerText;
+            let bank = document.getElementById('treasury-bank').innerText;
+            let pos = document.getElementById('treasury-pos').innerText;
+            let wallet = document.getElementById('treasury-wallet').innerText;
+            let cur = getCurrentCurrency();
+
+            let csv = `data:text/csv;charset=utf-8,\uFEFF=== تقرير الخزينة والبنوك (${cur}) ===\nطريقة التحصيل,المبلغ\n"كاش مباشر",${cash}\n"InstaPay / تحويلات",${bank}\n"شبكة / فيزا (POS)",${pos}\n"محفظة العملاء",${wallet}\n`;
+            const encodedUri = encodeURI(csv);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Treasury_Report.csv");
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        }
+
+        function printCashReceipt() {
+            const name = prompt("اسم العميل لاستلام النقدية:", "عميل");
+            if(!name) return;
+            const amount = prompt("المبلغ المستلم:", "500");
+            if(!amount) return;
+            const cur = getCurrentCurrency();
+
+            const receiptWin = window.open('', '_blank');
+            receiptWin.document.write(`
+                <html dir="rtl">
+                <head>
+                    <title>إيصال استلام نقدية</title>
+                    <style>
+                        body { font-family: 'Cairo', sans-serif; padding: 25px; color: #333; }
+                        .receipt { border: 2px dashed #d63384; padding: 20px; max-width: 400px; margin: auto; border-radius: 12px; }
+                        h3 { text-align: center; color: #d63384; margin-bottom: 2px; }
+                        .sub { text-align: center; font-size: 11px; color: #666; margin-bottom: 15px; }
+                        p { margin: 6px 0; font-size: 14px; }
+                        .footer { text-align: center; margin-top: 20px; font-size: 11px; color: #666; border-top: 1px solid #ddd; padding-top: 8px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="receipt">
+                        <h3>مركز التجميل المتكامل</h3>
+                        <div class="sub">إيصال استلام نقدية / دفعة تحت حساب</div>
+                        <hr>
+                        <p><strong>التاريخ:</strong> ${getFormattedDateTime()}</p>
+                        <p><strong>اسم العميل:</strong> ${name}</p>
+                        <p><strong>المبلغ المستلم:</strong> <span style="color:#198754; font-weight:bold;">${amount} ${cur}</span></p>
+                        <p><strong>المسؤول:</strong> ${window.currentUser ? window.currentUser.name : '--'}</p>
+                        <div class="footer">توقيع المستلم: ........................ | وختم المركز</div>
+                    </div>
+                    <script>window.print();<\/script>
+                </body>
+                </html>
+            `);
+            receiptWin.document.close();
         }
 
         function openFinanceModal(title, records) {
@@ -1172,351 +1328,69 @@
             window.saveToFirebase(); renderAppointments();
         }
 
-        function savePatientToQueue() {
+        function addClinicStaff() {
+            const name = document.getElementById('staff-name').value.trim();
+            const salary = parseFloat(document.getElementById('staff-salary-in').value) || 4000;
+            const role = document.getElementById('staff-role-select').value;
+            const user = document.getElementById('staff-user').value.trim();
+            const pass = document.getElementById('staff-pass').value.trim();
+
+            if(!name || !user || !pass) { alert("أدخل كافة بيانات الموظف!"); return; }
+            const exists = window.platformData.users.some(x => x && x.user === user);
+            if(exists) { alert("اسم المستخدم مستخدم مسبقاً!"); return; }
+
             const cId = getCurrentClinicId();
-            if(cId === 'master') { alert("يجب الدخول لفرع لتسجيل الجلسات!"); return; }
+            if(cId === 'master') { alert("يجب الدخول لفرع محدد لتعيين الموظفين!"); return; }
 
-            const name = document.getElementById('p-name').value.trim();
-            const phone = document.getElementById('p-phone').value.trim();
-            const total = Math.max(0, parseFloat(document.getElementById('p-total').value) || 0);
-            const paid = Math.max(0, parseFloat(document.getElementById('p-paid').value) || 0);
-            const payMethod = document.getElementById('p-pay-method').value;
-            const expert = document.getElementById('p-expert-select')?.value || 'غير محدد';
-            
-            let servs = []; document.querySelectorAll('.service-chk:checked').forEach(c => servs.push(c.value));
-            
-            if(!name || !phone) return;
+            if(!window.platformData.staffDirectory) window.platformData.staffDirectory = {};
+            if(!window.platformData.staffDirectory[cId]) window.platformData.staffDirectory[cId] = [];
+            window.platformData.staffDirectory[cId].push({ id: Date.now(), name, salary, role, phone: '--' });
 
-            if (payMethod === 'محفظة العميل') {
-                if(!window.platformData.walletStore) window.platformData.walletStore = {};
-                if(!window.platformData.walletStore[cId]) window.platformData.walletStore[cId] = {};
-                let currentWallet = window.platformData.walletStore[cId][name] || 0;
-                if (currentWallet < paid) {
-                    alert(`عذراً، رصيد محفظة العميل (${currentWallet}) لا يكفي لتغطية المدفوع (${paid})!`);
-                    return;
-                }
-                window.platformData.walletStore[cId][name] = currentWallet - paid;
-            }
-
-            if(!window.platformData.queue[cId]) window.platformData.queue[cId] = [];
-            window.platformData.queue[cId].push({ id: Date.now(), name, phone, service: servs.join('+')||'جلسة تجميل', total, paid, payMethod, handler: expert, due: total - paid, status: 'waiting', isoDate: getTodayISO(), date: getFormattedDateTime() });
-
-            window.saveToFirebase(); renderAllUI();
-            document.getElementById('p-name').value=''; document.getElementById('p-phone').value=''; document.getElementById('p-total').value=''; document.getElementById('p-paid').value='';
-            document.querySelectorAll('.service-chk').forEach(c => c.checked=false);
-            alert("تم الحفظ بنجاح!");
-        }
-
-        function topUpCustomerWallet() {
-            if(!window.activeProfilePatient) return;
-            const amtStr = prompt(`أدخل مبلغ الشحن لمحفظة العميل (${window.activeProfilePatient}):`);
-            if(amtStr && !isNaN(amtStr)) {
-                const addAmt = parseFloat(amtStr);
-                const cId = getCurrentClinicId();
-                if(!window.platformData.walletStore) window.platformData.walletStore = {};
-                if(!window.platformData.walletStore[cId]) window.platformData.walletStore[cId] = {};
-                let current = window.platformData.walletStore[cId][window.activeProfilePatient] || 0;
-                window.platformData.walletStore[cId][window.activeProfilePatient] = current + addAmt;
-                window.saveToFirebase();
-                openPatientProfile(window.activeProfilePatient);
-                alert(`تم شحن المحفظة بنجاح! الرصيد الحالي: ${window.platformData.walletStore[cId][window.activeProfilePatient]}`);
-            }
-        }
-
-        function recordStaffAttendance() {
-            const staffSel = document.getElementById('att-staff-select');
-            const status = document.getElementById('att-status').value;
-            if(!staffSel || staffSel.value === "") { alert("اختر الموظف!"); return; }
-            const staffName = staffSel.value;
-            const cId = getCurrentClinicId();
-
-            if(!window.platformData.attendanceStore) window.platformData.attendanceStore = {};
-            if(!window.platformData.attendanceStore[cId]) window.platformData.attendanceStore[cId] = [];
-
-            window.platformData.attendanceStore[cId].push({ id: Date.now(), staffName, status, date: getTodayISO() });
-
-            // إذا كان تأخير أو غياب، نسجل خصم تلقائي في الرواتب
-            if(status === 'تأخير' || status === 'غياب') {
-                const deductAmt = status === 'تأخير' ? 50 : 200;
-                if(!window.platformData.payrollStore) window.platformData.payrollStore = {};
-                if(!window.platformData.payrollStore[cId]) window.platformData.payrollStore[cId] = [];
-                window.platformData.payrollStore[cId].push({ id: Date.now(), staffName, transType: 'deduction', amount: deductAmt, note: `جزاء تلقائي (${status})`, date: getFormattedDateTime() });
-            }
-
+            window.platformData.users.push({ name: name, user: user, pass: pass, role: role, clinicId: cId });
             window.saveToFirebase();
-            renderPayrollSummary();
-            alert("تم تسجيل الحضور/الانصراف والجزاءات بدقة!");
+            renderDocStaff();
+            populatePayrollStaffSelect();
+            document.getElementById('staff-name').value = '';
+            document.getElementById('staff-salary-in').value = '4000';
+            document.getElementById('staff-user').value = '';
+            document.getElementById('staff-pass').value = '';
+            alert("تم إضافة الموظف بنجاح!");
         }
 
-        function addPharmacyItem() {
-            const name = document.getElementById('ph-drug-name').value.trim();
-            const qty = Math.max(0, parseInt(document.getElementById('ph-drug-qty').value) || 0);
-            const minQty = Math.max(0, parseInt(document.getElementById('ph-drug-min').value) || 3);
-            const price = Math.max(0, parseFloat(document.getElementById('ph-drug-price').value) || 0);
-            const expiry = document.getElementById('ph-drug-expiry').value;
-
-            if(!name) { alert("أدخل اسم المستحضر!"); return; }
-            const cId = getCurrentClinicId();
-            if(!window.platformData.pharmacyStore) window.platformData.pharmacyStore = {};
-            if(!window.platformData.pharmacyStore[cId]) window.platformData.pharmacyStore[cId] = [];
-
-            window.platformData.pharmacyStore[cId].push({ id: Date.now(), name, qty, minQty, price, expiry: expiry || 'بدون تاريخ' });
-            window.saveToFirebase();
-            renderPharmacyStore();
-            document.getElementById('ph-drug-name').value = '';
-            document.getElementById('ph-drug-qty').value = '';
-            document.getElementById('ph-drug-min').value = '';
-            document.getElementById('ph-drug-price').value = '';
-            document.getElementById('ph-drug-expiry').value = '';
-            alert("تم إضافة المنتج للمخزن وحد الطلب بنجاح!");
-        }
-
-        function recordWastage(idx) {
-            const cId = getCurrentClinicId();
-            const list = window.platformData.pharmacyStore[cId];
-            if(!list || !list[idx]) return;
-            const item = list[idx];
-            const wast = parseInt(prompt(`كمية الهالك أو الاستهلاك الداخلي لـ (${item.name}):`, "1"));
-            if(wast && !isNaN(wast) && wast > 0) {
-                if(wast > item.qty) { alert("الكمية المراد تسجیلها كهالك أكبر من المتبقي بالمخزن!"); return; }
-                item.qty -= wast;
-                window.saveToFirebase();
-                renderPharmacyStore();
-                alert("تم خصم الهالك وتحديث المخزن!");
-            }
-        }
-
-        function renderPharmacyStore() {
-            const tbody = document.getElementById('pharmacy-tbody');
-            const alertBox = document.getElementById('pharmacy-expiry-alerts-box');
+        function renderDocStaff() {
+            const tbody = document.getElementById('doc-staff-tbody');
             if(!tbody) return;
             tbody.innerHTML = '';
-            if(alertBox) alertBox.innerHTML = '';
-
             let cur = getCurrentCurrency();
+
             const cId = getCurrentClinicId();
-            const list = (window.platformData.pharmacyStore && window.platformData.pharmacyStore[cId]) ? window.platformData.pharmacyStore[cId] : [];
+            const staffList = (window.platformData.staffDirectory && window.platformData.staffDirectory[cId]) ? window.platformData.staffDirectory[cId] : [];
             
-            let lowStockAlerts = [];
-
-            list.forEach((p, idx) => {
-                if(p.qty <= (p.minQty || 3)) {
-                    lowStockAlerts.push(p.name);
-                }
-
-                tbody.innerHTML += `<tr>
-                    <td><strong>${p.name}</strong></td>
-                    <td class="fw-bold ${p.qty <= (p.minQty||3) ? 'text-danger' : 'text-primary'}">${p.qty} عبوة (حد الطلب: ${p.minQty||3})</td>
-                    <td>${p.price} ${cur}</td>
-                    <td><small class="text-muted">${p.expiry}</small></td>
-                    <td><button onclick="recordWastage(${idx})" class="btn btn-sm btn-outline-warning py-0">هالك</button></td>
-                    <td><button onclick="deletePharmacyItem('${cId}', ${idx})" class="btn btn-sm btn-outline-danger py-0"><i class="fa-solid fa-trash"></i></button></td>
-                </tr>`;
-            });
-
-            if(lowStockAlerts.length > 0 && alertBox) {
-                alertBox.innerHTML = `<div class="alert alert-danger py-2 px-3 small rounded-3"><i class="fa-solid fa-triangle-exclamation me-1"></i> <strong>تنبيه مخزون:</strong> المنتجات الآتية قاربت على النفاد (وصلت لحد الطلب): <strong>${lowStockAlerts.join('، ')}</strong></div>`;
-            }
-        }
-
-        function deletePharmacyItem(cId, idx) {
-            window.platformData.pharmacyStore[cId].splice(idx, 1);
-            window.saveToFirebase();
-            renderPharmacyStore();
-        }
-
-        function renderQueue() {
-            const tb = document.getElementById('queue-tbody'); if(!tb) return;
-            tb.innerHTML = '';
-            getClinicQueue().forEach((p, i) => {
-                tb.innerHTML += `<tr>
-                    <td>${i+1}</td>
-                    <td><strong>${p.name}</strong></td>
-                    <td><small class="text-muted">${p.service}</small></td>
-                    <td><small class="text-info fw-bold">${p.handler || '--'}</small></td>
-                    <td><span class="badge bg-light text-dark border">${p.payMethod || 'نقدي'}</span></td>
-                    <td>${p.total}</td>
-                    <td class="text-success">${p.paid}</td>
-                    <td>
-                        <button onclick="printOfficialInvoice('${p.name}', '${p.service}', ${p.total}, ${p.paid}, '${p.payMethod}', '${p.handler}', '${p.date}')" class="btn btn-sm btn-outline-danger py-0"><i class="fa-solid fa-print"></i></button>
-                        <button onclick="switchTab('patients'); openPatientProfile('${p.name}')" class="btn btn-sm btn-outline-primary py-0"><i class="fa-solid fa-user-gear"></i></button>
-                        <button onclick="removeFromQueue(${p.id})" class="btn btn-sm btn-outline-danger py-0"><i class="fa-solid fa-trash"></i></button>
-                        ${p.status !== 'done' ? `<button onclick="finishExam(${p.id})" class="btn btn-sm btn-outline-success py-0"><i class="fa-solid fa-check"></i></button>` : ''}
-                    </td>
-                </tr>`;
-            });
-        }
-
-        function removeFromQueue(id) {
-            const cId = getCurrentClinicId();
-            if (cId && window.platformData.queue[cId]) {
-                window.platformData.queue[cId] = window.platformData.queue[cId].filter(x => x.id != id);
-                window.saveToFirebase(); renderAllUI();
-            }
-        }
-
-        function finishExam(id) {
-            const cId = getCurrentClinicId();
-            if (cId && window.platformData.queue[cId]) {
-                const itemIdx = window.platformData.queue[cId].findIndex(x => x.id == id);
-                if(itemIdx > -1) {
-                    const item = window.platformData.queue[cId][itemIdx];
-                    item.status = 'done';
-                    if(!window.platformData.archive[cId]) window.platformData.archive[cId] = [];
-                    window.platformData.archive[cId].push(item);
-                    window.platformData.queue[cId].splice(itemIdx, 1);
-                    window.saveToFirebase(); renderAllUI();
-                }
-            }
-        }
-
-        function renderArchiveTable(records) {
-            const tb = document.getElementById('archive-tbody'); if(!tb) return;
-            tb.innerHTML = '';
-            if (!records || records.length === 0) {
-                tb.innerHTML = '<tr><td colspan="8" class="text-center text-muted">لا توجد سجلات للأرشيف</td></tr>';
+            if(staffList.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">لا توجد موظفين مسجلين</td></tr>';
                 return;
             }
-            records.forEach((r) => {
-                tb.innerHTML += `<tr><td>${r.isoDate}</td><td>${r.name}</td><td>${r.phone || '--'}</td><td>${r.service}</td><td><span class="badge bg-light text-dark border">${r.payMethod}</span></td><td>${r.handler}</td><td>${r.total}</td>
-                <td><button onclick="printOfficialInvoice('${r.name}', '${r.service}', ${r.total}, ${r.paid}, '${r.payMethod}', '${r.handler}', '${r.date}')" class="btn btn-sm btn-outline-danger py-0"><i class="fa-solid fa-print"></i></button></td></tr>`;
-            });
-        }
 
-        function searchArchive() {
-            const nameQ = document.getElementById('archive-search-name').value.trim().toLowerCase();
-            const dateQ = document.getElementById('archive-search-date').value;
-            const filtered = getCombinedAllRecords().filter(r => {
-                const matchName = !nameQ || r.name.toLowerCase().includes(nameQ) || (r.phone && r.phone.includes(nameQ));
-                const matchDate = !dateQ || r.isoDate === dateQ || (r.date && r.date.includes(dateQ));
-                return matchName && matchDate;
-            });
-            renderArchiveTable(filtered);
-        }
+            staffList.forEach((st, idx) => {
+                let roleLabel = 'خبير تجميل';
+                if(st.role === 'reception') roleLabel = 'استقبال';
+                else if(st.role === 'accountant') roleLabel = 'محاسب';
 
-        function clearArchiveSearch() {
-            document.getElementById('archive-search-name').value = '';
-            document.getElementById('archive-search-date').value = '';
-            renderArchiveTable(getCombinedAllRecords());
-        }
-
-        function renderPatientsDir() {
-            const tb = document.getElementById('patients-dir-tbody'); if(!tb) return;
-            tb.innerHTML = '';
-            let unique = {};
-            getCombinedAllRecords().forEach(p => {
-                if(!unique[p.name]) unique[p.name] = { name: p.name, phone: p.phone, due: 0, points: Math.floor((p.paid || 0) / 100) };
-                unique[p.name].due += ((p.total || 0) - (p.paid || 0));
-            });
-            Object.values(unique).forEach(p => {
-                tb.innerHTML += `<tr style="cursor:pointer;" onclick="openPatientProfile('${p.name}')"><td><strong>${p.name}</strong></td><td>${p.phone || '--'}</td><td><span class="badge bg-success">${p.points} نقطة</span></td><td class="${p.due > 0 ? 'text-danger fw-bold' : 'text-success'}">${p.due}</td></tr>`;
-            });
-        }
-
-        function filterPatientsList() {
-            const q = document.getElementById('patient-search-in').value.toLowerCase();
-            document.querySelectorAll('#patients-dir-tbody tr').forEach(r => {
-                if(r.children.length > 0) {
-                    const name = r.children[0].innerText.toLowerCase();
-                    r.style.display = name.includes(q) ? '' : 'none';
-                }
-            });
-        }
-
-        function renderFinance() {
-            let tot = 0, pd = 0, exp = 0, walletTotal = 0;
-            const tb = document.getElementById('finance-tbody');
-            if(!tb) return;
-            tb.innerHTML = '';
-            getCombinedAllRecords().forEach(p => {
-                tot += p.total; pd += p.paid;
-                if(p.payMethod === 'محفظة العميل') walletTotal += p.paid;
-                tb.innerHTML += `<tr>
-                    <td>${p.name}</td>
-                    <td>${p.isoDate || p.date}</td>
-                    <td>${p.service}</td>
-                    <td><span class="badge bg-light text-dark border">${p.payMethod || 'نقدي'}</span></td>
-                    <td>${p.handler || '--'}</td>
-                    <td>${p.total}</td>
-                    <td class="text-success">${p.paid}</td>
-                    <td class="text-danger">${(p.total||0)-(p.paid||0)}</td>
-                    <td><button onclick="printOfficialInvoice('${p.name}', '${p.service}', ${p.total}, ${p.paid}, '${p.payMethod}', '${p.handler}', '${p.date}')" class="btn btn-outline-danger btn-sm py-0"><i class="fa-solid fa-print"></i> فاتورة</button></td>
+                tbody.innerHTML += `<tr>
+                    <td><strong>${st.name}</strong></td>
+                    <td><span class="badge bg-info text-dark">${roleLabel}</span></td>
+                    <td class="text-success">${st.salary} ${cur}</td>
+                    <td>${st.name}</td>
+                    <td><button onclick="deleteStaffMember('${cId}', ${idx})" class="btn btn-danger btn-sm py-0"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>`;
             });
-            getExpensesRecordsForModal().forEach(e => exp += e.amount);
-
-            document.getElementById('fin-total').innerText = tot;
-            document.getElementById('fin-paid').innerText = pd;
-            document.getElementById('fin-expenses').innerText = exp;
-            document.getElementById('fin-net').innerText = pd - exp;
-            if(document.getElementById('treasury-wallet')) document.getElementById('treasury-wallet').innerText = walletTotal + " " + getCurrentCurrency();
-
-            calculateDoctorCommissions();
         }
 
-        function addServiceSetting() {
-            const name = document.getElementById('serv-name-in').value.trim();
-            const price = Math.max(0, parseFloat(document.getElementById('serv-price-in').value) || 0);
-            if(!name) return;
-            window.platformData.services.push({ name, price });
+        function deleteStaffMember(cId, idx) {
+            window.platformData.staffDirectory[cId].splice(idx, 1);
             window.saveToFirebase();
-            renderServicesSettings();
-            renderMultiServicesCheckboxes();
-            document.getElementById('serv-name-in').value = '';
-            document.getElementById('serv-price-in').value = '';
-        }
-
-        function renderServicesSettings() {
-            const tb = document.getElementById('services-settings-tbody');
-            if(!tb) return;
-            tb.innerHTML = '';
-            window.platformData.services.forEach((s, i) => { tb.innerHTML += `<tr><td>${s.name}</td><td>${s.price}</td><td><button onclick="deleteService(${i})" class="btn btn-danger btn-sm py-0"><i class="fa-solid fa-trash"></i></button></td></tr>`; });
-        }
-
-        function deleteService(i) {
-            window.platformData.services.splice(i, 1);
-            window.saveToFirebase();
-            renderServicesSettings();
-            renderMultiServicesCheckboxes();
-        }
-
-        function renderMultiServicesCheckboxes() {
-            const container = document.getElementById('multi-services-checkboxes');
-            if(!container) return;
-            container.innerHTML = '';
-            if(window.platformData.services) {
-                window.platformData.services.forEach((s, idx) => {
-                    container.innerHTML += `<div class="form-check">
-                        <input class="form-check-input service-chk" type="checkbox" value="${s.name}" data-price="${s.price}" id="srv_${idx}" onchange="calculateMultiServicesTotal()">
-                        <label class="form-check-label small" for="srv_${idx}">${s.name} (${s.price} ${getCurrentCurrency()})</label>
-                    </div>`;
-                });
-            }
-        }
-
-        function calculateMultiServicesTotal() {
-            let total = 0;
-            document.querySelectorAll('.service-chk:checked').forEach(chk => {
-                total += parseFloat(chk.dataset.price) || 0;
-            });
-            const cId = getCurrentClinicId();
-            const set = (window.platformData.settings || {})[cId] || {};
-            const taxRate = parseFloat(set.vatRate) || 0;
-            const finalTotal = total + (total * taxRate / 100);
-
-            document.getElementById('p-total').value = finalTotal;
-            document.getElementById('p-paid').value = finalTotal;
-        }
-
-        function populateAttendanceSelect() {
-            const sel = document.getElementById('att-staff-select');
-            if(!sel) return;
-            sel.innerHTML = '<option value="">اختر الموظف لتسجيل الحضور...</option>';
-            const cId = getCurrentClinicId();
-            const list = (window.platformData.staffDirectory && window.platformData.staffDirectory[cId]) ? window.platformData.staffDirectory[cId] : [];
-            list.forEach(st => {
-                sel.innerHTML += `<option value="${st.name}">${st.name} (${st.role})</option>`;
-            });
+            renderDocStaff();
+            populatePayrollStaffSelect();
         }
 
         function renderAllUI() {
